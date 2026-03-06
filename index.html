@@ -59,7 +59,6 @@
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
     }
 
-    /* Для Firefox */
     * {
       scrollbar-width: thin;
       scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.2);
@@ -150,227 +149,6 @@
 
     .music-btn.off {
       opacity: 0.7;
-    }
-
-    /* Кнопка чата */
-    .chat-toggle {
-      position: fixed;
-      bottom: max(30px, env(safe-area-inset-bottom));
-      left: max(30px, env(safe-area-inset-left));
-      z-index: 1000;
-    }
-
-    .chat-btn {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 50px;
-      padding: 18px 35px;
-      color: white;
-      font-size: 1.3rem;
-      font-weight: 400;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      letter-spacing: 0.5px;
-    }
-
-    .chat-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: scale(1.05);
-    }
-
-    .chat-btn span {
-      font-size: 1.8rem;
-    }
-
-    /* Окно чата */
-    .chat-window {
-      position: fixed;
-      bottom: max(120px, env(safe-area-inset-bottom) + 90px);
-      left: max(30px, env(safe-area-inset-left));
-      width: 380px;
-      height: 550px;
-      background: rgba(20, 25, 45, 0.35);
-      backdrop-filter: blur(30px) saturate(180%);
-      -webkit-backdrop-filter: blur(30px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 40px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 999;
-      transform: translateX(-120%);
-      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .chat-window.open {
-      transform: translateX(0);
-    }
-
-    .chat-header {
-      padding: 25px 25px 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .chat-header h3 {
-      font-size: 1.4rem;
-      font-weight: 400;
-      color: white;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .chat-header h3 span {
-      font-size: 1.8rem;
-    }
-
-    .close-chat {
-      background: none;
-      border: none;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 2rem;
-      cursor: pointer;
-      transition: var(--transition);
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-    }
-
-    .close-chat:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-    }
-
-    .chat-messages {
-      flex: 1;
-      padding: 25px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    /* Стили для скролла в чате */
-    .chat-messages::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .chat-messages::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-    }
-
-    .chat-messages::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-    }
-
-    .message {
-      display: flex;
-      flex-direction: column;
-      max-width: 85%;
-    }
-
-    .message.bot {
-      align-self: flex-start;
-    }
-
-    .message.user {
-      align-self: flex-end;
-    }
-
-    .message-content {
-      padding: 15px 20px;
-      border-radius: 30px;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: white;
-      font-size: 1rem;
-      line-height: 1.5;
-      word-wrap: break-word;
-    }
-
-    .message.bot .message-content {
-      background: rgba(77, 158, 255, 0.15);
-      border-color: rgba(77, 158, 255, 0.3);
-    }
-
-    .message.user .message-content {
-      background: rgba(255, 112, 181, 0.15);
-      border-color: rgba(255, 112, 181, 0.3);
-    }
-
-    .message-time {
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.5);
-      margin-top: 5px;
-      margin-left: 10px;
-    }
-
-    .chat-input-area {
-      padding: 20px 25px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      gap: 12px;
-      background: rgba(0, 0, 0, 0.1);
-    }
-
-    .chat-input {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 40px;
-      padding: 15px 22px;
-      color: white;
-      font-size: 1rem;
-      outline: none;
-      transition: var(--transition);
-    }
-
-    .chat-input:focus {
-      border-color: rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .chat-input::placeholder {
-      color: rgba(255, 255, 255, 0.4);
-    }
-
-    .send-btn {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .send-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: scale(1.05);
     }
 
     /* Типографика */
@@ -851,11 +629,14 @@
       font-weight: 350;
     }
 
-    /* Telegram кнопка */
-    .telegram-section {
+    /* Контейнер для кнопок (Telegram + чат) */
+    .buttons-container {
       margin: 50px 0 70px;
       display: flex;
       justify-content: center;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
       padding: 0 15px;
     }
 
@@ -876,7 +657,6 @@
       transition: var(--transition);
       letter-spacing: 1px;
       text-align: center;
-      width: fit-content;
     }
 
     .telegram-button:hover {
@@ -884,6 +664,223 @@
       border-color: rgba(255, 255, 255, 0.3);
       transform: scale(1.02);
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+    }
+
+    .chat-btn {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      padding: 20px 45px;
+      color: white;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .chat-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.02);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+    }
+
+    .chat-btn span {
+      font-size: 2rem;
+    }
+
+    /* Окно чата */
+    .chat-window {
+      position: fixed;
+      bottom: max(120px, env(safe-area-inset-bottom) + 90px);
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      width: 400px;
+      height: 550px;
+      background: rgba(20, 25, 45, 0.4);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 40px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+    }
+
+    .chat-window.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .chat-header {
+      padding: 25px 25px 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-header h3 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-header h3 span {
+      font-size: 1.8rem;
+    }
+
+    .close-chat {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .close-chat:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 25px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-messages::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      max-width: 85%;
+    }
+
+    .message.bot {
+      align-self: flex-start;
+    }
+
+    .message.user {
+      align-self: flex-end;
+    }
+
+    .message-content {
+      padding: 15px 20px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .message.bot .message-content {
+      background: rgba(77, 158, 255, 0.15);
+      border-color: rgba(77, 158, 255, 0.3);
+    }
+
+    .message.user .message-content {
+      background: rgba(255, 112, 181, 0.15);
+      border-color: rgba(255, 112, 181, 0.3);
+    }
+
+    .message-time {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 5px;
+      margin-left: 10px;
+    }
+
+    .chat-input-area {
+      padding: 20px 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 40px;
+      padding: 15px 22px;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .chat-input:focus {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .chat-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .send-btn {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .send-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
     }
 
     /* Футер */
@@ -970,18 +967,25 @@
         width: calc(100% - 40px);
         left: 20px;
         right: 20px;
+        transform: translateX(0) translateY(20px);
         bottom: 100px;
         height: 500px;
       }
 
-      .chat-toggle {
-        left: 20px;
-        bottom: 20px;
+      .chat-window.open {
+        transform: translateX(0) translateY(0);
       }
 
-      .chat-btn {
-        padding: 15px 25px;
-        font-size: 1.1rem;
+      .buttons-container {
+        gap: 20px;
+        flex-direction: column;
+      }
+
+      .telegram-button, .chat-btn {
+        width: 100%;
+        max-width: 400px;
+        padding: 18px 30px;
+        font-size: 1.4rem;
       }
 
       .progress-bar-bg {
@@ -1023,11 +1027,6 @@
         border-radius: 45px;
       }
       
-      .telegram-button {
-        padding: 18px 35px;
-        font-size: 1.4rem;
-      }
-      
       .progress-bar-bg {
         height: 40px;
       }
@@ -1059,11 +1058,6 @@
       .release-date {
         font-size: 1.8rem;
         padding: 10px 20px;
-      }
-      
-      .chat-btn {
-        padding: 12px 20px;
-        font-size: 1rem;
       }
     }
 
@@ -1102,29 +1096,6 @@
   <!-- Кнопка управления музыкой -->
   <div class="music-control">
     <div class="music-btn" id="musicToggle">🔊</div>
-  </div>
-
-  <!-- Кнопка чата -->
-  <div class="chat-toggle">
-    <div class="chat-btn" id="chatToggle">
-      <span>💬</span>
-      Остались вопросы? Жми
-    </div>
-  </div>
-
-  <!-- Окно чата -->
-  <div class="chat-window" id="chatWindow">
-    <div class="chat-header">
-      <h3><span>🤖</span> TOK Нейросеть</h3>
-      <button class="close-chat" id="closeChat">✕</button>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <!-- Сообщения будут добавляться сюда -->
-    </div>
-    <div class="chat-input-area">
-      <input type="text" class="chat-input" id="chatInput" placeholder="Введите ваш вопрос...">
-      <div class="send-btn" id="sendMessage">➤</div>
-    </div>
   </div>
 
   <!-- Аудио элемент -->
@@ -1259,10 +1230,29 @@
     </div>
   </section>
 
-  <!-- TELEGRAM КНОПКА -->
-  <section class="telegram-section">
+  <!-- КОНТЕЙНЕР ДЛЯ КНОПОК (Telegram + чат) -->
+  <div class="buttons-container">
     <a href="https://t.me/Tok_messenger" class="telegram-button" target="_blank" rel="noopener noreferrer">📱 Новости про TOK</a>
-  </section>
+    <div class="chat-btn" id="chatToggle">
+      <span>💬</span>
+      Остались вопросы? Жми
+    </div>
+  </div>
+
+  <!-- Окно чата -->
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <h3><span>🤖</span> TOK Нейросеть</h3>
+      <button class="close-chat" id="closeChat">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <!-- Сообщения будут добавляться сюда -->
+    </div>
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Введите ваш вопрос...">
+      <div class="send-btn" id="sendMessage">➤</div>
+    </div>
+  </div>
 
   <!-- ФУТЕР -->
   <footer class="footer">
@@ -1374,7 +1364,7 @@
         toggleBtn.classList.toggle('off', !isPlaying);
       });
 
-      // Чат нейросети
+      // ========= УМНЫЙ ЧАТ =========
       const chatToggle = document.getElementById('chatToggle');
       const chatWindow = document.getElementById('chatWindow');
       const closeChat = document.getElementById('closeChat');
@@ -1382,37 +1372,83 @@
       const chatInput = document.getElementById('chatInput');
       const sendBtn = document.getElementById('sendMessage');
 
-      // База знаний на основе текста сайта
+      // Расширенная база знаний на основе всего текста сайта
       const knowledgeBase = {
-        'привет': 'Здравствуйте! Чем я могу вам помочь?',
-        'ток': 'TOK — это инновационный децентрализованный мессенджер, который невозможно заблокировать. Он обеспечивает абсолютную приватность и работает быстрее аналогов.',
-        'мессенджер': 'TOK — это не просто мессенджер, а целая экосистема безопасного общения с P2P-архитектурой, сквозным шифрованием и бесплатным функционалом.',
-        'бесплатно': 'Да, TOK полностью бесплатный! Тысячи стикеров, десятки тем, неограниченное количество сообщений — всё это доступно каждому пользователю без подписок.',
-        'приватность': 'TOK гарантирует абсолютную приватность: сквозное шифрование включено по умолчанию, открытый исходный код, отсутствие логов и сбора метаданных.',
-        'безопасность': 'Безопасность — наш приоритет. Сквозное шифрование, децентрализация и открытый код обеспечивают защиту ваших данных.',
-        'когда релиз': 'Релиз TOK запланирован на 4-й квартал 2026 года. Сейчас идёт активная разработка, готовность составляет примерно 28%',
-        'дата релиза': 'Релиз TOK запланирован на 4-й квартал 2026 года.',
-        'готовность': 'Готовность TOK постоянно растёт. Сейчас она составляет примерно 28%. Вы можете следить за прогрессом на нашем сайте.',
-        'функции': 'TOK предлагает: неблокируемую архитектуру, молниеносную скорость, полную бесплатность, приватность, глобальную сеть, кастомизацию, умного помощника, кроссплатформенность и встроенные игры.',
+        // Приветствия
+        'привет': 'Здравствуйте! Я нейросеть TOK, рад помочь с любыми вопросами о нашем мессенджере.',
+        'здравствуйте': 'Добрый день! Чем могу быть полезен?',
+        'hello': 'Hello! I can answer in Russian about TOK messenger.',
+        
+        // Основное о TOK
+        'что такое tok': 'TOK — это децентрализованный мессенджер с абсолютной приватностью. Он неблокируемый, полностью бесплатный, с открытым кодом и сквозным шифрованием.',
+        'tok': 'TOK — инновационная платформа для безопасного общения. Основные черты: P2P-архитектура, отсутствие блокировок, шифрование по умолчанию, бесплатный функционал.',
+        'мессенджер': 'TOK Messenger — это не просто чат, а целая экосистема: стикеры, темы, звонки, игры, AI-помощник и многое другое.',
+        
+        // Приватность и безопасность
+        'приватность': 'Абсолютная приватность — наша основа. Сквозное шифрование (E2EE) включено всегда, открытый код позволяет любому проверить отсутствие закладок. Мы не храним логи и не собираем метаданные.',
+        'безопасность': 'Безопасность обеспечивается децентрализацией: нет единого сервера, который можно взломать или заблокировать. Все сообщения защищены криптографией.',
+        'шифрование': 'Используется сквозное шифрование (E2EE), поэтому даже мы не можем прочитать ваши сообщения. Ключи хранятся только на ваших устройствах.',
+        
+        // Блокировки
+        'блокировка': 'TOK невозможно заблокировать из-за P2P-архитектуры. Трафик идёт в обход центральных серверов, поэтому никакие блокировки провайдеров не работают.',
+        'неблокируемый': 'Да, TOK неблокируемый. Сообщения доставляются через распределённую сеть узлов, что делает его устойчивым к цензуре.',
+        
+        // Бесплатность
+        'бесплатно': 'TOK полностью бесплатен. Никаких подписок, платных стикеров или скрытых платежей. Всё, что вы видите, доступно сразу.',
+        'цена': 'Цена — ноль рублей. Мы считаем, что базовое общение не должно стоить денег.',
+        
+        // Скорость
+        'скорость': 'Благодаря умной маршрутизации и оптимизации протоколов сообщения доставляются за миллисекунды. TOK работает быстро даже на медленных каналах.',
+        'быстрый': 'Молниеносная скорость — одна из ключевых фич TOK. Мы используем современные протоколы и P2P для минимизации задержек.',
+        
+        // Функции
+        'стикеры': 'В TOK тысячи бесплатных стикеров и наборов. Вы также можете загружать свои.',
+        'темы': 'Десятки тем оформления: от тёмных до светлых, с неоновыми акцентами. Можно кастомизировать цвета и расположение элементов.',
+        'кастомизация': 'Вы можете настроить интерфейс под себя: темы, цвета, расположение кнопок, шрифты. Сделайте TOK уникальным.',
+        'звонки': 'Удобные голосовые звонки с шумоподавлением и высоким качеством звука. Без ограничений по времени.',
+        'игры': 'В TOK есть встроенные мини-игры для общения с друзьями: от простых аркад до головоломок.',
+        'помощник': 'Умный AI-помощник помогает с переводами, суммаризацией длинных сообщений и быстрыми ответами.',
+        
+        // Кроссплатформенность
+        'windows': 'TOK доступен на Windows, macOS, Linux, iOS, Android. Все данные синхронизируются в реальном времени.',
+        'mac': 'Да, есть нативная версия для macOS.',
+        'linux': 'Да, поддерживается Linux (deb, rpm, flatpak).',
+        'ios': 'TOK для iOS можно скачать в App Store (скоро).',
+        'android': 'TOK для Android доступен в Google Play и как APK.',
+        
+        // Разработчики
+        'k1lame': 'K1lame — ведущий программист и архитектор TOK. Отвечает за ядро мессенджера и безопасность.',
+        'martin_mefik': 'Martin_Mefik — ведущий программист, разработчик интерфейсов и клиентской части.',
         'разработчики': 'Над проектом работают ведущие программисты K1lame и Martin_Mefik.',
-        'K1lame': 'K1lame — один из ведущих программистов проекта TOK.',
-        'Martin_Mefik': 'Martin_Mefik — ведущий программист и архитектор TOK.',
-        'дизайн': 'Интерфейс TOK выполнен в минималистичном стиле с неоновыми акцентами. Главный экран, кастомизация, быстрая регистрация и удобные звонки — всё продумано для вас.',
-        'интерфейс': 'Интерфейс TOK включает главный экран с неоновыми акцентами, гибкую кастомизацию, быструю регистрацию и удобные звонки.',
-        'регистрация': 'Регистрация в TOK быстрая, удобная и безопасная. Ваши данные под защитой с первого мгновения.',
-        'звонки': 'В TOK доступны удобные звонки с кристально чистым качеством звука и шумоподавлением.',
-        'кастомизация': 'TOK позволяет настроить интерфейс под себя: темы, цвета, расположение элементов. Сделайте TOK по-настоящему своим.',
-        'игры': 'В TOK есть встроенные мини-игры для общения с друзьями. Это весело!',
-        'по умолчанию': 'По умолчанию',
-        'кроссплатформенность': 'TOK доступен на всех устройствах: iOS, Android, Windows, Mac, Linux.',
-        'помощник': 'Умный помощник на базе AI помогает с переводами, суммаризацией сообщений и быстрыми ответами.',
+        'кто делает': 'TOK создают K1lame и Martin_Mefik.',
+        
+        // Дата релиза и прогресс
+        'релиз': 'Релиз TOK запланирован на 4-й квартал 2026 года. Сейчас идёт активная разработка.',
+        'когда': 'Релиз ожидается в 4-м квартале 2026. Точная дата будет объявлена позже.',
+        'готовность': 'Текущая готовность — примерно 28% (отслеживайте на сайте, прогресс обновляется в реальном времени).',
+        'прогресс': 'Прогресс разработки можно видеть на шкале выше. Сейчас он составляет {{progress}}%',
+        
+        // Интерфейс и дизайн
+        'интерфейс': 'Интерфейс TOK выполнен в минималистичном стиле с неоновыми акцентами. Главный экран, кастомизация, быстрая регистрация и удобные звонки — всё продумано для вас.',
+        'дизайн': 'Дизайн стеклянный (glassmorphism), с полупрозрачными элементами и неоновыми границами. Вдохновлён современными трендами и космосом.',
+        'главный экран': 'На главном экране — список чатов, поиск, избранное. Минимум лишнего, максимум функциональности.',
+        'регистрация': 'Регистрация быстрая: нужен только номер телефона или email. Все данные защищены сразу.',
+        
+        // Правовая информация
+        'копирование': 'Все права защищены. Копирование и подражание без договорённости преследуется по статье 1229 ГК РФ.',
+        'права': 'TOK Messenger © 2026. Все права защищены.',
+        
+        // Общие фразы
+        'как дела': 'У меня всё отлично, я обучаюсь каждый день, чтобы лучше отвечать на ваши вопросы!',
+        'спасибо': 'Пожалуйста! Обращайтесь ещё.',
+        'пока': 'До свидания! Если появятся вопросы, я здесь.',
+        'помощь': 'Я могу рассказать о TOK: его функциях, безопасности, разработчиках, дате релиза и многом другом. Просто спросите!',
       };
 
       // Открытие/закрытие чата
       chatToggle.addEventListener('click', () => {
         chatWindow.classList.toggle('open');
         if (chatWindow.classList.contains('open') && chatMessages.children.length === 0) {
-          // Добавляем приветственное сообщение от бота при первом открытии
           addBotMessage('Здравствуйте, на связи нейросеть мессенджера TOK, какой у вас вопрос?');
         }
       });
@@ -1429,9 +1465,9 @@
         addUserMessage(text);
         chatInput.value = '';
 
-        // Ищем ответ в базе знаний
+        // Генерируем ответ
         setTimeout(() => {
-          let answer = findAnswer(text);
+          let answer = generateAnswer(text);
           addBotMessage(answer);
         }, 600);
       }
@@ -1444,7 +1480,7 @@
         const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
         
         messageDiv.innerHTML = `
-          <div class="message-content">${text}</div>
+          <div class="message-content">${escapeHtml(text)}</div>
           <div class="message-time">${timeStr}</div>
         `;
         
@@ -1460,7 +1496,7 @@
         const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
         
         messageDiv.innerHTML = `
-          <div class="message-content">${text}</div>
+          <div class="message-content">${escapeHtml(text)}</div>
           <div class="message-time">${timeStr}</div>
         `;
         
@@ -1468,18 +1504,60 @@
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
 
-      function findAnswer(question) {
-        question = question.toLowerCase();
+      // Экранирование HTML
+      function escapeHtml(unsafe) {
+        return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      // Генерация ответа на основе вопроса
+      function generateAnswer(question) {
+        const lowerQuestion = question.toLowerCase();
         
-        // Проверяем все ключи в базе знаний
+        // Сначала проверим точные совпадения ключей (целые фразы)
         for (let key in knowledgeBase) {
-          if (question.includes(key)) {
-            return knowledgeBase[key];
+          if (lowerQuestion.includes(key)) {
+            let answer = knowledgeBase[key];
+            // Заменим плейсхолдер прогресса, если есть
+            if (answer.includes('{{progress}}')) {
+              const progress = document.getElementById('progressPercent').textContent;
+              answer = answer.replace('{{progress}}', progress);
+            }
+            return answer;
           }
         }
         
-        // Если не нашли, возвращаем общий ответ
-        return 'Спасибо за ваш вопрос! Я нейросеть TOK и могу рассказать о нашем мессенджере: о его функциях, безопасности, дате релиза, разработчиках и многом другом. Пожалуйста, задайте вопрос более конкретно.';
+        // Если не нашли, ищем по отдельным словам (кроме коротких)
+        const words = lowerQuestion.split(/\s+/).filter(w => w.length > 3);
+        let bestMatch = null;
+        let maxMatches = 0;
+        
+        for (let key in knowledgeBase) {
+          let matches = 0;
+          for (let word of words) {
+            if (key.includes(word)) matches++;
+          }
+          if (matches > maxMatches) {
+            maxMatches = matches;
+            bestMatch = key;
+          }
+        }
+        
+        if (bestMatch && maxMatches > 0) {
+          let answer = knowledgeBase[bestMatch];
+          if (answer.includes('{{progress}}')) {
+            const progress = document.getElementById('progressPercent').textContent;
+            answer = answer.replace('{{progress}}', progress);
+          }
+          return answer;
+        }
+        
+        // Если ничего не нашли, генерируем интеллектуальный ответ
+        return 'Интересный вопрос! Я ещё учусь, но могу точно рассказать о TOK. Попробуйте спросить о функциях, безопасности, разработчиках или дате релиза.';
       }
 
       sendBtn.addEventListener('click', sendUserMessage);
@@ -1489,7 +1567,7 @@
         }
       });
 
-      // Код из изображения для ПК версии
+      // Код из изображения для ПК версии (защита от выделения)
       if (window.innerWidth > 1024) {
         document.addEventListener("selectstart", function(e) {
           e.preventDefault();
@@ -1499,27 +1577,15 @@
         window.Input = window.Input || { mouse: { left: false, middle: false, right: false } };
 
         document.addEventListener("mousedown", function(event) {
-          if (event.button === 0) {
-            Input.mouse.left = true;
-          }
-          if (event.button === 1) {
-            Input.mouse.middle = true;
-          }
-          if (event.button === 2) {
-            Input.mouse.right = true;
-          }
+          if (event.button === 0) Input.mouse.left = true;
+          if (event.button === 1) Input.mouse.middle = true;
+          if (event.button === 2) Input.mouse.right = true;
         });
 
         document.addEventListener("mouseup", function(event) {
-          if (event.button === 0) {
-            Input.mouse.left = false;
-          }
-          if (event.button === 1) {
-            Input.mouse.middle = false;
-          }
-          if (event.button === 2) {
-            Input.mouse.right = false;
-          }
+          if (event.button === 0) Input.mouse.left = false;
+          if (event.button === 1) Input.mouse.middle = false;
+          if (event.button === 2) Input.mouse.right = false;
         });
 
         document.addEventListener("contextmenu", function(event) {
