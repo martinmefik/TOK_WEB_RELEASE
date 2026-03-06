@@ -79,6 +79,42 @@
       transform: translateY(0);
     }
 
+    /* Кнопка управления музыкой */
+    .music-control {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+    }
+
+    .music-btn {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(11, 15, 26, 0.8);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--neon-purple);
+      color: var(--neon-purple);
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 0 30px rgba(184, 77, 255, 0.5);
+    }
+
+    .music-btn:hover {
+      border-color: var(--neon-pink);
+      color: var(--neon-pink);
+      box-shadow: 0 0 50px rgba(255, 77, 154, 0.7);
+      transform: scale(1.1);
+    }
+
+    .music-btn.off {
+      opacity: 0.7;
+    }
+
     /* Типографика */
     h1, h2, h3 {
       font-weight: 500;
@@ -215,7 +251,7 @@
       line-height: 1.8;
     }
 
-    /* ГАЛЕРЕЯ (4 фото, крупнее) */
+    /* ГАЛЕРЕЯ (4 фото, крупнее, смещена правее) */
     .gallery-section {
       margin: 140px 0;
       display: flex;
@@ -230,64 +266,66 @@
       text-align: center;
       margin-bottom: 70px;
       text-shadow: 0 0 20px var(--neon-purple), 0 0 40px var(--neon-blue);
+      transform: translateX(30px);
     }
 
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 50px;
-      max-width: 1600px;
+      gap: 60px;
+      max-width: 1800px;
       width: 100%;
       margin: 0 auto;
       justify-content: center;
+      transform: translateX(40px);
     }
 
     .gallery-item {
       background: rgba(11, 15, 26, 0.7);
       backdrop-filter: blur(15px);
       border: 2px solid var(--neon-purple);
-      border-radius: 80px;
-      padding: 35px;
-      box-shadow: 0 0 40px rgba(184, 77, 255, 0.4);
+      border-radius: 90px;
+      padding: 40px;
+      box-shadow: 0 0 50px rgba(184, 77, 255, 0.4);
       transition: var(--transition);
     }
 
     .gallery-item:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 80px rgba(255, 77, 154, 0.6);
-      transform: translateY(-20px) scale(1.03);
+      box-shadow: 0 0 90px rgba(255, 77, 154, 0.6);
+      transform: translateY(-25px) scale(1.05);
     }
 
     .gallery-item img {
       width: 100%;
       height: auto;
-      border-radius: 70px;
+      border-radius: 80px;
       border: 2px solid var(--neon-purple);
-      box-shadow: 0 0 30px rgba(184, 77, 255, 0.6);
+      box-shadow: 0 0 40px rgba(184, 77, 255, 0.6);
       transition: var(--transition);
     }
 
     .gallery-item:hover img {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 50px rgba(255, 77, 154, 0.7);
+      box-shadow: 0 0 60px rgba(255, 77, 154, 0.7);
     }
 
     .gallery-caption {
-      font-size: 2.4rem;
-      margin: 35px 0 20px;
+      font-size: 2.6rem;
+      margin: 40px 0 25px;
       color: var(--text-primary);
-      text-shadow: 0 0 15px var(--neon-purple);
+      text-shadow: 0 0 20px var(--neon-purple);
       transition: var(--transition);
     }
 
     .gallery-item:hover .gallery-caption {
-      text-shadow: 0 0 15px var(--neon-pink);
+      text-shadow: 0 0 20px var(--neon-pink);
     }
 
     .gallery-description {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       color: var(--text-secondary);
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     /* Причины (расширенные) */
@@ -600,9 +638,20 @@
     }
 
     /* Адаптация */
+    @media (max-width: 1600px) {
+      .gallery-grid {
+        gap: 50px;
+        transform: translateX(20px);
+      }
+    }
+
     @media (max-width: 1400px) {
       .gallery-grid {
         gap: 40px;
+        transform: translateX(0);
+      }
+      .gallery-title {
+        transform: translateX(0);
       }
     }
 
@@ -648,6 +697,16 @@
 </head>
 <body>
 
+  <!-- Кнопка управления музыкой -->
+  <div class="music-control">
+    <div class="music-btn" id="musicToggle">🔊</div>
+  </div>
+
+  <!-- Аудио элемент -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
   <!-- HERO -->
   <section class="section hero">
     <h1>TOK — Непросто мессенджер</h1>
@@ -666,7 +725,7 @@
     </div>
   </section>
 
-  <!-- ГАЛЕРЕЯ (4 фото, крупные) -->
+  <!-- ГАЛЕРЕЯ (4 фото, крупные, смещена правее) -->
   <section class="section container gallery-section">
     <h2 class="gallery-title neon-text">⚡ Интерфейс TOK</h2>
     <div class="gallery-grid">
@@ -692,7 +751,7 @@
       <div class="gallery-item">
         <img src="5image.jpg" alt="TOK звонки" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00ff9d?text=TOK+Calls'">
         <div class="gallery-caption">📞 Удобные звонки</div>
-        <div class="gallery-description">Кристально чистое качество звука, шумоподавление и возможность записывать разговоры. Будьте на связи всегда.</div>
+        <div class="gallery-description">Кристально чистое качество звука, шумоподавление. Будьте на связи всегда.</div>
       </div>
     </div>
   </section>
@@ -805,34 +864,4 @@
       // Прогресс с миллипроцентами (3 месяца = 90 дней)
       const startDate = new Date('2026-03-06T00:00:00');
       const endDate = new Date('2026-06-06T00:00:00');
-      const totalDuration = endDate - startDate;
-      
-      function updateProgress() {
-        const now = new Date();
-        
-        if (now < startDate) {
-          document.getElementById('progressFill').style.width = '0%';
-          document.getElementById('progressPercent').textContent = '0.000000%';
-          return;
-        }
-        
-        if (now > endDate) {
-          document.getElementById('progressFill').style.width = '100%';
-          document.getElementById('progressPercent').textContent = '100.000000%';
-          return;
-        }
-        
-        const elapsed = now - startDate;
-        const progress = (elapsed / totalDuration) * 100;
-        const formattedProgress = progress.toFixed(6);
-        
-        document.getElementById('progressFill').style.width = progress + '%';
-        document.getElementById('progressPercent').textContent = formattedProgress + '%';
-      }
-      
-      updateProgress();
-      setInterval(updateProgress, 1000);
-    })();
-  </script>
-</body>
-</html>
+      const totalDuration = endDate
