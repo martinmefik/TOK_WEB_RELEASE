@@ -89,7 +89,7 @@
       100% { transform: translateY(-15px); }
     }
 
-    /* Карточка TOK (без кнопки, с большим текстом) */
+    /* Карточка TOK */
     .tok-card {
       display: flex;
       flex-wrap: wrap;
@@ -162,6 +162,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      width: 100%;
     }
 
     .gallery-title {
@@ -177,6 +179,7 @@
       gap: 40px;
       max-width: 1300px;
       width: 100%;
+      margin: 0 auto;
     }
 
     .gallery-item {
@@ -226,7 +229,7 @@
       line-height: 1.7;
     }
 
-    /* Причины (центрированные) */
+    /* Причины */
     .reasons-section {
       margin: 140px 0;
       display: flex;
@@ -284,7 +287,7 @@
       line-height: 1.8;
     }
 
-    /* Прогресс */
+    /* Прогресс с анимацией */
     .progress-section {
       max-width: 900px;
       margin: 140px auto;
@@ -313,7 +316,7 @@
     }
 
     .progress-bar-fill {
-      width: 28%;
+      width: 0%;
       height: 100%;
       background: linear-gradient(90deg, var(--neon-blue), #80ffff);
       border-radius: 100px;
@@ -325,7 +328,25 @@
       font-weight: 700;
       font-size: 1.8rem;
       box-shadow: 0 0 30px var(--neon-blue);
-      transition: var(--transition);
+      transition: width 0.1s linear;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
     .progress-section:hover .progress-bar-fill {
@@ -333,11 +354,19 @@
       box-shadow: 0 0 40px var(--neon-pink);
     }
 
-    .progress-note {
+    .progress-percent {
       font-size: 2rem;
-      margin-top: 35px;
+      margin-top: 25px;
       color: var(--text-secondary);
       text-shadow: 0 0 8px var(--neon-blue);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 2px;
+    }
+
+    .progress-milli {
+      font-size: 1.2rem;
+      color: var(--neon-blue);
+      opacity: 0.9;
     }
 
     /* Создатели */
@@ -479,6 +508,37 @@
       box-shadow: 0 0 50px var(--neon-pink);
     }
 
+    /* Telegram кнопка */
+    .telegram-section {
+      margin: 80px 0 100px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .telegram-button {
+      display: inline-block;
+      background: var(--bg-card);
+      border: 3px solid var(--neon-blue);
+      color: var(--text-primary);
+      font-size: 2.2rem;
+      font-weight: 600;
+      padding: 25px 70px;
+      border-radius: 90px;
+      text-decoration: none;
+      text-shadow: 0 0 10px var(--neon-blue);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+      transition: var(--transition);
+      letter-spacing: 2px;
+    }
+
+    .telegram-button:hover {
+      border-color: var(--neon-pink);
+      color: var(--neon-pink);
+      text-shadow: 0 0 15px var(--neon-pink);
+      box-shadow: 0 0 60px rgba(255, 77, 154, 0.4);
+      transform: scale(1.05);
+    }
+
     /* Футер */
     .footer {
       background: #03050a;
@@ -528,6 +588,11 @@
         font-size: 3rem;
         padding: 20px 40px;
       }
+      
+      .telegram-button {
+        font-size: 1.8rem;
+        padding: 20px 50px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -550,7 +615,7 @@
     <h1>Добро пожаловать в мир технологий вместе с TOK</h1>
   </section>
 
-  <!-- TOK Card (без кнопки, с большим текстом) -->
+  <!-- TOK Card -->
   <section class="section container">
     <div class="tok-card">
       <div class="tok-avatar">TOK</div>
@@ -563,23 +628,23 @@
     </div>
   </section>
 
-  <!-- ГАЛЕРЕЯ (центрированная, фото крупнее, подписи исправлены) -->
+  <!-- ГАЛЕРЕЯ (центрированная, фото крупнее, порядок исправлен) -->
   <section class="section container gallery-section">
     <h2 class="gallery-title neon-text">⚡ Интерфейс TOK</h2>
     <div class="gallery-grid">
-      <!-- Левое фото (image.jpg) - теперь с подписью про кастомизацию -->
+      <!-- Левое фото (image.jpg) - Главный экран -->
       <div class="gallery-item">
-        <img src="image.jpg" alt="TOK интерфейс" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00f0ff?text=TOK+Custom'">
-        <div class="gallery-caption">🎨 Кастомизация</div>
-        <div class="gallery-description">Возможность настроить интерфейс под себя — темы, цвета, расположение элементов. Сделайте TOK по-настоящему своим.</div>
-      </div>
-      <!-- Центральное фото (1image.jpg) - теперь с подписью про главный экран -->
-      <div class="gallery-item">
-        <img src="1image.jpg" alt="TOK главный" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/b84dff?text=TOK+Main'">
+        <img src="image.jpg" alt="TOK главный экран" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00f0ff?text=TOK+Main'">
         <div class="gallery-caption">🚀 Главный экран</div>
         <div class="gallery-description">Минималистичный дизайн с неоновыми акцентами. Всё важное — на виду, ничего лишнего.</div>
       </div>
-      <!-- Правое фото (2image.jpg) - теперь с подписью про регистрацию -->
+      <!-- Центральное фото (1image.jpg) - Кастомизация -->
+      <div class="gallery-item">
+        <img src="1image.jpg" alt="TOK кастомизация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/b84dff?text=TOK+Custom'">
+        <div class="gallery-caption">🎨 Кастомизация</div>
+        <div class="gallery-description">Возможность настроить интерфейс под себя — темы, цвета, расположение элементов. Сделайте TOK по-настоящему своим.</div>
+      </div>
+      <!-- Правое фото (2image.jpg) - Быстрая регистрация -->
       <div class="gallery-item">
         <img src="2image.jpg" alt="TOK регистрация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/ff4d9a?text=TOK+Register'">
         <div class="gallery-caption">🔐 Быстрая регистрация</div>
@@ -611,13 +676,13 @@
     </div>
   </section>
 
-  <!-- ПРОГРЕСС 28% -->
+  <!-- ПРОГРЕСС С АНИМАЦИЕЙ -->
   <section class="section container progress-section">
     <div class="progress-label neon-text">⚡ готовность к релизу</div>
     <div class="progress-bar-bg">
-      <div class="progress-bar-fill">28%</div>
+      <div class="progress-bar-fill" id="progressFill"></div>
     </div>
-    <div class="progress-note">приложение готово на 28% — финальная стадия разработки</div>
+    <div class="progress-percent" id="progressPercent">0.000000%</div>
   </section>
 
   <!-- БЛОК СОЗДАТЕЛЕЙ -->
@@ -645,6 +710,11 @@
     </div>
   </section>
 
+  <!-- TELEGRAM КНОПКА -->
+  <section class="telegram-section">
+    <a href="https://t.me/Tok_messenger" class="telegram-button" target="_blank" rel="noopener noreferrer">📱 TOK Messenger в Telegram</a>
+  </section>
+
   <!-- ФУТЕР -->
   <footer class="footer">
     <p>© 2026 TOK Messenger — связь без границ</p>
@@ -652,6 +722,7 @@
 
   <script>
     (function() {
+      // Плавное появление секций
       const sections = document.querySelectorAll('.section');
       
       const observer = new IntersectionObserver((entries) => {
@@ -667,6 +738,45 @@
       setTimeout(() => {
         document.querySelector('.hero').classList.add('revealed');
       }, 100);
+
+      // Прогресс с миллипроцентами (3 месяца = 90 дней)
+      const startDate = new Date('2026-03-06T00:00:00'); // Старт 6 марта 2026
+      const endDate = new Date('2026-06-06T00:00:00'); // Финиш 6 июня 2026
+      const totalDuration = endDate - startDate; // в миллисекундах
+      
+      function updateProgress() {
+        const now = new Date();
+        
+        // Если текущая дата раньше старта
+        if (now < startDate) {
+          document.getElementById('progressFill').style.width = '0%';
+          document.getElementById('progressPercent').textContent = '0.000000%';
+          return;
+        }
+        
+        // Если текущая дата позже финиша
+        if (now > endDate) {
+          document.getElementById('progressFill').style.width = '100%';
+          document.getElementById('progressPercent').textContent = '100.000000%';
+          return;
+        }
+        
+        // Вычисляем прогресс
+        const elapsed = now - startDate;
+        const progress = (elapsed / totalDuration) * 100;
+        
+        // Форматируем с 6 знаками после запятой (миллипроценты)
+        const formattedProgress = progress.toFixed(6);
+        
+        document.getElementById('progressFill').style.width = progress + '%';
+        document.getElementById('progressPercent').textContent = formattedProgress + '%';
+      }
+      
+      // Обновляем при загрузке
+      updateProgress();
+      
+      // Обновляем каждые 10 секунд (для демонстрации, можно поставить реже)
+      setInterval(updateProgress, 10000);
     })();
   </script>
 </body>
