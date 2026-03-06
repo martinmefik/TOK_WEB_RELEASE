@@ -2,277 +2,179 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>TOK Messenger — будущее без границ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOK — тёмный мессенджер</title>
   <style>
-    /* === СБРОС И БАЗОВЫЕ НАСТРОЙКИ === */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
-      background: #0b0d17;
-      background-image: radial-gradient(circle at 30% 20%, #1b1f30 0%, #03050c 95%);
-      color: #edf2fc;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #0a0c15;
+      background-image: radial-gradient(circle at 30% 20%, #1b1f30 0%, #03050a 100%);
+      color: #eef3fc;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
     .container {
-      max-width: 1300px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
     }
-
-    /* === ПЛАВНОЕ ПОЯВЛЕНИЕ СЕКЦИЙ === */
     .section {
       opacity: 0;
       transform: translateY(40px);
-      transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
-      will-change: opacity, transform;
+      transition: opacity 1s ease, transform 1s ease;
     }
-
     .section.revealed {
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* === ТИПОГРАФИКА И ОБЩИЕ ЭЛЕМЕНТЫ === */
     h1, h2, h3 {
       font-weight: 500;
       line-height: 1.2;
     }
-
-    .glass-card {
-      background: rgba(18, 22, 40, 0.6);
+    .glass {
+      background: rgba(20, 25, 45, 0.6);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(90, 120, 255, 0.15);
-      border-radius: 56px;
-      box-shadow: 0 30px 60px -20px #000000, 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+      border: 1px solid rgba(100, 140, 255, 0.15);
+      border-radius: 48px;
+      box-shadow: 0 30px 60px -30px #000;
     }
-
     .gradient-text {
-      background: linear-gradient(145deg, #d6e2ff, #ffffff);
+      background: linear-gradient(145deg, #e0eaff, #ffffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
-
-    /* === HERO (УМЕНЬШЕННЫЙ ЗАГОЛОВОК) === */
+    /* Hero */
     .hero {
       min-height: 90vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 20px;
     }
-
     .hero h1 {
-      font-size: clamp(2rem, 6vw, 3.8rem);
-      font-weight: 500;
-      background: linear-gradient(135deg, #b5c8ff, #e0ecff, #b0c5ff);
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      background: linear-gradient(135deg, #c0d0ff, #ffffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 0 50px rgba(70, 130, 255, 0.5);
-      max-width: 1000px;
-      margin: 0 auto;
-      animation: gentleDrift 8s infinite alternate ease-in-out;
+      max-width: 900px;
     }
-
-    @keyframes gentleDrift {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-12px); }
-    }
-
-    /* === КАРТОЧКА TOK (ПЕРЕРАБОТАНА) === */
+    /* Карточка TOK */
     .tok-card {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 30px;
+      gap: 40px;
+      padding: 50px;
+      margin: 80px 0;
       background: rgba(18, 22, 40, 0.7);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(80, 120, 255, 0.2);
+      border: 1px solid #2f3b70;
       border-radius: 70px;
-      padding: 50px 45px;
-      margin: 80px 0;
-      box-shadow: 0 40px 80px -20px #000000;
     }
-
     .tok-avatar {
       width: 160px;
       height: 160px;
-      background: linear-gradient(135deg, #202642, #0f1429);
+      background: linear-gradient(135deg, #252b4a, #121734);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 20px 40px -8px #2f4bff, 0 0 0 2px rgba(255,255,255,0.05) inset;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .tok-avatar::before {
-      content: "TOK";
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 700;
-      background: linear-gradient(145deg, #c8d9ff, #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -0.02em;
+      color: #b5cbff;
+      box-shadow: 0 20px 40px -10px #1f3ad0;
+      border: 2px solid #4f71ff;
     }
-
-    .tok-avatar::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
     .tok-content {
       flex: 1;
-      min-width: 280px;
     }
-
     .tok-content h2 {
-      font-size: clamp(2.4rem, 5vw, 3.5rem);
-      background: linear-gradient(145deg, #e6edff, #b7cbff);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      background: linear-gradient(145deg, #dde6ff, #ffffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
     }
-
     .tok-content p {
       font-size: 1.2rem;
-      color: #b6c3e6;
-      max-width: 600px;
-      margin-bottom: 30px;
+      color: #cad2f0;
+      margin: 20px 0 30px;
     }
-
-    .btn-glow {
+    .btn {
       display: inline-block;
-      background: rgba(35, 55, 130, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(50, 80, 200, 0.3);
+      border: 1px solid #5f7eff;
       color: white;
       padding: 16px 42px;
       border-radius: 60px;
       font-weight: 600;
-      font-size: 1.2rem;
-      backdrop-filter: blur(10px);
       text-decoration: none;
-      box-shadow: 0 15px 30px -12px #0f1f6b;
-      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+      transition: 0.3s;
     }
-
-    .btn-glow:hover {
-      background: rgba(70, 110, 255, 0.5);
-      border-color: rgba(255, 255, 255, 0.3);
+    .btn:hover {
+      background: #3f5ef0;
       box-shadow: 0 20px 40px -10px #3f5ef0;
-      transform: scale(1.02);
     }
-
-    .tok-decoration {
-      width: 180px;
-      height: 180px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="75" fill="none" stroke="%233f5ef0" stroke-width="2.5" stroke-dasharray="12 8"/><circle cx="100" cy="100" r="45" fill="none" stroke="%236385ff" stroke-width="2" stroke-dasharray="8 6"/><text x="100" y="125" font-size="52" text-anchor="middle" fill="%23b0c5ff" font-weight="400" font-family="Inter">✦</text></svg>');
-      background-size: contain;
-      filter: drop-shadow(0 0 40px #3451ff);
-      opacity: 0.9;
-      flex-shrink: 0;
-    }
-
-    /* === СЕКЦИЯ ПРИЧИН (ПОЧЕМУ ВЫБРАТЬ) === */
+    /* Reasons grid */
     .reasons {
       margin: 140px 0;
     }
-
     .reasons h2 {
-      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
       text-align: center;
-      margin-bottom: 70px;
-      background: linear-gradient(145deg, #d2e0ff, #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin-bottom: 60px;
     }
-
-    .reasons-grid {
+    .reason-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 35px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
     }
-
     .reason-card {
       background: rgba(18, 22, 40, 0.6);
       backdrop-filter: blur(10px);
-      padding: 45px 30px;
+      border: 1px solid #2e3a6a;
       border-radius: 50px;
-      border: 1px solid #2a3560;
-      transition: transform 0.3s, border-color 0.3s;
+      padding: 40px 25px;
+      transition: 0.3s;
     }
-
     .reason-card:hover {
-      border-color: #5f7eff;
+      border-color: #6f8aff;
       transform: translateY(-8px);
-      box-shadow: 0 30px 50px -20px #1e37a0;
     }
-
     .reason-card h3 {
-      font-size: 2.2rem;
-      font-weight: 500;
-      color: #d1deff;
-      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #d4e0ff;
+      margin-bottom: 15px;
     }
-
     .reason-card p {
-      color: #b1bedf;
+      color: #b2c2e8;
       font-size: 1.1rem;
     }
-
-    /* === ШКАЛА ПРОГРЕССА (28%) === */
-    .progress-section {
-      max-width: 950px;
-      margin: 130px auto;
+    /* Progress */
+    .progress-block {
+      max-width: 800px;
+      margin: 140px auto;
       text-align: center;
     }
-
     .progress-label {
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 500;
-      background: linear-gradient(145deg, #d4e1ff, #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 40px;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      margin-bottom: 35px;
     }
-
-    .progress-track {
+    .bar-bg {
       background: #1c233a;
       height: 48px;
       border-radius: 100px;
       padding: 6px;
-      box-shadow: inset 0 4px 12px #010114;
     }
-
-    .progress-fill {
+    .bar-fill {
       width: 28%;
       height: 100%;
-      background: linear-gradient(90deg, #2d4dff, #8ba3ff, #2d4dff);
+      background: linear-gradient(90deg, #2d4dff, #8ba3ff);
       border-radius: 100px;
       display: flex;
       align-items: center;
@@ -281,361 +183,182 @@
       color: white;
       font-weight: 700;
       font-size: 1.4rem;
-      box-shadow: 0 0 25px #3f5ef0;
-      transition: width 1.5s ease;
+      box-shadow: 0 0 30px #3f5ef0;
     }
-
     .progress-note {
-      font-size: 1.9rem;
-      margin-top: 35px;
-      color: #cad5ff;
+      font-size: 1.8rem;
+      margin-top: 30px;
+      color: #d0dcff;
     }
-
-    /* === БЛОК СОЗДАТЕЛЕЙ (ВЫНЕСЕН ИЗ ФУТЕРА) === */
-    .creators-block {
-      margin: 150px 0 80px;
+    /* Creators */
+    .creators {
+      margin: 140px 0;
       display: flex;
       justify-content: center;
     }
-
     .creators-card {
-      background: rgba(20, 25, 50, 0.7);
+      background: rgba(18, 22, 40, 0.7);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(100, 140, 255, 0.25);
+      border: 1px solid #4f71ff;
       border-radius: 90px;
       padding: 60px 80px;
       text-align: center;
       max-width: 900px;
-      width: 100%;
-      box-shadow: 0 40px 70px -25px #000;
     }
-
     .creators-card p {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      background: linear-gradient(145deg, #e6eeff, #ffffff);
+      font-size: clamp(2rem, 5vw, 3rem);
+      background: linear-gradient(145deg, #e0ecff, #ffffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
     }
-
-    .creators-names {
+    .creator-names {
       display: flex;
       justify-content: center;
-      gap: 50px;
+      gap: 60px;
+      margin-top: 30px;
       flex-wrap: wrap;
-      margin-top: 25px;
     }
-
     .creator {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-
     .creator-avatar {
       width: 100px;
       height: 100px;
-      background: linear-gradient(145deg, #263155, #12172f);
+      background: #20294a;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       font-weight: 600;
       color: #b5cbff;
       border: 2px solid #4f71ff;
-      box-shadow: 0 15px 30px -10px #1f37b0;
       margin-bottom: 15px;
     }
-
     .creator span {
-      font-size: 1.8rem;
-      background: linear-gradient(145deg, #ccdbff, #ffffff);
+      font-size: 2rem;
+      background: linear-gradient(145deg, #d6e4ff, #ffffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
-    /* === БЛОК ДИНАМИЧЕСКОЙ ДАТЫ РЕЛИЗА === */
+    /* Release */
     .release-block {
       background: rgba(18, 22, 40, 0.5);
       backdrop-filter: blur(8px);
+      border: 1px solid #3f5ef0;
       border-radius: 80px;
-      padding: 50px 40px;
+      padding: 50px;
       margin: 120px 0;
-      border: 1px solid #314478;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-around;
-      gap: 30px;
     }
-
     .release-text {
       font-size: 2rem;
-      color: #d3dfff;
+      color: #d0daff;
     }
-
     .release-date {
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       font-weight: 600;
-      background: linear-gradient(145deg, #b7cdff, white);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      padding: 15px 35px;
+      color: #ffffff;
+      background: #1e2950;
+      padding: 15px 40px;
       border-radius: 70px;
-      background: rgba(40, 60, 150, 0.3);
-      backdrop-filter: blur(12px);
-      border: 1px solid #5771ff;
+      border: 1px solid #6f8aff;
+      box-shadow: 0 0 30px #1f3ad0;
     }
-
-    /* === ФУТЕР (МИНИМАЛИСТИЧНЫЙ) === */
+    /* Footer */
     .footer {
       background: #070b1a;
       border-radius: 60px 60px 0 0;
       padding: 50px 30px;
       text-align: center;
+      color: #9aabdf;
       border-top: 1px solid #2b3870;
-      color: #8f9fd5;
-      font-size: 1.2rem;
     }
-
-    /* === АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ === */
+    /* Mobile */
     @media (max-width: 768px) {
-      .container {
-        padding: 0 18px;
-      }
-
-      .tok-card {
-        padding: 40px 25px;
-        border-radius: 50px;
-      }
-
-      .tok-avatar {
-        width: 130px;
-        height: 130px;
-      }
-
-      .tok-avatar::before {
-        font-size: 2.3rem;
-      }
-
-      .tok-decoration {
-        width: 140px;
-        height: 140px;
-      }
-
-      .btn-glow {
-        padding: 14px 32px;
-        font-size: 1.1rem;
-      }
-
-      .reasons-grid {
-        gap: 20px;
-      }
-
-      .reason-card {
-        padding: 35px 25px;
-        border-radius: 40px;
-      }
-
-      .progress-track {
-        height: 40px;
-      }
-
-      .progress-fill {
-        font-size: 1.2rem;
-        padding-right: 20px;
-      }
-
-      .creators-card {
-        padding: 40px 25px;
-        border-radius: 60px;
-      }
-
-      .creator-avatar {
-        width: 80px;
-        height: 80px;
-        font-size: 1.8rem;
-      }
-
-      .creator span {
-        font-size: 1.5rem;
-      }
-
-      .release-block {
-        flex-direction: column;
-        text-align: center;
-        padding: 40px 20px;
-      }
-
-      .release-text {
-        font-size: 1.8rem;
-      }
-
-      .release-date {
-        font-size: 2.2rem;
-        padding: 12px 25px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .tok-content h2 {
-        font-size: 2.2rem;
-      }
-
-      .tok-content p {
-        font-size: 1rem;
-      }
-
-      .reason-card h3 {
-        font-size: 1.8rem;
-      }
+      .tok-card { padding: 30px; }
+      .creators-card { padding: 40px 30px; }
+      .creator-avatar { width: 80px; height: 80px; font-size: 2rem; }
+      .creator span { font-size: 1.6rem; }
+      .release-block { flex-direction: column; gap: 20px; }
     }
   </style>
 </head>
 <body>
+  <!-- Hero -->
+  <section class="section hero" id="hero">
+    <h1>Добро пожаловать в мир технологий вместе с TOK</h1>
+  </section>
 
-<!-- HERO: уменьшенный заголовок -->
-<section class="section hero" id="hero">
-  <h1>Добро пожаловать в мир технологий вместе с TOK</h1>
-</section>
-
-<!-- КАРТОЧКА TOK -->
-<section class="section container" id="tok-card">
-  <div class="tok-card">
-    <div class="tok-avatar"></div>
-    <div class="tok-content">
-      <h2>TOK Messenger</h2>
-      <p>Новый инновационный мессенджер, который невозможно заблокировать. Он работает стабильнее любых аналогов. Внутри — бесплатный премиум-функционал и передовые технологии приватности.</p>
-      <a href="#reasons" class="btn-glow">Узнать больше</a>
-    </div>
-    <div class="tok-decoration"></div>
-  </div>
-</section>
-
-<!-- ПОЧЕМУ СТОИТ ВЫБРАТЬ (ПРИЧИНЫ) -->
-<section class="section container reasons" id="reasons">
-  <h2>Почему стоит выбрать TOK?</h2>
-  <div class="reasons-grid">
-    <div class="reason-card">
-      <h3>🛡️ Неблокируемый</h3>
-      <p>Децентрализованная P2P-архитектура. Сообщения передаются в обход любых блокировок — вы всегда на связи, даже при перебоях с интернетом.</p>
-    </div>
-    <div class="reason-card">
-      <h3>⚡ Скорость света</h3>
-      <p>Умная маршрутизация через несколько каналов одновременно. Доставка сообщений занимает миллисекунды, независимо от нагрузки сети.</p>
-    </div>
-    <div class="reason-card">
-      <h3>🎁 Всё бесплатно</h3>
-      <p>Более 1000 стикеров, 50 тем, неограниченное облако 50 ГБ, голосовые и видео звонки высокого качества — без подписок и скрытых платежей.</p>
-    </div>
-    <div class="reason-card">
-      <h3>🔐 Приватность в коде</h3>
-      <p>Сквозное шифрование по умолчанию, открытый исходный код клиентов. Никаких логов, никакого сбора метаданных. Только вы и ваши собеседники.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ШКАЛА ПРОГРЕССА (28%) -->
-<section class="section container progress-section">
-  <div class="progress-label">готовность к релизу</div>
-  <div class="progress-track">
-    <div class="progress-fill">28%</div>
-  </div>
-  <div class="progress-note">приложение готово на 28% — осталось совсем немного, и оно выйдет в релиз!</div>
-</section>
-
-<!-- БЛОК СОЗДАТЕЛЕЙ (КРАСИВО ОФОРМЛЕН, ВЫНЕСЕН ИЗ ФУТЕРА) -->
-<section class="section container creators-block">
-  <div class="creators-card glass-card">
-    <p>над этим проектом стараются</p>
-    <div class="creators-names">
-      <div class="creator">
-        <div class="creator-avatar">K</div>
-        <span>K1lame</span>
-      </div>
-      <div class="creator">
-        <div class="creator-avatar">M</div>
-        <span>Martin_Mefik</span>
+  <!-- TOK Card -->
+  <section class="section container">
+    <div class="tok-card">
+      <div class="tok-avatar">TOK</div>
+      <div class="tok-content">
+        <h2>TOK Messenger</h2>
+        <p>Инновационный мессенджер, который невозможно заблокировать. Работает стабильнее аналогов, а внутри — бесплатные стикеры, темы и приватность.</p>
+        <a href="#reasons" class="btn">Узнать больше</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- БЛОК С ДИНАМИЧЕСКОЙ ДАТОЙ РЕЛИЗА (вместо фиксированной) -->
-<section class="section container release-block">
-  <span class="release-text">ориентировочная дата релиза</span>
-  <span class="release-date" id="dynamicReleaseDate">обновляется</span>
-</section>
+  <!-- Reasons (без облака) -->
+  <section class="section container reasons" id="reasons">
+    <h2 class="gradient-text">Почему стоит выбрать TOK?</h2>
+    <div class="reason-grid">
+      <div class="reason-card"><h3>🛡️ Неблокируемый</h3><p>Децентрализованная P2P-сеть. Никакие блокировки не помешают общению.</p></div>
+      <div class="reason-card"><h3>⚡ Мгновенно</h3><p>Умная маршрутизация доставляет сообщения за миллисекунды.</p></div>
+      <div class="reason-card"><h3>🎁 Бесплатно навсегда</h3><p>Тысячи стикеров, 50+ тем, звонки высокого качества без подписок.</p></div>
+      <div class="reason-card"><h3>🔐 Приватность</h3><p>Сквозное шифрование по умолчанию, открытый код, никаких логов.</p></div>
+    </div>
+  </section>
 
-<!-- ФУТЕР -->
-<footer class="footer">
-  <p>© 2025 TOK Messenger — связь без компромиссов</p>
-</footer>
+  <!-- Progress 28% -->
+  <section class="section container progress-block">
+    <div class="progress-label gradient-text">готовность к релизу</div>
+    <div class="bar-bg"><div class="bar-fill">28%</div></div>
+    <div class="progress-note">приложение готово на 28% — скоро выйдет в релиз!</div>
+  </section>
 
-<!-- СКРИПТ ДЛЯ ПЛАВНОГО ПОЯВЛЕНИЯ И ДИНАМИЧЕСКОЙ ДАТЫ -->
-<script>
-  (function() {
-    // --- Intersection Observer для появления секций ---
+  <!-- Creators -->
+  <section class="section container creators">
+    <div class="creators-card">
+      <p>над этим проектом стараются</p>
+      <div class="creator-names">
+        <div class="creator"><div class="creator-avatar">K</div><span>K1lame</span></div>
+        <div class="creator"><div class="creator-avatar">M</div><span>Martin_Mefik</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Release date 2026 -->
+  <section class="section container release-block">
+    <span class="release-text">релиз состоится в</span>
+    <span class="release-date">2026</span>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">© 2026 TOK Messenger — связь без границ</footer>
+
+  <script>
+    // Intersection Observer для плавного появления
     const sections = document.querySelectorAll('.section');
-    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-        } else {
-          // Если хотим, чтобы при уходе секция исчезала, можно удалять класс.
-          // Но для более плавного эффекта оставим один раз появившись.
-          // Чтобы они не исчезали, комментируем else.
-          // entry.target.classList.remove('revealed');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('revealed');
       });
-    }, {
-      threshold: 0.2,
-      rootMargin: '0px 0px -20px 0px' // немного срабатывает раньше
+    }, { threshold: 0.2 });
+    sections.forEach(s => observer.observe(s));
+    // Плавный скролл по кнопке
+    document.querySelector('.btn')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('#reasons').scrollIntoView({ behavior: 'smooth' });
     });
-
-    sections.forEach(section => observer.observe(section));
-
-    // Также для hero, если он ещё не появился, но он сразу видим — observer сработает.
-
-    // --- Динамическая дата релиза (обновляется каждый день) ---
-    function updateReleaseDate() {
-      const dateElement = document.getElementById('dynamicReleaseDate');
-      if (!dateElement) return;
-
-      const now = new Date();
-      // Формируем строку вида "апрель 2026 · уточняется"
-      const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-      const month = months[now.getMonth()];
-      const year = now.getFullYear() + 1; // предполагаем релиз через год
-      // но сделаем динамическое сообщение, которое меняется в зависимости от времени
-      const day = now.getDate();
-      // Чтобы дата выглядела обновляющейся, добавим случайный разброс? Но лучше просто текст "обновляется еженедельно"
-      // Поставим красивую фразу
-      dateElement.textContent = `⚡ обновляется · ${month} ${year}`;
-    }
-
-    updateReleaseDate();
-    // можно обновлять раз в час (но для демо достаточно)
-    setInterval(updateReleaseDate, 3600000); // каждый час
-  })();
-</script>
-
-<!-- ДОПОЛНИТЕЛЬНЫЙ СКРИПТ ДЛЯ ПЛАВНОГО СКРОЛЛА ПО КНОПКЕ -->
-<script>
-  document.querySelector('.btn-glow')?.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector('#reasons');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-</script>
-
+  </script>
 </body>
 </html>
