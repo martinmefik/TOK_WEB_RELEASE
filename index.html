@@ -864,4 +864,64 @@
       // Прогресс с миллипроцентами (3 месяца = 90 дней)
       const startDate = new Date('2026-03-06T00:00:00');
       const endDate = new Date('2026-06-06T00:00:00');
-      const totalDuration = endDate
+      const totalDuration = endDate - startDate;
+      
+      function updateProgress() {
+        const now = new Date();
+        
+        if (now < startDate) {
+          document.getElementById('progressFill').style.width = '0%';
+          document.getElementById('progressPercent').textContent = '0.000000%';
+          return;
+        }
+        
+        if (now > endDate) {
+          document.getElementById('progressFill').style.width = '100%';
+          document.getElementById('progressPercent').textContent = '100.000000%';
+          return;
+        }
+        
+        const elapsed = now - startDate;
+        const progress = (elapsed / totalDuration) * 100;
+        const formattedProgress = progress.toFixed(6);
+        
+        document.getElementById('progressFill').style.width = progress + '%';
+        document.getElementById('progressPercent').textContent = formattedProgress + '%';
+      }
+      
+      updateProgress();
+      setInterval(updateProgress, 1000);
+
+      // Управление музыкой
+      const audio = document.getElementById('bgMusic');
+      const toggleBtn = document.getElementById('musicToggle');
+      
+      // Устанавливаем громкость 10% (0.1)
+      audio.volume = 0.1;
+      
+      let isPlaying = false;
+      
+      // Пытаемся автоматически запустить музыку (может не сработать из-за политик браузера)
+      audio.play().then(() => {
+        isPlaying = true;
+        toggleBtn.textContent = '🔊';
+      }).catch(() => {
+        isPlaying = false;
+        toggleBtn.textContent = '🔈';
+      });
+      
+      toggleBtn.addEventListener('click', () => {
+        if (isPlaying) {
+          audio.pause();
+          toggleBtn.textContent = '🔈';
+        } else {
+          audio.play().catch(e => console.log('Автовоспроизведение заблокировано'));
+          toggleBtn.textContent = '🔊';
+        }
+        isPlaying = !isPlaying;
+        toggleBtn.classList.toggle('off');
+      });
+    })();
+  </script>
+</body>
+</html>
