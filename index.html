@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TOK — неоновый чёрный мессенджер</title>
+  <title>TOK — непросто мессенджер</title>
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -21,29 +21,47 @@
       --neon-blue: #00f0ff;
       --neon-cyan: #0ff;
       --neon-pink: #ff4d9a;
+      --neon-purple: #b84dff;
       --text-primary: #f0f5ff;
       --text-secondary: #c0ccff;
       --border-neon: rgba(0, 240, 255, 0.3);
       --glow-blue: 0 0 15px #00f0ff, 0 0 40px rgba(0, 240, 255, 0.3);
       --glow-pink: 0 0 15px #ff4d9a, 0 0 40px rgba(255, 77, 154, 0.3);
+      --glow-purple: 0 0 15px #b84dff, 0 0 40px rgba(184, 77, 255, 0.3);
       --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     body {
       background: var(--bg-deep);
       background-image: 
-        radial-gradient(circle at 20% 30%, #1a1f40 0%, transparent 60%),
-        radial-gradient(circle at 80% 70%, #2a1f45 0%, transparent 60%);
+        radial-gradient(circle at 10% 20%, #1a1f40 0%, transparent 60%),
+        radial-gradient(circle at 90% 80%, #2a1f45 0%, transparent 60%),
+        radial-gradient(circle at 30% 70%, #1f1a4a 0%, transparent 60%);
       color: var(--text-primary);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 5 L55 30 L30 55 L5 30 Z" fill="none" stroke="%2300f0ff" stroke-width="0.3" opacity="0.1"/></svg>');
+      pointer-events: none;
+      z-index: 0;
     }
 
     .container {
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 30px;
+      position: relative;
+      z-index: 1;
     }
 
     /* Плавное появление */
@@ -66,7 +84,11 @@
 
     .neon-text {
       color: var(--text-primary);
-      text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-cyan);
+      text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-cyan), 0 0 30px var(--neon-purple);
+    }
+
+    .neon-text-pink {
+      text-shadow: 0 0 10px var(--neon-pink), 0 0 20px #ff99c2;
     }
 
     /* HERO */
@@ -76,20 +98,40 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0,240,255,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(50px);
+      animation: pulse 8s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.3; }
+      100% { transform: scale(1.5); opacity: 0.6; }
     }
 
     .hero h1 {
-      font-size: clamp(2.4rem, 7vw, 4.5rem);
-      max-width: 1000px;
-      background: linear-gradient(135deg, #fff, var(--neon-blue), #fff);
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      max-width: 1100px;
+      background: linear-gradient(135deg, #fff, var(--neon-blue), var(--neon-purple), #fff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: float 8s infinite alternate;
+      position: relative;
+      z-index: 2;
+      letter-spacing: -0.02em;
     }
 
     @keyframes float {
       0% { transform: translateY(0); }
-      100% { transform: translateY(-15px); }
+      100% { transform: translateY(-20px); }
     }
 
     /* Карточка TOK */
@@ -98,35 +140,55 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 60px;
-      background: var(--bg-card);
-      border: 2px solid var(--neon-blue);
-      border-radius: 70px;
+      background: rgba(11, 15, 26, 0.8);
+      backdrop-filter: blur(20px);
+      border: 2px solid var(--neon-purple);
+      border-radius: 80px;
       padding: 70px 60px;
       margin: 100px 0;
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3), inset 0 0 30px rgba(0, 240, 255, 0.2);
-      backdrop-filter: blur(5px);
+      box-shadow: 0 0 50px rgba(184, 77, 255, 0.4), inset 0 0 40px rgba(184, 77, 255, 0.2);
       transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tok-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,77,154,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .tok-card:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 60px rgba(255, 77, 154, 0.4), inset 0 0 40px rgba(255, 77, 154, 0.3);
+      box-shadow: 0 0 80px rgba(255, 77, 154, 0.6), inset 0 0 60px rgba(255, 77, 154, 0.3);
     }
 
     .tok-avatar {
-      width: 200px;
-      height: 200px;
-      background: linear-gradient(135deg, #11172a, #0b0f1a);
+      width: 220px;
+      height: 220px;
+      background: linear-gradient(135deg, #1a1f40, #0b0f1a);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 4rem;
+      font-size: 4.5rem;
       font-weight: 700;
-      color: var(--neon-blue);
-      border: 3px solid var(--neon-blue);
-      box-shadow: var(--glow-blue);
+      color: var(--neon-purple);
+      border: 3px solid var(--neon-purple);
+      box-shadow: var(--glow-purple);
       transition: var(--transition);
+      position: relative;
+      z-index: 2;
     }
 
     .tok-card:hover .tok-avatar {
@@ -137,18 +199,20 @@
 
     .tok-content {
       flex: 1;
+      position: relative;
+      z-index: 2;
     }
 
     .tok-content h2 {
       font-size: clamp(3rem, 5vw, 4rem);
       color: var(--text-primary);
-      text-shadow: 0 0 15px var(--neon-blue);
+      text-shadow: 0 0 20px var(--neon-purple);
       margin-bottom: 25px;
       transition: var(--transition);
     }
 
     .tok-card:hover .tok-content h2 {
-      text-shadow: 0 0 15px var(--neon-pink);
+      text-shadow: 0 0 20px var(--neon-pink);
     }
 
     .tok-content p {
@@ -159,7 +223,7 @@
       line-height: 1.8;
     }
 
-    /* ГАЛЕРЕЯ (центрированная) */
+    /* ГАЛЕРЕЯ (центрированная, сдвинута правее) */
     .gallery-section {
       margin: 140px 0;
       display: flex;
@@ -170,65 +234,67 @@
     }
 
     .gallery-title {
-      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-size: clamp(3rem, 6vw, 4.2rem);
       text-align: center;
-      margin-bottom: 60px;
-      text-shadow: 0 0 15px var(--neon-blue);
+      margin-bottom: 70px;
+      text-shadow: 0 0 15px var(--neon-purple), 0 0 30px var(--neon-blue);
     }
 
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
+      gap: 45px;
       max-width: 1300px;
       width: 100%;
       margin: 0 auto;
       justify-content: center;
+      transform: translateX(20px);
     }
 
     .gallery-item {
-      background: var(--bg-card);
-      border: 2px solid var(--neon-blue);
-      border-radius: 60px;
-      padding: 30px;
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+      background: rgba(11, 15, 26, 0.7);
+      backdrop-filter: blur(15px);
+      border: 2px solid var(--neon-purple);
+      border-radius: 70px;
+      padding: 35px;
+      box-shadow: 0 0 40px rgba(184, 77, 255, 0.3);
       transition: var(--transition);
     }
 
     .gallery-item:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 50px rgba(255, 77, 154, 0.4);
-      transform: translateY(-10px);
+      box-shadow: 0 0 70px rgba(255, 77, 154, 0.5);
+      transform: translateY(-15px) scale(1.02);
     }
 
     .gallery-item img {
       width: 100%;
       height: auto;
-      border-radius: 50px;
-      border: 2px solid var(--neon-blue);
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+      border-radius: 60px;
+      border: 2px solid var(--neon-purple);
+      box-shadow: 0 0 30px rgba(184, 77, 255, 0.5);
       transition: var(--transition);
     }
 
     .gallery-item:hover img {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 35px rgba(255, 77, 154, 0.5);
+      box-shadow: 0 0 50px rgba(255, 77, 154, 0.6);
     }
 
     .gallery-caption {
-      font-size: 2rem;
-      margin: 30px 0 20px;
+      font-size: 2.2rem;
+      margin: 35px 0 20px;
       color: var(--text-primary);
-      text-shadow: 0 0 10px var(--neon-blue);
+      text-shadow: 0 0 15px var(--neon-purple);
       transition: var(--transition);
     }
 
     .gallery-item:hover .gallery-caption {
-      text-shadow: 0 0 10px var(--neon-pink);
+      text-shadow: 0 0 15px var(--neon-pink);
     }
 
     .gallery-description {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--text-secondary);
       line-height: 1.7;
     }
@@ -242,96 +308,97 @@
     }
 
     .reasons-title {
-      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-size: clamp(3rem, 6vw, 4.2rem);
       text-align: center;
-      margin-bottom: 70px;
-      text-shadow: 0 0 15px var(--neon-blue);
+      margin-bottom: 80px;
+      text-shadow: 0 0 20px var(--neon-purple);
     }
 
     .reasons-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 40px;
-      max-width: 1100px;
+      gap: 45px;
+      max-width: 1200px;
       width: 100%;
     }
 
     .reason-card {
-      background: var(--bg-card);
-      border: 2px solid var(--neon-blue);
-      border-radius: 60px;
-      padding: 50px 40px;
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+      background: rgba(11, 15, 26, 0.7);
+      backdrop-filter: blur(15px);
+      border: 2px solid var(--neon-purple);
+      border-radius: 70px;
+      padding: 55px 45px;
+      box-shadow: 0 0 40px rgba(184, 77, 255, 0.3);
       transition: var(--transition);
       height: 100%;
     }
 
     .reason-card:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 50px rgba(255, 77, 154, 0.4);
-      transform: translateY(-8px);
+      box-shadow: 0 0 70px rgba(255, 77, 154, 0.5);
+      transform: translateY(-10px);
     }
 
     .reason-card h3 {
-      font-size: 2.5rem;
-      color: var(--neon-blue);
-      text-shadow: 0 0 10px var(--neon-blue);
+      font-size: 2.6rem;
+      color: var(--neon-purple);
+      text-shadow: 0 0 15px var(--neon-purple);
       margin-bottom: 30px;
       transition: var(--transition);
     }
 
     .reason-card:hover h3 {
       color: var(--neon-pink);
-      text-shadow: 0 0 10px var(--neon-pink);
+      text-shadow: 0 0 15px var(--neon-pink);
     }
 
     .reason-card p {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--text-secondary);
       line-height: 1.8;
     }
 
     /* Прогресс с анимацией */
     .progress-section {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 140px auto;
       text-align: center;
     }
 
     .progress-label {
-      font-size: clamp(2.4rem, 5vw, 3.2rem);
-      margin-bottom: 40px;
-      text-shadow: 0 0 10px var(--neon-blue);
+      font-size: clamp(2.6rem, 5vw, 3.4rem);
+      margin-bottom: 50px;
+      text-shadow: 0 0 15px var(--neon-purple);
     }
 
     .progress-bar-bg {
       background: #11172a;
-      height: 60px;
+      height: 70px;
       border-radius: 100px;
       padding: 8px;
-      border: 2px solid var(--neon-blue);
-      box-shadow: inset 0 0 25px #000, 0 0 20px var(--neon-blue);
+      border: 2px solid var(--neon-purple);
+      box-shadow: inset 0 0 30px #000, 0 0 30px var(--neon-purple);
       transition: var(--transition);
     }
 
     .progress-section:hover .progress-bar-bg {
       border-color: var(--neon-pink);
-      box-shadow: inset 0 0 25px #000, 0 0 30px var(--neon-pink);
+      box-shadow: inset 0 0 30px #000, 0 0 50px var(--neon-pink);
     }
 
     .progress-bar-fill {
       width: 0%;
       height: 100%;
-      background: linear-gradient(90deg, var(--neon-blue), #80ffff);
+      background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
       border-radius: 100px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      padding-right: 35px;
+      padding-right: 40px;
       color: var(--bg-deep);
       font-weight: 700;
-      font-size: 1.8rem;
-      box-shadow: 0 0 30px var(--neon-blue);
+      font-size: 2rem;
+      box-shadow: 0 0 40px var(--neon-purple);
       transition: width 0.1s linear;
       position: relative;
       overflow: hidden;
@@ -344,7 +411,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       animation: shimmer 2s infinite;
     }
 
@@ -353,24 +420,13 @@
       100% { transform: translateX(100%); }
     }
 
-    .progress-section:hover .progress-bar-fill {
-      background: linear-gradient(90deg, var(--neon-pink), #ff99c2);
-      box-shadow: 0 0 40px var(--neon-pink);
-    }
-
     .progress-percent {
-      font-size: 2rem;
-      margin-top: 25px;
+      font-size: 2.2rem;
+      margin-top: 30px;
       color: var(--text-secondary);
-      text-shadow: 0 0 8px var(--neon-blue);
+      text-shadow: 0 0 10px var(--neon-purple);
       font-family: 'Courier New', monospace;
-      letter-spacing: 2px;
-    }
-
-    .progress-milli {
-      font-size: 1.2rem;
-      color: var(--neon-blue);
-      opacity: 0.9;
+      letter-spacing: 3px;
     }
 
     /* Создатели */
@@ -381,38 +437,39 @@
     }
 
     .creators-card {
-      background: var(--bg-card);
-      border: 2px solid var(--neon-blue);
-      border-radius: 100px;
+      background: rgba(11, 15, 26, 0.8);
+      backdrop-filter: blur(20px);
+      border: 2px solid var(--neon-purple);
+      border-radius: 120px;
       padding: 80px 100px;
       text-align: center;
-      max-width: 1100px;
+      max-width: 1200px;
       width: 100%;
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+      box-shadow: 0 0 60px rgba(184, 77, 255, 0.4);
       transition: var(--transition);
     }
 
     .creators-card:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 60px rgba(255, 77, 154, 0.4);
+      box-shadow: 0 0 90px rgba(255, 77, 154, 0.5);
     }
 
     .creators-card p {
-      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      font-size: clamp(2.6rem, 5vw, 3.6rem);
       color: var(--text-primary);
-      text-shadow: 0 0 15px var(--neon-blue);
+      text-shadow: 0 0 20px var(--neon-purple);
       margin-bottom: 60px;
       transition: var(--transition);
     }
 
     .creators-card:hover p {
-      text-shadow: 0 0 15px var(--neon-pink);
+      text-shadow: 0 0 20px var(--neon-pink);
     }
 
     .creators-names {
       display: flex;
       justify-content: center;
-      gap: 120px;
+      gap: 150px;
       flex-wrap: wrap;
     }
 
@@ -423,37 +480,30 @@
     }
 
     .creator-avatar {
-      width: 150px;
-      height: 150px;
-      background: linear-gradient(135deg, #1a1f35, #0b0f1a);
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      font-weight: 600;
-      color: var(--neon-blue);
-      border: 3px solid var(--neon-blue);
-      box-shadow: 0 0 30px var(--neon-blue);
+      object-fit: cover;
+      border: 4px solid var(--neon-purple);
+      box-shadow: 0 0 40px var(--neon-purple);
       margin-bottom: 30px;
       transition: var(--transition);
     }
 
     .creators-card:hover .creator-avatar {
       border-color: var(--neon-pink);
-      color: var(--neon-pink);
-      box-shadow: 0 0 40px var(--neon-pink);
+      box-shadow: 0 0 60px var(--neon-pink);
     }
 
     .creator span {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       color: var(--text-primary);
-      text-shadow: 0 0 10px var(--neon-blue);
+      text-shadow: 0 0 15px var(--neon-purple);
       transition: var(--transition);
     }
 
     .creators-card:hover .creator span {
-      text-shadow: 0 0 10px var(--neon-pink);
+      text-shadow: 0 0 15px var(--neon-pink);
     }
 
     /* Дата релиза */
@@ -464,52 +514,53 @@
     }
 
     .release-card {
-      background: var(--bg-card);
-      border: 2px solid var(--neon-blue);
-      border-radius: 100px;
-      padding: 70px 90px;
+      background: rgba(11, 15, 26, 0.8);
+      backdrop-filter: blur(20px);
+      border: 2px solid var(--neon-purple);
+      border-radius: 120px;
+      padding: 70px 100px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 35px;
-      max-width: 900px;
+      gap: 40px;
+      max-width: 1000px;
       width: 100%;
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+      box-shadow: 0 0 60px rgba(184, 77, 255, 0.4);
       transition: var(--transition);
     }
 
     .release-card:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 60px rgba(255, 77, 154, 0.4);
+      box-shadow: 0 0 90px rgba(255, 77, 154, 0.5);
     }
 
     .release-text {
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       color: var(--text-primary);
-      text-shadow: 0 0 12px var(--neon-blue);
+      text-shadow: 0 0 15px var(--neon-purple);
       transition: var(--transition);
     }
 
     .release-card:hover .release-text {
-      text-shadow: 0 0 12px var(--neon-pink);
+      text-shadow: 0 0 15px var(--neon-pink);
     }
 
     .release-date {
-      font-size: 4rem;
+      font-size: 4.5rem;
       font-weight: 600;
-      color: var(--neon-blue);
+      color: var(--neon-purple);
       background: #0b0f1a;
-      padding: 25px 70px;
-      border-radius: 90px;
-      border: 3px solid var(--neon-blue);
-      box-shadow: 0 0 35px var(--neon-blue);
+      padding: 30px 80px;
+      border-radius: 100px;
+      border: 3px solid var(--neon-purple);
+      box-shadow: 0 0 50px var(--neon-purple);
       transition: var(--transition);
     }
 
     .release-card:hover .release-date {
       color: var(--neon-pink);
       border-color: var(--neon-pink);
-      box-shadow: 0 0 50px var(--neon-pink);
+      box-shadow: 0 0 70px var(--neon-pink);
     }
 
     /* Telegram кнопка */
@@ -521,16 +572,17 @@
 
     .telegram-button {
       display: inline-block;
-      background: var(--bg-card);
-      border: 3px solid var(--neon-blue);
+      background: rgba(11, 15, 26, 0.8);
+      backdrop-filter: blur(15px);
+      border: 3px solid var(--neon-purple);
       color: var(--text-primary);
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 600;
-      padding: 25px 70px;
-      border-radius: 90px;
+      padding: 30px 80px;
+      border-radius: 100px;
       text-decoration: none;
-      text-shadow: 0 0 10px var(--neon-blue);
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+      text-shadow: 0 0 15px var(--neon-purple);
+      box-shadow: 0 0 50px rgba(184, 77, 255, 0.4);
       transition: var(--transition);
       letter-spacing: 2px;
     }
@@ -538,8 +590,8 @@
     .telegram-button:hover {
       border-color: var(--neon-pink);
       color: var(--neon-pink);
-      text-shadow: 0 0 15px var(--neon-pink);
-      box-shadow: 0 0 60px rgba(255, 77, 154, 0.4);
+      text-shadow: 0 0 20px var(--neon-pink);
+      box-shadow: 0 0 80px rgba(255, 77, 154, 0.5);
       transform: scale(1.05);
     }
 
@@ -550,20 +602,22 @@
       padding: 60px 30px;
       text-align: center;
       color: var(--text-secondary);
-      border-top: 2px solid var(--neon-blue);
-      box-shadow: 0 -10px 30px rgba(0, 240, 255, 0.2);
+      border-top: 2px solid var(--neon-purple);
+      box-shadow: 0 -10px 40px rgba(184, 77, 255, 0.3);
     }
 
     /* Адаптация */
     @media (max-width: 992px) {
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
+        transform: translateX(0);
       }
     }
 
     @media (max-width: 768px) {
       .gallery-grid {
         grid-template-columns: 1fr;
+        transform: translateX(0);
       }
       
       .reasons-grid {
@@ -575,9 +629,8 @@
       }
       
       .creator-avatar {
-        width: 120px;
-        height: 120px;
-        font-size: 3rem;
+        width: 130px;
+        height: 130px;
       }
       
       .creator span {
@@ -585,7 +638,7 @@
       }
       
       .release-card {
-        padding: 50px 30px;
+        padding: 50px 40px;
       }
       
       .release-date {
@@ -594,20 +647,8 @@
       }
       
       .telegram-button {
-        font-size: 1.8rem;
-        padding: 20px 50px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .tok-card {
-        padding: 40px 25px;
-      }
-      
-      .tok-avatar {
-        width: 150px;
-        height: 150px;
-        font-size: 3rem;
+        font-size: 2rem;
+        padding: 25px 60px;
       }
     }
   </style>
@@ -616,7 +657,7 @@
 
   <!-- HERO -->
   <section class="section hero">
-    <h1>Добро пожаловать в мир технологий вместе с TOK</h1>
+    <h1>TOK — Непросто мессенджер</h1>
   </section>
 
   <!-- TOK Card -->
@@ -632,7 +673,7 @@
     </div>
   </section>
 
-  <!-- ГАЛЕРЕЯ (центрированная) -->
+  <!-- ГАЛЕРЕЯ (центрированная, сдвинута правее) -->
   <section class="section container gallery-section">
     <h2 class="gallery-title neon-text">⚡ Интерфейс TOK</h2>
     <div class="gallery-grid">
@@ -689,17 +730,17 @@
     <div class="progress-percent" id="progressPercent">0.000000%</div>
   </section>
 
-  <!-- БЛОК СОЗДАТЕЛЕЙ -->
+  <!-- БЛОК СОЗДАТЕЛЕЙ С ФОТОГРАФИЯМИ -->
   <section class="section creators-section">
     <div class="creators-card">
       <p>Над этим проектом работаю:</p>
       <div class="creators-names">
         <div class="creator">
-          <div class="creator-avatar">K</div>
+          <img src="4image.jpg" alt="K1lame" class="creator-avatar" onerror="this.src='https://via.placeholder.com/160x160/0b0f1a/b84dff?text=K1lame'">
           <span>K1lame</span>
         </div>
         <div class="creator">
-          <div class="creator-avatar">M</div>
+          <img src="3image.jpg" alt="Martin_Mefik" class="creator-avatar" onerror="this.src='https://via.placeholder.com/160x160/0b0f1a/ff4d9a?text=Martin'">
           <span>Martin_Mefik</span>
         </div>
       </div>
@@ -710,7 +751,7 @@
   <section class="section release-section">
     <div class="release-card">
       <span class="release-text">Примерная дата релиза TOK:</span>
-      <span class="release-date">2026</span>
+      <span class="release-date">2 квартал 2026</span>
     </div>
   </section>
 
@@ -744,42 +785,34 @@
       }, 100);
 
       // Прогресс с миллипроцентами (3 месяца = 90 дней)
-      const startDate = new Date('2026-03-06T00:00:00'); // Старт 6 марта 2026
-      const endDate = new Date('2026-06-06T00:00:00'); // Финиш 6 июня 2026
-      const totalDuration = endDate - startDate; // в миллисекундах
+      const startDate = new Date('2026-03-06T00:00:00');
+      const endDate = new Date('2026-06-06T00:00:00');
+      const totalDuration = endDate - startDate;
       
       function updateProgress() {
         const now = new Date();
         
-        // Если текущая дата раньше старта
         if (now < startDate) {
           document.getElementById('progressFill').style.width = '0%';
           document.getElementById('progressPercent').textContent = '0.000000%';
           return;
         }
         
-        // Если текущая дата позже финиша
         if (now > endDate) {
           document.getElementById('progressFill').style.width = '100%';
           document.getElementById('progressPercent').textContent = '100.000000%';
           return;
         }
         
-        // Вычисляем прогресс
         const elapsed = now - startDate;
         const progress = (elapsed / totalDuration) * 100;
-        
-        // Форматируем с 6 знаками после запятой (миллипроценты)
         const formattedProgress = progress.toFixed(6);
         
         document.getElementById('progressFill').style.width = progress + '%';
         document.getElementById('progressPercent').textContent = formattedProgress + '%';
       }
       
-      // Обновляем при загрузке
       updateProgress();
-      
-      // Обновляем каждую секунду для плавности (единицы)
       setInterval(updateProgress, 1000);
     })();
   </script>
