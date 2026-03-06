@@ -84,10 +84,10 @@
       transform: translateY(0);
     }
 
-    /* Кнопка управления музыкой */
+    /* Кнопка управления музыкой - перемещена наверх */
     .music-control {
       position: fixed;
-      bottom: max(20px, env(safe-area-inset-bottom));
+      top: max(20px, env(safe-area-inset-top));
       right: max(20px, env(safe-area-inset-right));
       z-index: 1000;
     }
@@ -709,7 +709,7 @@
         width: 55px;
         height: 55px;
         font-size: 1.6rem;
-        bottom: 15px;
+        top: 15px;
         right: 15px;
       }
 
@@ -924,7 +924,7 @@
   <!-- ОБЪЕДИНЕННЫЙ БЛОК (прогресс + дата релиза) -->
   <section class="section combined-section">
     <div class="combined-card">
-      <div class="progress-label">⚡ готовность TOK Messenger:</div>
+      <div class="progress-label">⚡ Готовность TOK Messenger:</div>
       <div class="progress-bar-bg">
         <div class="progress-bar-fill" id="progressFill"></div>
       </div>
@@ -932,7 +932,7 @@
       
       <div class="release-info">
         <span class="release-text">Примерная дата релиза TOK:</span>
-        <span class="release-date">2 квартал 2026</span>
+        <span class="release-date">4-й квартал 2026 г.</span>
       </div>
     </div>
   </section>
@@ -983,9 +983,9 @@
         document.querySelector('.hero').classList.add('revealed');
       }, 100);
 
-      // Прогресс с миллипроцентами
+      // Прогресс с миллипроцентами (9 месяцев)
       const startDate = new Date('2026-03-06T00:00:00');
-      const endDate = new Date('2026-06-06T00:00:00');
+      const endDate = new Date('2026-12-06T00:00:00'); // +9 месяцев
       const totalDuration = endDate - startDate;
       
       function updateProgress() {
@@ -1080,6 +1080,49 @@
         favicon.onerror = function() {
           console.log('Favicon не загрузился, используем стандартный');
         };
+      }
+
+      // Код из изображения для ПК версии
+      if (window.innerWidth > 1024) {
+        // Для предотвращения выделения текста при кликах
+        document.addEventListener("selectstart", function(e) {
+          e.preventDefault();
+          return false;
+        });
+
+        // Обработка нажатий мыши для Input.mouse (эмуляция)
+        window.Input = window.Input || { mouse: { left: false, middle: false, right: false } };
+
+        document.addEventListener("mousedown", function(event) {
+          if (event.button === 0) {
+            Input.mouse.left = true;
+          }
+          if (event.button === 1) {
+            Input.mouse.middle = true;
+          }
+          if (event.button === 2) {
+            Input.mouse.right = true;
+          }
+        });
+
+        document.addEventListener("mouseup", function(event) {
+          if (event.button === 0) {
+            Input.mouse.left = false;
+          }
+          if (event.button === 1) {
+            Input.mouse.middle = false;
+          }
+          if (event.button === 2) {
+            Input.mouse.right = false;
+          }
+        });
+
+        // Защита от контекстного меню на правый клик (опционально)
+        document.addEventListener("contextmenu", function(event) {
+          // Можно раскомментировать если нужно полностью отключить контекстное меню
+          // event.preventDefault();
+          return false;
+        });
       }
     })();
   </script>
