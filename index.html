@@ -251,7 +251,7 @@
       line-height: 1.8;
     }
 
-    /* ГАЛЕРЕЯ (4 фото, крупнее, смещена правее) */
+    /* ГАЛЕРЕЯ (полностью переделанная) */
     .gallery-section {
       margin: 140px 0;
       display: flex;
@@ -259,6 +259,7 @@
       align-items: center;
       justify-content: center;
       width: 100%;
+      position: relative;
     }
 
     .gallery-title {
@@ -266,18 +267,21 @@
       text-align: center;
       margin-bottom: 70px;
       text-shadow: 0 0 20px var(--neon-purple), 0 0 40px var(--neon-blue);
-      transform: translateX(30px);
+    }
+
+    .gallery-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 60px;
-      max-width: 1800px;
-      width: 100%;
-      margin: 0 auto;
+      grid-template-columns: repeat(4, minmax(280px, 350px));
+      gap: 50px;
       justify-content: center;
-      transform: translateX(40px);
+      margin: 0 auto;
+      width: fit-content;
     }
 
     .gallery-item {
@@ -285,15 +289,16 @@
       backdrop-filter: blur(15px);
       border: 2px solid var(--neon-purple);
       border-radius: 90px;
-      padding: 40px;
+      padding: 35px;
       box-shadow: 0 0 50px rgba(184, 77, 255, 0.4);
       transition: var(--transition);
+      width: 100%;
     }
 
     .gallery-item:hover {
       border-color: var(--neon-pink);
       box-shadow: 0 0 90px rgba(255, 77, 154, 0.6);
-      transform: translateY(-25px) scale(1.05);
+      transform: translateY(-20px) scale(1.05);
     }
 
     .gallery-item img {
@@ -311,11 +316,12 @@
     }
 
     .gallery-caption {
-      font-size: 2.6rem;
-      margin: 40px 0 25px;
+      font-size: 2.4rem;
+      margin: 35px 0 20px;
       color: var(--text-primary);
       text-shadow: 0 0 20px var(--neon-purple);
       transition: var(--transition);
+      text-align: center;
     }
 
     .gallery-item:hover .gallery-caption {
@@ -323,9 +329,10 @@
     }
 
     .gallery-description {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--text-secondary);
-      line-height: 1.8;
+      line-height: 1.7;
+      text-align: center;
     }
 
     /* Причины (расширенные) */
@@ -638,27 +645,13 @@
     }
 
     /* Адаптация */
-    @media (max-width: 1600px) {
-      .gallery-grid {
-        gap: 50px;
-        transform: translateX(20px);
-      }
-    }
-
     @media (max-width: 1400px) {
       .gallery-grid {
-        gap: 40px;
-        transform: translateX(0);
-      }
-      .gallery-title {
-        transform: translateX(0);
+        grid-template-columns: repeat(2, minmax(280px, 350px));
       }
     }
 
     @media (max-width: 1200px) {
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
       .reasons-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -666,7 +659,7 @@
 
     @media (max-width: 768px) {
       .gallery-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(280px, 350px);
       }
       .reasons-grid {
         grid-template-columns: 1fr;
@@ -725,33 +718,35 @@
     </div>
   </section>
 
-  <!-- ГАЛЕРЕЯ (4 фото, крупные, смещена правее) -->
-  <section class="section container gallery-section">
+  <!-- ГАЛЕРЕЯ (полностью переделанная, с правильным центрированием) -->
+  <section class="section gallery-section">
     <h2 class="gallery-title neon-text">⚡ Интерфейс TOK</h2>
-    <div class="gallery-grid">
-      <!-- Фото 1 - Главный экран -->
-      <div class="gallery-item">
-        <img src="image.jpg" alt="TOK главный экран" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00f0ff?text=TOK+Main'">
-        <div class="gallery-caption">🚀 Главный экран</div>
-        <div class="gallery-description">Минималистичный дизайн с неоновыми акцентами. Всё важное — на виду, ничего лишнего.</div>
-      </div>
-      <!-- Фото 2 - Кастомизация -->
-      <div class="gallery-item">
-        <img src="1image.jpg" alt="TOK кастомизация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/b84dff?text=TOK+Custom'">
-        <div class="gallery-caption">🎨 Кастомизация</div>
-        <div class="gallery-description">Возможность настроить интерфейс под себя — темы, цвета, расположение элементов. Сделайте TOK по-настоящему своим.</div>
-      </div>
-      <!-- Фото 3 - Быстрая регистрация -->
-      <div class="gallery-item">
-        <img src="2image.jpg" alt="TOK регистрация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/ff4d9a?text=TOK+Register'">
-        <div class="gallery-caption">🔐 Быстрая регистрация</div>
-        <div class="gallery-description">Удобная, быстрая и безопасная регистрация — ваши данные под защитой с первого мгновения.</div>
-      </div>
-      <!-- Фото 4 - Удобные звонки -->
-      <div class="gallery-item">
-        <img src="5image.jpg" alt="TOK звонки" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00ff9d?text=TOK+Calls'">
-        <div class="gallery-caption">📞 Удобные звонки</div>
-        <div class="gallery-description">Кристально чистое качество звука, шумоподавление. Будьте на связи всегда.</div>
+    <div class="gallery-wrapper">
+      <div class="gallery-grid">
+        <!-- Фото 1 - Главный экран -->
+        <div class="gallery-item">
+          <img src="image.jpg" alt="TOK главный экран" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00f0ff?text=TOK+Main'">
+          <div class="gallery-caption">🚀 Главный экран</div>
+          <div class="gallery-description">Минималистичный дизайн с неоновыми акцентами. Всё важное — на виду, ничего лишнего.</div>
+        </div>
+        <!-- Фото 2 - Кастомизация -->
+        <div class="gallery-item">
+          <img src="1image.jpg" alt="TOK кастомизация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/b84dff?text=TOK+Custom'">
+          <div class="gallery-caption">🎨 Кастомизация</div>
+          <div class="gallery-description">Возможность настроить интерфейс под себя — темы, цвета, расположение элементов. Сделайте TOK по-настоящему своим.</div>
+        </div>
+        <!-- Фото 3 - Быстрая регистрация -->
+        <div class="gallery-item">
+          <img src="2image.jpg" alt="TOK регистрация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/ff4d9a?text=TOK+Register'">
+          <div class="gallery-caption">🔐 Быстрая регистрация</div>
+          <div class="gallery-description">Удобная, быстрая и безопасная регистрация — ваши данные под защитой с первого мгновения.</div>
+        </div>
+        <!-- Фото 4 - Удобные звонки -->
+        <div class="gallery-item">
+          <img src="5image.jpg" alt="TOK звонки" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00ff9d?text=TOK+Calls'">
+          <div class="gallery-caption">📞 Удобные звонки</div>
+          <div class="gallery-description">Кристально чистое качество звука, шумоподавление. Будьте на связи всегда.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -896,12 +891,12 @@
       const audio = document.getElementById('bgMusic');
       const toggleBtn = document.getElementById('musicToggle');
       
-      // Устанавливаем громкость 10% (0.1)
-      audio.volume = 0.1;
+      // Устанавливаем громкость 3% (0.03)
+      audio.volume = 0.03;
       
       let isPlaying = false;
       
-      // Пытаемся автоматически запустить музыку (может не сработать из-за политик браузера)
+      // Пытаемся автоматически запустить музыку
       audio.play().then(() => {
         isPlaying = true;
         toggleBtn.textContent = '🔊';
