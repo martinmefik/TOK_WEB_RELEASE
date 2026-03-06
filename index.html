@@ -2,11 +2,12 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>TOK — непросто мессенджер</title>
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="favicon.ico">
   <style>
     * {
       margin: 0;
@@ -45,6 +46,7 @@
       line-height: 1.6;
       overflow-x: hidden;
       position: relative;
+      min-height: 100vh;
     }
 
     body::before {
@@ -65,6 +67,7 @@
       padding: 0 30px;
       position: relative;
       z-index: 2;
+      width: 100%;
     }
 
     /* Плавное появление */
@@ -153,7 +156,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(3rem, 9vw, 5.5rem);
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
       max-width: 1200px;
       background: linear-gradient(135deg, #fff, var(--neon-blue), var(--neon-purple), var(--neon-pink), #fff);
       -webkit-background-clip: text;
@@ -162,6 +165,7 @@
       position: relative;
       z-index: 2;
       letter-spacing: -0.02em;
+      padding: 0 20px;
     }
 
     @keyframes float {
@@ -174,17 +178,18 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 60px;
+      gap: 40px;
       background: rgba(11, 15, 26, 0.8);
       backdrop-filter: blur(20px);
       border: 2px solid var(--neon-purple);
-      border-radius: 80px;
-      padding: 70px 60px;
-      margin: 100px 0;
+      border-radius: 60px;
+      padding: 50px 40px;
+      margin: 80px 0;
       box-shadow: 0 0 60px rgba(184, 77, 255, 0.5), inset 0 0 50px rgba(184, 77, 255, 0.3);
       transition: var(--transition);
       position: relative;
       overflow: hidden;
+      width: 100%;
     }
 
     .tok-card::before {
@@ -209,8 +214,8 @@
     }
 
     .tok-avatar {
-      width: 240px;
-      height: 240px;
+      width: min(200px, 30vw);
+      height: min(200px, 30vw);
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid var(--neon-purple);
@@ -229,13 +234,14 @@
       flex: 1;
       position: relative;
       z-index: 2;
+      min-width: 280px;
     }
 
     .tok-content h2 {
-      font-size: clamp(3rem, 5vw, 4rem);
+      font-size: clamp(2.5rem, 4vw, 4rem);
       color: var(--text-primary);
       text-shadow: 0 0 20px var(--neon-purple);
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       transition: var(--transition);
     }
 
@@ -244,16 +250,16 @@
     }
 
     .tok-content p {
-      font-size: 1.35rem;
+      font-size: clamp(1rem, 2vw, 1.35rem);
       color: var(--text-secondary);
       max-width: 700px;
-      margin-bottom: 20px;
-      line-height: 1.8;
+      margin-bottom: 15px;
+      line-height: 1.7;
     }
 
-    /* ГАЛЕРЕЯ (полностью переделанная) */
+    /* ГАЛЕРЕЯ */
     .gallery-section {
-      margin: 140px 0;
+      margin: 100px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -263,178 +269,183 @@
     }
 
     .gallery-title {
-      font-size: clamp(3.2rem, 6vw, 4.5rem);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
       text-align: center;
-      margin-bottom: 70px;
+      margin-bottom: 50px;
       text-shadow: 0 0 20px var(--neon-purple), 0 0 40px var(--neon-blue);
+      padding: 0 20px;
     }
 
     .gallery-wrapper {
       width: 100%;
       display: flex;
       justify-content: center;
+      padding: 0 20px;
     }
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(280px, 350px));
-      gap: 50px;
-      justify-content: center;
-      margin: 0 auto;
-      width: fit-content;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1400px;
+      width: 100%;
     }
 
     .gallery-item {
       background: rgba(11, 15, 26, 0.7);
       backdrop-filter: blur(15px);
       border: 2px solid var(--neon-purple);
-      border-radius: 90px;
-      padding: 35px;
-      box-shadow: 0 0 50px rgba(184, 77, 255, 0.4);
+      border-radius: 50px;
+      padding: 20px;
+      box-shadow: 0 0 40px rgba(184, 77, 255, 0.4);
       transition: var(--transition);
       width: 100%;
     }
 
     .gallery-item:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 90px rgba(255, 77, 154, 0.6);
-      transform: translateY(-20px) scale(1.05);
+      box-shadow: 0 0 70px rgba(255, 77, 154, 0.6);
+      transform: translateY(-15px) scale(1.03);
     }
 
     .gallery-item img {
       width: 100%;
       height: auto;
-      border-radius: 80px;
+      border-radius: 40px;
       border: 2px solid var(--neon-purple);
-      box-shadow: 0 0 40px rgba(184, 77, 255, 0.6);
+      box-shadow: 0 0 30px rgba(184, 77, 255, 0.6);
       transition: var(--transition);
     }
 
     .gallery-item:hover img {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 60px rgba(255, 77, 154, 0.7);
+      box-shadow: 0 0 50px rgba(255, 77, 154, 0.7);
     }
 
     .gallery-caption {
-      font-size: 2.4rem;
-      margin: 35px 0 20px;
+      font-size: clamp(1.5rem, 2.5vw, 2.4rem);
+      margin: 25px 0 15px;
       color: var(--text-primary);
-      text-shadow: 0 0 20px var(--neon-purple);
+      text-shadow: 0 0 15px var(--neon-purple);
       transition: var(--transition);
       text-align: center;
     }
 
     .gallery-item:hover .gallery-caption {
-      text-shadow: 0 0 20px var(--neon-pink);
+      text-shadow: 0 0 15px var(--neon-pink);
     }
 
     .gallery-description {
-      font-size: 1.4rem;
+      font-size: clamp(0.9rem, 1.5vw, 1.4rem);
       color: var(--text-secondary);
-      line-height: 1.7;
+      line-height: 1.6;
       text-align: center;
+      padding: 0 5px;
     }
 
-    /* Причины (расширенные) */
+    /* Причины */
     .reasons-section {
-      margin: 140px 0;
+      margin: 100px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     .reasons-title {
-      font-size: clamp(3.2rem, 6vw, 4.5rem);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
       text-align: center;
-      margin-bottom: 80px;
+      margin-bottom: 50px;
       text-shadow: 0 0 20px var(--neon-purple);
+      padding: 0 20px;
     }
 
     .reasons-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
+      gap: 30px;
       max-width: 1400px;
       width: 100%;
+      padding: 0 20px;
     }
 
     .reason-card {
       background: rgba(11, 15, 26, 0.7);
       backdrop-filter: blur(15px);
       border: 2px solid var(--neon-purple);
-      border-radius: 70px;
-      padding: 45px 35px;
-      box-shadow: 0 0 40px rgba(184, 77, 255, 0.4);
+      border-radius: 50px;
+      padding: 35px 25px;
+      box-shadow: 0 0 30px rgba(184, 77, 255, 0.4);
       transition: var(--transition);
       height: 100%;
     }
 
     .reason-card:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 80px rgba(255, 77, 154, 0.6);
-      transform: translateY(-15px);
+      box-shadow: 0 0 60px rgba(255, 77, 154, 0.6);
+      transform: translateY(-10px);
     }
 
     .reason-card h3 {
-      font-size: 2.5rem;
+      font-size: clamp(1.8rem, 2.5vw, 2.5rem);
       color: var(--neon-purple);
-      text-shadow: 0 0 15px var(--neon-purple);
-      margin-bottom: 25px;
+      text-shadow: 0 0 12px var(--neon-purple);
+      margin-bottom: 20px;
       transition: var(--transition);
     }
 
     .reason-card:hover h3 {
       color: var(--neon-pink);
-      text-shadow: 0 0 15px var(--neon-pink);
+      text-shadow: 0 0 12px var(--neon-pink);
     }
 
     .reason-card p {
-      font-size: 1.2rem;
+      font-size: clamp(0.95rem, 1.5vw, 1.2rem);
       color: var(--text-secondary);
-      line-height: 1.7;
+      line-height: 1.6;
     }
 
     /* Объединенный блок прогресса и даты */
     .combined-section {
       max-width: 1200px;
-      margin: 140px auto;
+      margin: 100px auto;
       text-align: center;
+      padding: 0 20px;
     }
 
     .combined-card {
       background: rgba(11, 15, 26, 0.8);
       backdrop-filter: blur(20px);
       border: 2px solid var(--neon-purple);
-      border-radius: 120px;
-      padding: 80px 70px;
-      box-shadow: 0 0 80px rgba(184, 77, 255, 0.5);
+      border-radius: 80px;
+      padding: 50px 40px;
+      box-shadow: 0 0 60px rgba(184, 77, 255, 0.5);
       transition: var(--transition);
     }
 
     .combined-card:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 120px rgba(255, 77, 154, 0.7);
+      box-shadow: 0 0 100px rgba(255, 77, 154, 0.7);
     }
 
     .progress-label {
-      font-size: clamp(2.8rem, 5vw, 3.6rem);
-      margin-bottom: 50px;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      margin-bottom: 40px;
       text-shadow: 0 0 15px var(--neon-purple);
     }
 
     .progress-bar-bg {
       background: #11172a;
-      height: 80px;
+      height: 60px;
       border-radius: 100px;
-      padding: 8px;
+      padding: 6px;
       border: 2px solid var(--neon-purple);
-      box-shadow: inset 0 0 40px #000, 0 0 40px var(--neon-purple);
+      box-shadow: inset 0 0 30px #000, 0 0 30px var(--neon-purple);
       transition: var(--transition);
     }
 
     .combined-card:hover .progress-bar-bg {
       border-color: var(--neon-pink);
-      box-shadow: inset 0 0 40px #000, 0 0 70px var(--neon-pink);
+      box-shadow: inset 0 0 30px #000, 0 0 50px var(--neon-pink);
     }
 
     .progress-bar-fill {
@@ -445,11 +456,11 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      padding-right: 50px;
+      padding-right: 30px;
       color: var(--bg-deep);
       font-weight: 700;
-      font-size: 2.2rem;
-      box-shadow: 0 0 50px var(--neon-purple);
+      font-size: clamp(1.2rem, 2vw, 2rem);
+      box-shadow: 0 0 40px var(--neon-purple);
       transition: width 0.1s linear;
       position: relative;
       overflow: hidden;
@@ -462,7 +473,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       animation: shimmer 2s infinite;
     }
 
@@ -472,91 +483,92 @@
     }
 
     .progress-percent {
-      font-size: 2.4rem;
-      margin: 40px 0 50px;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      margin: 30px 0 40px;
       color: var(--text-secondary);
-      text-shadow: 0 0 15px var(--neon-purple);
+      text-shadow: 0 0 12px var(--neon-purple);
       font-family: 'Courier New', monospace;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
     }
 
     .release-info {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 25px;
+      gap: 20px;
     }
 
     .release-text {
-      font-size: 2.6rem;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
       color: var(--text-primary);
-      text-shadow: 0 0 15px var(--neon-purple);
+      text-shadow: 0 0 12px var(--neon-purple);
       transition: var(--transition);
     }
 
     .combined-card:hover .release-text {
-      text-shadow: 0 0 15px var(--neon-pink);
+      text-shadow: 0 0 12px var(--neon-pink);
     }
 
     .release-date {
-      font-size: 4rem;
+      font-size: clamp(2.5rem, 4vw, 4rem);
       font-weight: 600;
       color: var(--neon-purple);
       background: #0b0f1a;
-      padding: 30px 80px;
-      border-radius: 100px;
+      padding: 20px 50px;
+      border-radius: 80px;
       border: 3px solid var(--neon-purple);
-      box-shadow: 0 0 50px var(--neon-purple);
+      box-shadow: 0 0 40px var(--neon-purple);
       transition: var(--transition);
     }
 
     .combined-card:hover .release-date {
       color: var(--neon-pink);
       border-color: var(--neon-pink);
-      box-shadow: 0 0 80px var(--neon-pink);
+      box-shadow: 0 0 60px var(--neon-pink);
     }
 
     /* Создатели */
     .creators-section {
-      margin: 140px 0;
+      margin: 100px 0;
       display: flex;
       justify-content: center;
+      padding: 0 20px;
     }
 
     .creators-card {
       background: rgba(11, 15, 26, 0.8);
       backdrop-filter: blur(20px);
       border: 2px solid var(--neon-purple);
-      border-radius: 150px;
-      padding: 90px 120px;
+      border-radius: 100px;
+      padding: 60px 40px;
       text-align: center;
-      max-width: 1300px;
+      max-width: 1200px;
       width: 100%;
-      box-shadow: 0 0 80px rgba(184, 77, 255, 0.5);
+      box-shadow: 0 0 60px rgba(184, 77, 255, 0.5);
       transition: var(--transition);
     }
 
     .creators-card:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 120px rgba(255, 77, 154, 0.7);
+      box-shadow: 0 0 100px rgba(255, 77, 154, 0.7);
     }
 
     .creators-card p {
-      font-size: clamp(2.8rem, 5vw, 3.8rem);
+      font-size: clamp(2rem, 4vw, 3.6rem);
       color: var(--text-primary);
-      text-shadow: 0 0 20px var(--neon-purple);
-      margin-bottom: 70px;
+      text-shadow: 0 0 15px var(--neon-purple);
+      margin-bottom: 50px;
       transition: var(--transition);
     }
 
     .creators-card:hover p {
-      text-shadow: 0 0 20px var(--neon-pink);
+      text-shadow: 0 0 15px var(--neon-pink);
     }
 
     .creators-names {
       display: flex;
       justify-content: center;
-      gap: 180px;
+      gap: 80px;
       flex-wrap: wrap;
     }
 
@@ -567,61 +579,64 @@
     }
 
     .creator-avatar {
-      width: 200px;
-      height: 200px;
+      width: min(150px, 25vw);
+      height: min(150px, 25vw);
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid var(--neon-purple);
-      box-shadow: 0 0 50px var(--neon-purple);
-      margin-bottom: 35px;
+      box-shadow: 0 0 40px var(--neon-purple);
+      margin-bottom: 25px;
       transition: var(--transition);
     }
 
     .creators-card:hover .creator-avatar {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 80px var(--neon-pink);
+      box-shadow: 0 0 60px var(--neon-pink);
     }
 
     .creator span {
-      font-size: 2.8rem;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
       color: var(--text-primary);
-      text-shadow: 0 0 15px var(--neon-purple);
+      text-shadow: 0 0 12px var(--neon-purple);
       transition: var(--transition);
     }
 
     .creators-card:hover .creator span {
-      text-shadow: 0 0 15px var(--neon-pink);
+      text-shadow: 0 0 12px var(--neon-pink);
     }
 
     /* Telegram кнопка */
     .telegram-section {
-      margin: 80px 0 100px;
+      margin: 60px 0 80px;
       display: flex;
       justify-content: center;
+      padding: 0 20px;
     }
 
     .telegram-button {
       display: inline-block;
       background: rgba(11, 15, 26, 0.8);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(15px);
       border: 3px solid var(--neon-purple);
       color: var(--text-primary);
-      font-size: 2.6rem;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
       font-weight: 600;
-      padding: 35px 90px;
-      border-radius: 120px;
+      padding: 25px 50px;
+      border-radius: 80px;
       text-decoration: none;
-      text-shadow: 0 0 20px var(--neon-purple);
-      box-shadow: 0 0 70px rgba(184, 77, 255, 0.5);
+      text-shadow: 0 0 15px var(--neon-purple);
+      box-shadow: 0 0 50px rgba(184, 77, 255, 0.5);
       transition: var(--transition);
-      letter-spacing: 3px;
+      letter-spacing: 2px;
+      text-align: center;
+      width: fit-content;
     }
 
     .telegram-button:hover {
       border-color: var(--neon-pink);
       color: var(--neon-pink);
-      text-shadow: 0 0 25px var(--neon-pink);
-      box-shadow: 0 0 100px rgba(255, 77, 154, 0.7);
+      text-shadow: 0 0 20px var(--neon-pink);
+      box-shadow: 0 0 80px rgba(255, 77, 154, 0.7);
       transform: scale(1.05);
     }
 
@@ -630,60 +645,112 @@
       background: rgba(3, 5, 10, 0.9);
       backdrop-filter: blur(10px);
       border-radius: 60px 60px 0 0;
-      padding: 70px 40px;
+      padding: 50px 30px;
       text-align: center;
       color: var(--text-secondary);
       border-top: 2px solid var(--neon-purple);
-      box-shadow: 0 -10px 50px rgba(184, 77, 255, 0.4);
+      box-shadow: 0 -10px 40px rgba(184, 77, 255, 0.4);
     }
 
     .footer p {
       max-width: 1200px;
       margin: 0 auto;
-      line-height: 1.8;
-      font-size: 1.2rem;
+      line-height: 1.7;
+      font-size: clamp(0.9rem, 2vw, 1.2rem);
+      padding: 0 20px;
     }
 
-    /* Адаптация */
-    @media (max-width: 1400px) {
-      .gallery-grid {
-        grid-template-columns: repeat(2, minmax(280px, 350px));
-      }
-    }
-
+    /* Адаптация для разных экранов */
     @media (max-width: 1200px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
       .reasons-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (max-width: 768px) {
-      .gallery-grid {
-        grid-template-columns: minmax(280px, 350px);
+      .tok-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 25px;
       }
+      
+      .tok-content p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+      }
+      
       .reasons-grid {
         grid-template-columns: 1fr;
+        max-width: 500px;
       }
+      
       .creators-names {
-        gap: 80px;
+        gap: 40px;
       }
-      .creator-avatar {
-        width: 160px;
-        height: 160px;
-      }
-      .creator span {
-        font-size: 2.2rem;
-      }
+      
       .combined-card {
-        padding: 50px 30px;
+        padding: 40px 25px;
       }
+      
       .release-date {
-        font-size: 3rem;
-        padding: 20px 50px;
+        padding: 15px 30px;
       }
+      
+      .music-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+      
+      .tok-card {
+        padding: 30px 20px;
+      }
+      
+      .gallery-item {
+        padding: 15px;
+      }
+      
+      .reason-card {
+        padding: 25px 20px;
+      }
+      
+      .creators-card {
+        padding: 40px 20px;
+      }
+      
       .telegram-button {
-        font-size: 2rem;
-        padding: 25px 60px;
+        padding: 20px 30px;
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (min-width: 2000px) {
+      .container {
+        max-width: 1800px;
+      }
+      
+      .gallery-grid {
+        max-width: 1800px;
+      }
+      
+      .reasons-grid {
+        max-width: 1800px;
       }
     }
   </style>
@@ -708,7 +775,7 @@
   <!-- TOK Card с фото -->
   <section class="section container">
     <div class="tok-card">
-      <img src="6image.jpg" alt="TOK" class="tok-avatar" onerror="this.src='https://via.placeholder.com/240x240/0b0f1a/b84dff?text=TOK'">
+      <img src="6image.jpg" alt="TOK" class="tok-avatar" onerror="this.src='https://via.placeholder.com/200x200/0b0f1a/b84dff?text=TOK'">
       <div class="tok-content">
         <h2>TOK Messenger</h2>
         <p>TOK — это не просто мессенджер. Это экосистема безопасного общения, построенная на принципах децентрализации и абсолютной приватности. Мы объединили передовые технологии P2P-сетей с интуитивно понятным интерфейсом, чтобы вы могли общаться без ограничений и слежки.</p>
@@ -718,32 +785,32 @@
     </div>
   </section>
 
-  <!-- ГАЛЕРЕЯ (полностью переделанная, с правильным центрированием) -->
+  <!-- ГАЛЕРЕЯ -->
   <section class="section gallery-section">
     <h2 class="gallery-title neon-text">⚡ Интерфейс TOK</h2>
     <div class="gallery-wrapper">
       <div class="gallery-grid">
         <!-- Фото 1 - Главный экран -->
         <div class="gallery-item">
-          <img src="image.jpg" alt="TOK главный экран" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00f0ff?text=TOK+Main'">
+          <img src="image.jpg" alt="TOK главный экран" onerror="this.src='https://via.placeholder.com/600x400/0b0f1a/00f0ff?text=TOK+Main'">
           <div class="gallery-caption">🚀 Главный экран</div>
           <div class="gallery-description">Минималистичный дизайн с неоновыми акцентами. Всё важное — на виду, ничего лишнего.</div>
         </div>
         <!-- Фото 2 - Кастомизация -->
         <div class="gallery-item">
-          <img src="1image.jpg" alt="TOK кастомизация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/b84dff?text=TOK+Custom'">
+          <img src="1image.jpg" alt="TOK кастомизация" onerror="this.src='https://via.placeholder.com/600x400/0b0f1a/b84dff?text=TOK+Custom'">
           <div class="gallery-caption">🎨 Кастомизация</div>
           <div class="gallery-description">Возможность настроить интерфейс под себя — темы, цвета, расположение элементов. Сделайте TOK по-настоящему своим.</div>
         </div>
         <!-- Фото 3 - Быстрая регистрация -->
         <div class="gallery-item">
-          <img src="2image.jpg" alt="TOK регистрация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/ff4d9a?text=TOK+Register'">
+          <img src="2image.jpg" alt="TOK регистрация" onerror="this.src='https://via.placeholder.com/600x400/0b0f1a/ff4d9a?text=TOK+Register'">
           <div class="gallery-caption">🔐 Быстрая регистрация</div>
           <div class="gallery-description">Удобная, быстрая и безопасная регистрация — ваши данные под защитой с первого мгновения.</div>
         </div>
         <!-- Фото 4 - Удобные звонки -->
         <div class="gallery-item">
-          <img src="5image.jpg" alt="TOK звонки" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00ff9d?text=TOK+Calls'">
+          <img src="5image.jpg" alt="TOK звонки" onerror="this.src='https://via.placeholder.com/600x400/0b0f1a/00ff9d?text=TOK+Calls'">
           <div class="gallery-caption">📞 Удобные звонки</div>
           <div class="gallery-description">Кристально чистое качество звука, шумоподавление. Будьте на связи всегда.</div>
         </div>
@@ -751,7 +818,7 @@
     </div>
   </section>
 
-  <!-- ПРИЧИНЫ (расширенные) -->
+  <!-- ПРИЧИНЫ -->
   <section class="section reasons-section" id="reasons">
     <h2 class="reasons-title neon-text">Почему стоит выбрать TOK?</h2>
     <div class="reasons-grid">
@@ -797,7 +864,7 @@
   <!-- ОБЪЕДИНЕННЫЙ БЛОК (прогресс + дата релиза) -->
   <section class="section combined-section">
     <div class="combined-card">
-      <div class="progress-label neon-text">⚡ готовность к релизу</div>
+      <div class="progress-label neon-text">⚡ готовность TOK Messenger:</div>
       <div class="progress-bar-bg">
         <div class="progress-bar-fill" id="progressFill"></div>
       </div>
@@ -816,11 +883,11 @@
       <p>Над этим проектом работают программисты:</p>
       <div class="creators-names">
         <div class="creator">
-          <img src="4image.jpg" alt="K1lame" class="creator-avatar" onerror="this.src='https://via.placeholder.com/200x200/0b0f1a/b84dff?text=K1lame'">
+          <img src="4image.jpg" alt="K1lame" class="creator-avatar" onerror="this.src='https://via.placeholder.com/150x150/0b0f1a/b84dff?text=K1lame'">
           <span>K1lame</span>
         </div>
         <div class="creator">
-          <img src="3image.jpg" alt="Martin_Mefik" class="creator-avatar" onerror="this.src='https://via.placeholder.com/200x200/0b0f1a/ff4d9a?text=Martin'">
+          <img src="3image.jpg" alt="Martin_Mefik" class="creator-avatar" onerror="this.src='https://via.placeholder.com/150x150/0b0f1a/ff4d9a?text=Martin'">
           <span>Martin_Mefik</span>
         </div>
       </div>
@@ -891,31 +958,51 @@
       const audio = document.getElementById('bgMusic');
       const toggleBtn = document.getElementById('musicToggle');
       
-      // Устанавливаем громкость 3% (0.03)
-      audio.volume = 0.03;
+      // Устанавливаем громкость 1% (0.01)
+      audio.volume = 0.01;
       
       let isPlaying = false;
       
-      // Пытаемся автоматически запустить музыку
-      audio.play().then(() => {
-        isPlaying = true;
-        toggleBtn.textContent = '🔊';
-      }).catch(() => {
-        isPlaying = false;
-        toggleBtn.textContent = '🔈';
-      });
+      // Функция для попытки автовоспроизведения
+      function attemptAutoPlay() {
+        audio.play().then(() => {
+          isPlaying = true;
+          toggleBtn.textContent = '🔊';
+          console.log('Музыка автоматически запущена');
+        }).catch((error) => {
+          console.log('Автовоспроизведение заблокировано браузером:', error);
+          isPlaying = false;
+          toggleBtn.textContent = '🔈';
+          // Пробуем снова при взаимодействии пользователя
+          document.addEventListener('click', function playOnClick() {
+            audio.play().catch(e => console.log('Не удалось запустить музыку'));
+            document.removeEventListener('click', playOnClick);
+          }, { once: true });
+        });
+      }
+      
+      // Пытаемся запустить музыку сразу
+      attemptAutoPlay();
       
       toggleBtn.addEventListener('click', () => {
         if (isPlaying) {
           audio.pause();
           toggleBtn.textContent = '🔈';
         } else {
-          audio.play().catch(e => console.log('Автовоспроизведение заблокировано'));
+          audio.play().catch(e => console.log('Не удалось запустить музыку'));
           toggleBtn.textContent = '🔊';
         }
         isPlaying = !isPlaying;
         toggleBtn.classList.toggle('off');
       });
+
+      // Проверка загрузки favicon
+      const favicon = document.querySelector('link[rel="icon"]');
+      if (favicon) {
+        favicon.onerror = function() {
+          console.log('Favicon не загрузился, но это не критично');
+        };
+      }
     })();
   </script>
 </body>
