@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TOK — неоновый чёрный мессенджер</title>
   <style>
     * {
@@ -16,21 +16,21 @@
       --bg-card: #0b0f1a;
       --bg-card-hover: #11172a;
       --neon-blue: #00f0ff;
-      --neon-purple: #b84dff;
-      --neon-pink: #ff4d9a;
       --neon-cyan: #0ff;
+      --neon-pink: #ff4d9a;
       --text-primary: #f0f5ff;
       --text-secondary: #c0ccff;
       --border-neon: rgba(0, 240, 255, 0.3);
       --glow-blue: 0 0 15px #00f0ff, 0 0 40px rgba(0, 240, 255, 0.3);
-      --glow-purple: 0 0 15px #b84dff, 0 0 40px rgba(184, 77, 255, 0.3);
+      --glow-pink: 0 0 15px #ff4d9a, 0 0 40px rgba(255, 77, 154, 0.3);
+      --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     body {
       background: var(--bg-deep);
       background-image: 
-        radial-gradient(circle at 10% 20%, #1a1f35 0%, transparent 50%),
-        radial-gradient(circle at 90% 70%, #2a1f40 0%, transparent 50%);
+        radial-gradient(circle at 20% 30%, #1a1f40 0%, transparent 60%),
+        radial-gradient(circle at 80% 70%, #2a1f45 0%, transparent 60%);
       color: var(--text-primary);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.6;
@@ -38,12 +38,12 @@
     }
 
     .container {
-      max-width: 1300px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 30px;
     }
 
-    /* ===== ПЛАВНОЕ ПОЯВЛЕНИЕ ===== */
+    /* Плавное появление */
     .section {
       opacity: 0;
       transform: translateY(40px);
@@ -55,7 +55,7 @@
       transform: translateY(0);
     }
 
-    /* ===== ТИПОГРАФИКА ===== */
+    /* Типографика */
     h1, h2, h3 {
       font-weight: 500;
       line-height: 1.2;
@@ -66,17 +66,7 @@
       text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-cyan);
     }
 
-    .neon-text-purple {
-      text-shadow: 0 0 10px var(--neon-purple), 0 0 20px #b84dff;
-    }
-
-    .gradient-neon {
-      background: linear-gradient(135deg, #fff, var(--neon-blue), var(--neon-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* ===== HERO ===== */
+    /* HERO */
     .hero {
       min-height: 90vh;
       display: flex;
@@ -88,7 +78,7 @@
     .hero h1 {
       font-size: clamp(2.4rem, 7vw, 4.5rem);
       max-width: 1000px;
-      background: linear-gradient(135deg, #fff, var(--neon-blue), var(--neon-purple));
+      background: linear-gradient(135deg, #fff, var(--neon-blue), #fff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: float 8s infinite alternate;
@@ -99,34 +89,47 @@
       100% { transform: translateY(-15px); }
     }
 
-    /* ===== КАРТОЧКА TOK ===== */
+    /* Карточка TOK (без кнопки, с большим текстом) */
     .tok-card {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 50px;
+      gap: 60px;
       background: var(--bg-card);
-      border: 1px solid var(--neon-blue);
+      border: 2px solid var(--neon-blue);
       border-radius: 70px;
-      padding: 60px 50px;
+      padding: 70px 60px;
       margin: 100px 0;
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.2), inset 0 0 20px rgba(0, 240, 255, 0.1);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3), inset 0 0 30px rgba(0, 240, 255, 0.2);
       backdrop-filter: blur(5px);
+      transition: var(--transition);
+    }
+
+    .tok-card:hover {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 60px rgba(255, 77, 154, 0.4), inset 0 0 40px rgba(255, 77, 154, 0.3);
     }
 
     .tok-avatar {
-      width: 180px;
-      height: 180px;
+      width: 200px;
+      height: 200px;
       background: linear-gradient(135deg, #11172a, #0b0f1a);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3.5rem;
+      font-size: 4rem;
       font-weight: 700;
       color: var(--neon-blue);
-      border: 2px solid var(--neon-blue);
+      border: 3px solid var(--neon-blue);
       box-shadow: var(--glow-blue);
+      transition: var(--transition);
+    }
+
+    .tok-card:hover .tok-avatar {
+      border-color: var(--neon-pink);
+      color: var(--neon-pink);
+      box-shadow: var(--glow-pink);
     }
 
     .tok-content {
@@ -134,91 +137,96 @@
     }
 
     .tok-content h2 {
-      font-size: clamp(2.8rem, 5vw, 3.8rem);
+      font-size: clamp(3rem, 5vw, 4rem);
       color: var(--text-primary);
-      text-shadow: 0 0 10px var(--neon-blue);
-      margin-bottom: 20px;
+      text-shadow: 0 0 15px var(--neon-blue);
+      margin-bottom: 25px;
+      transition: var(--transition);
+    }
+
+    .tok-card:hover .tok-content h2 {
+      text-shadow: 0 0 15px var(--neon-pink);
     }
 
     .tok-content p {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       color: var(--text-secondary);
-      max-width: 600px;
-      margin-bottom: 30px;
+      max-width: 700px;
+      margin-bottom: 20px;
+      line-height: 1.8;
     }
 
-    .btn-neon {
-      display: inline-block;
-      background: transparent;
-      border: 2px solid var(--neon-blue);
-      color: var(--text-primary);
-      padding: 18px 48px;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 1.2rem;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      box-shadow: 0 0 15px var(--neon-blue);
-      transition: 0.3s;
-    }
-
-    .btn-neon:hover {
-      background: var(--neon-blue);
-      color: var(--bg-deep);
-      box-shadow: 0 0 30px var(--neon-blue);
-      transform: scale(1.02);
-    }
-
-    /* ===== ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ (3 фото) ===== */
+    /* Галерея (центрированная, фото крупнее) */
     .gallery-section {
       margin: 140px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gallery-title {
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      text-align: center;
+      margin-bottom: 60px;
+      text-shadow: 0 0 15px var(--neon-blue);
     }
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 50px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1300px;
+      width: 100%;
     }
 
     .gallery-item {
       background: var(--bg-card);
-      border: 1px solid var(--neon-purple);
-      border-radius: 50px;
-      padding: 25px;
-      box-shadow: 0 0 25px rgba(184, 77, 255, 0.2);
-      transition: 0.4s;
+      border: 2px solid var(--neon-blue);
+      border-radius: 60px;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+      transition: var(--transition);
     }
 
     .gallery-item:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 35px rgba(255, 77, 154, 0.3);
+      box-shadow: 0 0 50px rgba(255, 77, 154, 0.4);
       transform: translateY(-10px);
     }
 
     .gallery-item img {
       width: 100%;
       height: auto;
-      border-radius: 40px;
-      border: 1px solid var(--neon-purple);
-      box-shadow: 0 0 20px rgba(184, 77, 255, 0.3);
+      border-radius: 50px;
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover img {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 35px rgba(255, 77, 154, 0.5);
     }
 
     .gallery-caption {
-      font-size: 1.8rem;
-      margin: 25px 0 15px;
+      font-size: 2rem;
+      margin: 30px 0 20px;
       color: var(--text-primary);
-      text-shadow: 0 0 8px var(--neon-purple);
+      text-shadow: 0 0 10px var(--neon-blue);
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover .gallery-caption {
+      text-shadow: 0 0 10px var(--neon-pink);
     }
 
     .gallery-description {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    /* ===== ПРИЧИНЫ (центрированные карточки) ===== */
+    /* Причины (центрированные) */
     .reasons-section {
       margin: 140px 0;
       display: flex;
@@ -237,48 +245,46 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 40px;
-      max-width: 1000px;
+      max-width: 1100px;
       width: 100%;
     }
 
     .reason-card {
       background: var(--bg-card);
-      border: 1px solid var(--neon-cyan);
-      border-radius: 50px;
-      padding: 45px 35px;
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
-      transition: 0.3s;
+      border: 2px solid var(--neon-blue);
+      border-radius: 60px;
+      padding: 50px 40px;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+      transition: var(--transition);
       height: 100%;
-      display: flex;
-      flex-direction: column;
     }
 
     .reason-card:hover {
       border-color: var(--neon-pink);
-      box-shadow: 0 0 35px rgba(255, 77, 154, 0.4);
+      box-shadow: 0 0 50px rgba(255, 77, 154, 0.4);
+      transform: translateY(-8px);
     }
 
     .reason-card h3 {
-      font-size: 2.4rem;
-      color: var(--neon-cyan);
-      text-shadow: 0 0 10px var(--neon-cyan);
-      margin-bottom: 25px;
+      font-size: 2.5rem;
+      color: var(--neon-blue);
+      text-shadow: 0 0 10px var(--neon-blue);
+      margin-bottom: 30px;
+      transition: var(--transition);
+    }
+
+    .reason-card:hover h3 {
+      color: var(--neon-pink);
+      text-shadow: 0 0 10px var(--neon-pink);
     }
 
     .reason-card p {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--text-secondary);
-      line-height: 1.7;
-      flex: 1;
+      line-height: 1.8;
     }
 
-    @media (max-width: 768px) {
-      .reasons-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* ===== ПРОГРЕСС ===== */
+    /* Прогресс */
     .progress-section {
       max-width: 900px;
       margin: 140px auto;
@@ -288,42 +294,53 @@
     .progress-label {
       font-size: clamp(2.4rem, 5vw, 3.2rem);
       margin-bottom: 40px;
-      text-shadow: 0 0 10px var(--neon-purple);
+      text-shadow: 0 0 10px var(--neon-blue);
     }
 
     .progress-bar-bg {
       background: #11172a;
-      height: 50px;
+      height: 60px;
       border-radius: 100px;
-      padding: 6px;
-      border: 1px solid var(--neon-purple);
-      box-shadow: inset 0 0 20px #000, 0 0 15px var(--neon-purple);
+      padding: 8px;
+      border: 2px solid var(--neon-blue);
+      box-shadow: inset 0 0 25px #000, 0 0 20px var(--neon-blue);
+      transition: var(--transition);
+    }
+
+    .progress-section:hover .progress-bar-bg {
+      border-color: var(--neon-pink);
+      box-shadow: inset 0 0 25px #000, 0 0 30px var(--neon-pink);
     }
 
     .progress-bar-fill {
       width: 28%;
       height: 100%;
-      background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink));
+      background: linear-gradient(90deg, var(--neon-blue), #80ffff);
       border-radius: 100px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      padding-right: 30px;
-      color: var(--text-primary);
+      padding-right: 35px;
+      color: var(--bg-deep);
       font-weight: 700;
-      font-size: 1.5rem;
-      box-shadow: 0 0 30px var(--neon-pink);
-      text-shadow: 0 0 5px #000;
+      font-size: 1.8rem;
+      box-shadow: 0 0 30px var(--neon-blue);
+      transition: var(--transition);
+    }
+
+    .progress-section:hover .progress-bar-fill {
+      background: linear-gradient(90deg, var(--neon-pink), #ff99c2);
+      box-shadow: 0 0 40px var(--neon-pink);
     }
 
     .progress-note {
       font-size: 2rem;
       margin-top: 35px;
       color: var(--text-secondary);
-      text-shadow: 0 0 8px var(--neon-purple);
+      text-shadow: 0 0 8px var(--neon-blue);
     }
 
-    /* ===== БЛОК СОЗДАТЕЛЕЙ (центрированный) ===== */
+    /* Создатели */
     .creators-section {
       margin: 140px 0;
       display: flex;
@@ -332,26 +349,37 @@
 
     .creators-card {
       background: var(--bg-card);
-      border: 1px solid var(--neon-pink);
+      border: 2px solid var(--neon-blue);
       border-radius: 100px;
-      padding: 70px 90px;
+      padding: 80px 100px;
       text-align: center;
-      max-width: 1000px;
+      max-width: 1100px;
       width: 100%;
-      box-shadow: 0 0 40px rgba(255, 77, 154, 0.3);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+      transition: var(--transition);
+    }
+
+    .creators-card:hover {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 60px rgba(255, 77, 154, 0.4);
     }
 
     .creators-card p {
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
       color: var(--text-primary);
+      text-shadow: 0 0 15px var(--neon-blue);
+      margin-bottom: 60px;
+      transition: var(--transition);
+    }
+
+    .creators-card:hover p {
       text-shadow: 0 0 15px var(--neon-pink);
-      margin-bottom: 50px;
     }
 
     .creators-names {
       display: flex;
       justify-content: center;
-      gap: 100px;
+      gap: 120px;
       flex-wrap: wrap;
     }
 
@@ -362,28 +390,40 @@
     }
 
     .creator-avatar {
-      width: 130px;
-      height: 130px;
+      width: 150px;
+      height: 150px;
       background: linear-gradient(135deg, #1a1f35, #0b0f1a);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3.5rem;
+      font-size: 4rem;
       font-weight: 600;
+      color: var(--neon-blue);
+      border: 3px solid var(--neon-blue);
+      box-shadow: 0 0 30px var(--neon-blue);
+      margin-bottom: 30px;
+      transition: var(--transition);
+    }
+
+    .creators-card:hover .creator-avatar {
+      border-color: var(--neon-pink);
       color: var(--neon-pink);
-      border: 2px solid var(--neon-pink);
-      box-shadow: 0 0 30px var(--neon-pink);
-      margin-bottom: 25px;
+      box-shadow: 0 0 40px var(--neon-pink);
     }
 
     .creator span {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       color: var(--text-primary);
+      text-shadow: 0 0 10px var(--neon-blue);
+      transition: var(--transition);
+    }
+
+    .creators-card:hover .creator span {
       text-shadow: 0 0 10px var(--neon-pink);
     }
 
-    /* ===== ДАТА РЕЛИЗА (центрированная) ===== */
+    /* Дата релиза */
     .release-section {
       margin: 120px 0;
       display: flex;
@@ -392,63 +432,114 @@
 
     .release-card {
       background: var(--bg-card);
-      border: 1px solid var(--neon-blue);
-      border-radius: 90px;
-      padding: 60px 80px;
+      border: 2px solid var(--neon-blue);
+      border-radius: 100px;
+      padding: 70px 90px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px;
-      max-width: 800px;
+      gap: 35px;
+      max-width: 900px;
       width: 100%;
       box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+      transition: var(--transition);
+    }
+
+    .release-card:hover {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 60px rgba(255, 77, 154, 0.4);
     }
 
     .release-text {
-      font-size: 2.4rem;
+      font-size: 2.6rem;
       color: var(--text-primary);
-      text-shadow: 0 0 10px var(--neon-blue);
+      text-shadow: 0 0 12px var(--neon-blue);
+      transition: var(--transition);
+    }
+
+    .release-card:hover .release-text {
+      text-shadow: 0 0 12px var(--neon-pink);
     }
 
     .release-date {
-      font-size: 3.5rem;
+      font-size: 4rem;
       font-weight: 600;
       color: var(--neon-blue);
       background: #0b0f1a;
-      padding: 20px 60px;
-      border-radius: 80px;
-      border: 2px solid var(--neon-blue);
-      box-shadow: 0 0 30px var(--neon-blue);
+      padding: 25px 70px;
+      border-radius: 90px;
+      border: 3px solid var(--neon-blue);
+      box-shadow: 0 0 35px var(--neon-blue);
+      transition: var(--transition);
     }
 
-    /* ===== ФУТЕР ===== */
+    .release-card:hover .release-date {
+      color: var(--neon-pink);
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 50px var(--neon-pink);
+    }
+
+    /* Футер */
     .footer {
       background: #03050a;
       border-radius: 60px 60px 0 0;
       padding: 60px 30px;
       text-align: center;
       color: var(--text-secondary);
-      border-top: 1px solid var(--neon-purple);
-      box-shadow: 0 -10px 30px rgba(184, 77, 255, 0.2);
+      border-top: 2px solid var(--neon-blue);
+      box-shadow: 0 -10px 30px rgba(0, 240, 255, 0.2);
     }
 
-    /* ===== АДАПТАЦИЯ ===== */
+    /* Адаптация */
+    @media (max-width: 992px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 768px) {
-      .container { padding: 0 20px; }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
       
-      .tok-card { padding: 40px 25px; }
-      .tok-avatar { width: 140px; height: 140px; font-size: 2.8rem; }
+      .reasons-grid {
+        grid-template-columns: 1fr;
+      }
       
-      .gallery-grid { grid-template-columns: 1fr; }
+      .creators-names {
+        gap: 60px;
+      }
       
-      .creators-card { padding: 40px 25px; }
-      .creators-names { gap: 40px; }
-      .creator-avatar { width: 100px; height: 100px; font-size: 2.5rem; }
-      .creator span { font-size: 1.8rem; }
+      .creator-avatar {
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
+      }
       
-      .release-card { padding: 40px 25px; }
-      .release-text { font-size: 1.8rem; }
-      .release-date { font-size: 2.5rem; padding: 15px 30px; }
+      .creator span {
+        font-size: 2rem;
+      }
+      
+      .release-card {
+        padding: 50px 30px;
+      }
+      
+      .release-date {
+        font-size: 3rem;
+        padding: 20px 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tok-card {
+        padding: 40px 25px;
+      }
+      
+      .tok-avatar {
+        width: 150px;
+        height: 150px;
+        font-size: 3rem;
+      }
     }
   </style>
 </head>
@@ -459,44 +550,45 @@
     <h1>Добро пожаловать в мир технологий вместе с TOK</h1>
   </section>
 
-  <!-- TOK Card -->
+  <!-- TOK Card (без кнопки, с большим текстом) -->
   <section class="section container">
     <div class="tok-card">
       <div class="tok-avatar">TOK</div>
       <div class="tok-content">
         <h2>TOK Messenger</h2>
-        <p>Инновационный мессенджер, который невозможно заблокировать. Работает стабильнее аналогов. Бесплатные стикеры, темы, звонки и абсолютная приватность.</p>
-        <a href="#reasons" class="btn-neon">Узнать больше</a>
+        <p>TOK — это не просто мессенджер. Это экосистема безопасного общения, построенная на принципах децентрализации и абсолютной приватности. Мы объединили передовые технологии P2P-сетей с интуитивно понятным интерфейсом, чтобы вы могли общаться без ограничений и слежки.</p>
+        <p>Каждое сообщение защищено сквозным шифрованием, а распределённая архитектура делает TOK устойчивым к любым блокировкам. Ваши данные принадлежат только вам — мы не храним логи и не собираем метаданные.</p>
+        <p>В TOK вы найдёте тысячи стикеров, десятки тем оформления, удобные голосовые сообщения и многое другое. И всё это совершенно бесплатно, без подписок и скрытых платежей. Мы верим, что современный мессенджер должен быть доступен каждому.</p>
       </div>
     </div>
   </section>
 
-  <!-- ГАЛЕРЕЯ (3 изображения с подписями) -->
+  <!-- ГАЛЕРЕЯ (центрированная, фото крупнее, подписи исправлены) -->
   <section class="section container gallery-section">
-    <h2 class="gradient-neon" style="text-align: center; font-size: 3rem; margin-bottom: 30px;">Интерфейс TOK</h2>
+    <h2 class="gallery-title neon-text">⚡ Интерфейс TOK</h2>
     <div class="gallery-grid">
-      <!-- Фото 1: image.jpg (основное) -->
+      <!-- Левое фото (image.jpg) - теперь с подписью про кастомизацию -->
       <div class="gallery-item">
-        <img src="image.jpg" alt="TOK интерфейс" onerror="this.src='https://via.placeholder.com/600x400/0b0f1a/00f0ff?text=TOK+Main'">
-        <div class="gallery-caption">🚀 Главный экран</div>
-        <div class="gallery-description">Минималистичный дизайн с неоновыми акцентами. Всё важное — на виду.</div>
-      </div>
-      <!-- Фото 2: 1image.jpg -->
-      <div class="gallery-item">
-        <img src="1image.jpg" alt="TOK регистрация" onerror="this.src='https://via.placeholder.com/600x400/0b0f1a/b84dff?text=TOK+Register'">
-        <div class="gallery-caption">🔐 Быстрая регистрация</div>
-        <div class="gallery-description">Удобная, быстрая и безопасная регистрация — ваши данные под защитой.</div>
-      </div>
-      <!-- Фото 3: 2image.jpg -->
-      <div class="gallery-item">
-        <img src="2image.jpg" alt="TOK кастомизация" onerror="this.src='https://via.placeholder.com/600x400/0b0f1a/ff4d9a?text=TOK+Custom'">
+        <img src="image.jpg" alt="TOK интерфейс" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00f0ff?text=TOK+Custom'">
         <div class="gallery-caption">🎨 Кастомизация</div>
-        <div class="gallery-description">Возможность настроить интерфейс под себя — темы, цвета, расположение элементов.</div>
+        <div class="gallery-description">Возможность настроить интерфейс под себя — темы, цвета, расположение элементов. Сделайте TOK по-настоящему своим.</div>
+      </div>
+      <!-- Центральное фото (1image.jpg) - теперь с подписью про главный экран -->
+      <div class="gallery-item">
+        <img src="1image.jpg" alt="TOK главный" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/b84dff?text=TOK+Main'">
+        <div class="gallery-caption">🚀 Главный экран</div>
+        <div class="gallery-description">Минималистичный дизайн с неоновыми акцентами. Всё важное — на виду, ничего лишнего.</div>
+      </div>
+      <!-- Правое фото (2image.jpg) - теперь с подписью про регистрацию -->
+      <div class="gallery-item">
+        <img src="2image.jpg" alt="TOK регистрация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/ff4d9a?text=TOK+Register'">
+        <div class="gallery-caption">🔐 Быстрая регистрация</div>
+        <div class="gallery-description">Удобная, быстрая и безопасная регистрация — ваши данные под защитой с первого мгновения.</div>
       </div>
     </div>
   </section>
 
-  <!-- ПРИЧИНЫ (центрированный блок с 4 карточками) -->
+  <!-- ПРИЧИНЫ -->
   <section class="section reasons-section" id="reasons">
     <h2 class="reasons-title neon-text">Почему стоит выбрать TOK?</h2>
     <div class="reasons-grid">
@@ -506,11 +598,11 @@
       </div>
       <div class="reason-card">
         <h3>⚡ Молниеносный</h3>
-        <p>Умная маршрутизация и оптимизация протоколов позволяют доставлять сообщения за миллисекунды. Видеозвонки в HD без задержек — реальность с TOK.</p>
+        <p>Умная маршрутизация и оптимизация протоколов позволяют доставлять сообщения за миллисекунды. TOK работает быстро даже при нестабильном соединении.</p>
       </div>
       <div class="reason-card">
         <h3>🎁 Полностью бесплатный</h3>
-        <p>Никаких подписок и скрытых платежей. Тысячи стикеров, десятки тем, неограниченное количество звонков — всё это доступно каждому пользователю.</p>
+        <p>Никаких подписок и скрытых платежей. Тысячи стикеров, десятки тем, неограниченное количество сообщений — всё это доступно каждому.</p>
       </div>
       <div class="reason-card">
         <h3>🔐 Абсолютная приватность</h3>
@@ -521,14 +613,14 @@
 
   <!-- ПРОГРЕСС 28% -->
   <section class="section container progress-section">
-    <div class="progress-label neon-text-purple">⚡ готовность к релизу</div>
+    <div class="progress-label neon-text">⚡ готовность к релизу</div>
     <div class="progress-bar-bg">
       <div class="progress-bar-fill">28%</div>
     </div>
     <div class="progress-note">приложение готово на 28% — финальная стадия разработки</div>
   </section>
 
-  <!-- БЛОК СОЗДАТЕЛЕЙ (центрированный, текст изменён) -->
+  <!-- БЛОК СОЗДАТЕЛЕЙ -->
   <section class="section creators-section">
     <div class="creators-card">
       <p>Над этим проектом работаю:</p>
@@ -545,7 +637,7 @@
     </div>
   </section>
 
-  <!-- ДАТА РЕЛИЗА (центрированная, текст изменён) -->
+  <!-- ДАТА РЕЛИЗА -->
   <section class="section release-section">
     <div class="release-card">
       <span class="release-text">Примерная дата релиза TOK:</span>
@@ -575,11 +667,6 @@
       setTimeout(() => {
         document.querySelector('.hero').classList.add('revealed');
       }, 100);
-
-      document.querySelector('.btn-neon')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.querySelector('#reasons').scrollIntoView({ behavior: 'smooth' });
-      });
     })();
   </script>
 </body>
