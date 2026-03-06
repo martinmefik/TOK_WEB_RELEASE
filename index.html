@@ -2,179 +2,311 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TOK — тёмный мессенджер</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>TOK Messenger — абсолютно ровный дизайн</title>
   <style>
+    /* ==================== БАЗОВЫЙ СБРОС И ПЕРЕМЕННЫЕ ==================== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
+    :root {
+      --bg-dark: #0a0c15;
+      --bg-card: rgba(18, 22, 40, 0.7);
+      --bg-card-solid: #121628;
+      --accent-blue: #3f5ef0;
+      --accent-blue-light: #5f7eff;
+      --accent-blue-dark: #1f3ad0;
+      --border-color: rgba(100, 140, 255, 0.25);
+      --text-primary: #eef3fc;
+      --text-secondary: #b2c2e8;
+      --text-muted: #8f9fd5;
+      --gradient-glow: linear-gradient(145deg, #e0eaff, #ffffff);
+      --glass-bg: rgba(18, 22, 40, 0.6);
+      --border-radius-card: 70px;
+      --border-radius-medium: 48px;
+      --border-radius-small: 40px;
+      --box-shadow-default: 0 30px 60px -30px #000;
+      --transition-default: all 0.3s ease;
+    }
+
     body {
-      background: #0a0c15;
+      background: var(--bg-dark);
       background-image: radial-gradient(circle at 30% 20%, #1b1f30 0%, #03050a 100%);
-      color: #eef3fc;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      line-height: 1.5;
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6; /* Чуть больше межстрочный интервал для читаемости */
+      font-weight: 400;
       overflow-x: hidden;
     }
+
+    /* ==================== УТИЛИТЫ ==================== */
     .container {
-      max-width: 1200px;
+      max-width: 1300px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 30px;
     }
+
+    /* Плавное появление секций */
     .section {
       opacity: 0;
       transform: translateY(40px);
-      transition: opacity 1s ease, transform 1s ease;
+      transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1), transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+      will-change: opacity, transform;
     }
+
     .section.revealed {
       opacity: 1;
       transform: translateY(0);
     }
-    h1, h2, h3 {
+
+    /* Типографика */
+    h1, h2, h3, h4 {
       font-weight: 500;
       line-height: 1.2;
+      letter-spacing: -0.02em;
     }
-    .glass {
-      background: rgba(20, 25, 45, 0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(100, 140, 255, 0.15);
-      border-radius: 48px;
-      box-shadow: 0 30px 60px -30px #000;
+
+    p {
+      margin-bottom: 1rem;
     }
+
     .gradient-text {
-      background: linear-gradient(145deg, #e0eaff, #ffffff);
+      background: var(--gradient-glow);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    /* Hero */
-    .hero {
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-medium);
+      box-shadow: var(--box-shadow-default);
+    }
+
+    /* ==================== HERO СЕКЦИЯ ==================== */
+    .hero-section {
       min-height: 90vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      padding: 20px;
     }
-    .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      background: linear-gradient(135deg, #c0d0ff, #ffffff);
+
+    .hero-title {
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      max-width: 1000px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #c0d0ff, #ffffff, #c0d0ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      max-width: 900px;
+      background-clip: text;
+      text-shadow: 0 0 40px rgba(70, 130, 255, 0.5);
+      animation: gentleFloat 8s infinite alternate ease-in-out;
     }
-    /* Карточка TOK */
+
+    @keyframes gentleFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-12px); }
+    }
+
+    /* ==================== КАРТОЧКА TOK ==================== */
     .tok-card {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 40px;
-      padding: 50px;
-      margin: 80px 0;
-      background: rgba(18, 22, 40, 0.7);
+      gap: 50px;
+      background: var(--bg-card);
       backdrop-filter: blur(16px);
-      border: 1px solid #2f3b70;
-      border-radius: 70px;
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--accent-blue-light);
+      border-radius: var(--border-radius-card);
+      padding: 60px 50px;
+      margin: 100px 0;
+      box-shadow: 0 40px 80px -30px #000;
     }
+
     .tok-avatar {
-      width: 160px;
-      height: 160px;
+      width: 180px;
+      height: 180px;
       background: linear-gradient(135deg, #252b4a, #121734);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: 700;
       color: #b5cbff;
-      box-shadow: 0 20px 40px -10px #1f3ad0;
-      border: 2px solid #4f71ff;
+      box-shadow: 0 20px 40px -10px var(--accent-blue-dark);
+      border: 2px solid var(--accent-blue-light);
+      flex-shrink: 0;
     }
+
     .tok-content {
       flex: 1;
+      min-width: 300px;
     }
+
     .tok-content h2 {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      background: linear-gradient(145deg, #dde6ff, #ffffff);
+      font-size: clamp(2.8rem, 5vw, 3.8rem);
+      background: linear-gradient(145deg, #e0ecff, #ffffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
     }
+
     .tok-content p {
-      font-size: 1.2rem;
-      color: #cad2f0;
-      margin: 20px 0 30px;
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 30px;
+      line-height: 1.7;
     }
-    .btn {
+
+    .btn-primary {
       display: inline-block;
       background: rgba(50, 80, 200, 0.3);
-      border: 1px solid #5f7eff;
+      border: 1px solid var(--accent-blue-light);
       color: white;
-      padding: 16px 42px;
+      padding: 18px 48px;
       border-radius: 60px;
       font-weight: 600;
+      font-size: 1.2rem;
       text-decoration: none;
       backdrop-filter: blur(8px);
-      transition: 0.3s;
+      -webkit-backdrop-filter: blur(8px);
+      transition: var(--transition-default);
+      cursor: pointer;
     }
-    .btn:hover {
-      background: #3f5ef0;
-      box-shadow: 0 20px 40px -10px #3f5ef0;
+
+    .btn-primary:hover {
+      background: var(--accent-blue);
+      box-shadow: 0 20px 40px -10px var(--accent-blue);
+      transform: scale(1.02);
     }
-    /* Reasons grid */
-    .reasons {
+
+    /* ==================== СЕКЦИЯ С ИЗОБРАЖЕНИЕМ (ВОЗВРАЩЕНА) ==================== */
+    .image-section {
       margin: 140px 0;
     }
-    .reasons h2 {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
+
+    .image-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-card);
+      padding: 50px;
       text-align: center;
-      margin-bottom: 60px;
     }
-    .reason-grid {
+
+    .image-card img {
+      width: 100%;
+      max-width: 1000px;
+      height: auto;
+      border-radius: var(--border-radius-small);
+      box-shadow: 0 40px 70px -30px #000, 0 0 0 1px rgba(255,255,255,0.05) inset;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .image-caption {
+      margin-top: 40px;
+      font-size: 2rem;
+      background: linear-gradient(145deg, #d6e4ff, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 500;
+    }
+
+    .image-description {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    /* ==================== ПРИЧИНЫ (GRID С ИДЕАЛЬНЫМ ВЫРАВНИВАНИЕМ) ==================== */
+    .reasons-section {
+      margin: 140px 0;
+    }
+
+    .reasons-title {
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .reasons-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 35px;
     }
+
     .reason-card {
-      background: rgba(18, 22, 40, 0.6);
+      background: var(--glass-bg);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid #2e3a6a;
       border-radius: 50px;
-      padding: 40px 25px;
-      transition: 0.3s;
+      padding: 45px 30px;
+      transition: var(--transition-default);
+      display: flex;
+      flex-direction: column;
     }
+
     .reason-card:hover {
-      border-color: #6f8aff;
+      border-color: var(--accent-blue-light);
       transform: translateY(-8px);
+      box-shadow: 0 30px 50px -20px var(--accent-blue-dark);
     }
+
     .reason-card h3 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: #d4e0ff;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
+
     .reason-card p {
-      color: #b2c2e8;
+      color: var(--text-secondary);
       font-size: 1.1rem;
+      line-height: 1.6;
+      flex: 1;
     }
-    /* Progress */
-    .progress-block {
-      max-width: 800px;
+
+    /* ==================== ПРОГРЕСС 28% ==================== */
+    .progress-section {
+      max-width: 900px;
       margin: 140px auto;
       text-align: center;
     }
+
     .progress-label {
-      font-size: clamp(2.2rem, 5vw, 3rem);
-      margin-bottom: 35px;
+      font-size: clamp(2.4rem, 5vw, 3.2rem);
+      margin-bottom: 40px;
     }
-    .bar-bg {
+
+    .progress-bar-bg {
       background: #1c233a;
-      height: 48px;
+      height: 50px;
       border-radius: 100px;
       padding: 6px;
+      box-shadow: inset 0 4px 15px #010114;
     }
-    .bar-fill {
+
+    .progress-bar-fill {
       width: 28%;
       height: 100%;
-      background: linear-gradient(90deg, #2d4dff, #8ba3ff);
+      background: linear-gradient(90deg, #2d4dff, #8ba3ff, #2d4dff);
       border-radius: 100px;
       display: flex;
       align-items: center;
@@ -182,183 +314,298 @@
       padding-right: 30px;
       color: white;
       font-weight: 700;
-      font-size: 1.4rem;
-      box-shadow: 0 0 30px #3f5ef0;
+      font-size: 1.5rem;
+      box-shadow: 0 0 30px var(--accent-blue);
+      transition: width 1.5s ease;
     }
+
     .progress-note {
-      font-size: 1.8rem;
-      margin-top: 30px;
+      font-size: 2rem;
+      margin-top: 35px;
       color: #d0dcff;
     }
-    /* Creators */
-    .creators {
+
+    /* ==================== БЛОК СОЗДАТЕЛЕЙ ==================== */
+    .creators-section {
       margin: 140px 0;
       display: flex;
       justify-content: center;
     }
+
     .creators-card {
-      background: rgba(18, 22, 40, 0.7);
+      background: var(--bg-card);
       backdrop-filter: blur(16px);
-      border: 1px solid #4f71ff;
-      border-radius: 90px;
-      padding: 60px 80px;
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--accent-blue-light);
+      border-radius: 100px;
+      padding: 70px 90px;
       text-align: center;
-      max-width: 900px;
+      max-width: 1000px;
+      width: 100%;
     }
+
     .creators-card p {
-      font-size: clamp(2rem, 5vw, 3rem);
-      background: linear-gradient(145deg, #e0ecff, #ffffff);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      background: linear-gradient(145deg, #e6eeff, #ffffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      margin-bottom: 40px;
     }
-    .creator-names {
+
+    .creators-names {
       display: flex;
       justify-content: center;
-      gap: 60px;
-      margin-top: 30px;
+      gap: 80px;
       flex-wrap: wrap;
     }
+
     .creator {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     .creator-avatar {
-      width: 100px;
-      height: 100px;
-      background: #20294a;
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(145deg, #263155, #12172f);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-weight: 600;
       color: #b5cbff;
-      border: 2px solid #4f71ff;
-      margin-bottom: 15px;
+      border: 2px solid var(--accent-blue-light);
+      box-shadow: 0 20px 40px -10px var(--accent-blue-dark);
+      margin-bottom: 20px;
     }
+
     .creator span {
-      font-size: 2rem;
+      font-size: 2.2rem;
       background: linear-gradient(145deg, #d6e4ff, #ffffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    /* Release */
-    .release-block {
-      background: rgba(18, 22, 40, 0.5);
-      backdrop-filter: blur(8px);
-      border: 1px solid #3f5ef0;
-      border-radius: 80px;
-      padding: 50px;
+
+    /* ==================== БЛОК ДАТЫ РЕЛИЗА ==================== */
+    .release-section {
       margin: 120px 0;
+    }
+
+    .release-card {
+      background: rgba(18, 22, 40, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--accent-blue-light);
+      border-radius: 90px;
+      padding: 60px 50px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-around;
+      gap: 30px;
     }
+
     .release-text {
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: #d0daff;
     }
+
     .release-date {
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 600;
       color: #ffffff;
       background: #1e2950;
-      padding: 15px 40px;
-      border-radius: 70px;
-      border: 1px solid #6f8aff;
-      box-shadow: 0 0 30px #1f3ad0;
+      padding: 20px 50px;
+      border-radius: 80px;
+      border: 1px solid var(--accent-blue-light);
+      box-shadow: 0 0 40px var(--accent-blue-dark);
     }
-    /* Footer */
+
+    /* ==================== ФУТЕР ==================== */
     .footer {
       background: #070b1a;
       border-radius: 60px 60px 0 0;
-      padding: 50px 30px;
+      padding: 60px 30px;
       text-align: center;
-      color: #9aabdf;
+      color: var(--text-muted);
       border-top: 1px solid #2b3870;
+      font-size: 1.2rem;
     }
-    /* Mobile */
+
+    /* ==================== АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ ==================== */
+    @media (max-width: 992px) {
+      .tok-card { padding: 40px; }
+      .creators-card { padding: 50px 40px; }
+      .creator-avatar { width: 100px; height: 100px; font-size: 2.5rem; }
+      .creator span { font-size: 1.8rem; }
+    }
+
     @media (max-width: 768px) {
-      .tok-card { padding: 30px; }
-      .creators-card { padding: 40px 30px; }
-      .creator-avatar { width: 80px; height: 80px; font-size: 2rem; }
-      .creator span { font-size: 1.6rem; }
-      .release-block { flex-direction: column; gap: 20px; }
+      .container { padding: 0 20px; }
+      
+      .tok-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 25px;
+      }
+      
+      .tok-content p { margin-left: auto; margin-right: auto; }
+      
+      .reasons-grid { gap: 20px; }
+      
+      .reason-card { padding: 35px 20px; }
+      
+      .progress-bar-bg { height: 40px; }
+      .progress-bar-fill { font-size: 1.2rem; padding-right: 15px; }
+      
+      .creators-card { padding: 40px 25px; }
+      .creators-names { gap: 40px; }
+      
+      .release-card { flex-direction: column; padding: 40px 25px; }
+      .release-text { font-size: 1.8rem; }
+      .release-date { font-size: 2.4rem; padding: 15px 30px; }
+      
+      .image-caption { font-size: 1.8rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2rem; }
+      .tok-content h2 { font-size: 2.2rem; }
+      .btn-primary { padding: 14px 32px; font-size: 1rem; }
+      .reason-card h3 { font-size: 1.8rem; }
+      .progress-note { font-size: 1.5rem; }
+      .creators-card p { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
-  <!-- Hero -->
-  <section class="section hero" id="hero">
-    <h1>Добро пожаловать в мир технологий вместе с TOK</h1>
+
+  <!-- HERO (уменьшенный, ровный) -->
+  <section class="section hero-section" id="hero">
+    <h1 class="hero-title">Добро пожаловать в мир технологий вместе с TOK</h1>
   </section>
 
-  <!-- TOK Card -->
+  <!-- Карточка TOK -->
   <section class="section container">
     <div class="tok-card">
       <div class="tok-avatar">TOK</div>
       <div class="tok-content">
         <h2>TOK Messenger</h2>
-        <p>Инновационный мессенджер, который невозможно заблокировать. Работает стабильнее аналогов, а внутри — бесплатные стикеры, темы и приватность.</p>
-        <a href="#reasons" class="btn">Узнать больше</a>
+        <p>Инновационный мессенджер, который невозможно заблокировать. Работает стабильнее аналогов. Внутри — бесплатные стикеры, темы, звонки и абсолютная приватность. Всё по-настоящему.</p>
+        <a href="#reasons" class="btn-primary">Узнать больше</a>
       </div>
     </div>
   </section>
 
-  <!-- Reasons (без облака) -->
-  <section class="section container reasons" id="reasons">
-    <h2 class="gradient-text">Почему стоит выбрать TOK?</h2>
-    <div class="reason-grid">
-      <div class="reason-card"><h3>🛡️ Неблокируемый</h3><p>Децентрализованная P2P-сеть. Никакие блокировки не помешают общению.</p></div>
-      <div class="reason-card"><h3>⚡ Мгновенно</h3><p>Умная маршрутизация доставляет сообщения за миллисекунды.</p></div>
-      <div class="reason-card"><h3>🎁 Бесплатно навсегда</h3><p>Тысячи стикеров, 50+ тем, звонки высокого качества без подписок.</p></div>
-      <div class="reason-card"><h3>🔐 Приватность</h3><p>Сквозное шифрование по умолчанию, открытый код, никаких логов.</p></div>
+  <!-- СЕКЦИЯ С ИЗОБРАЖЕНИЕМ (ВОЗВРАЩЕНА) -->
+  <section class="section container image-section" id="imageBlock">
+    <div class="image-card">
+      <!-- Предполагаем, что файл image.jpg лежит в корне репозитория или рядом с HTML -->
+      <img src="image.jpg" alt="Интерфейс TOK Messenger" onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x600/0b0d17/4f71ff?text=TOK+Design';">
+      <div class="image-caption">Красивый и всеми любимый дизайн</div>
+      <div class="image-description">
+        Минимализм, плавность, внимание к деталям. Интерфейс TOK создан, чтобы вы забыли о лишнем и сосредоточились на общении. Каждая анимация, каждый оттенок подобран для вашего комфорта. Тёмная тема — это не просто стиль, это забота о глазах.
+      </div>
     </div>
   </section>
 
-  <!-- Progress 28% -->
-  <section class="section container progress-block">
-    <div class="progress-label gradient-text">готовность к релизу</div>
-    <div class="bar-bg"><div class="bar-fill">28%</div></div>
-    <div class="progress-note">приложение готово на 28% — скоро выйдет в релиз!</div>
+  <!-- Почему стоит выбрать (причины) -->
+  <section class="section container reasons-section" id="reasons">
+    <h2 class="gradient-text reasons-title">Почему стоит выбрать TOK?</h2>
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <h3>🛡️ Неблокируемый</h3>
+        <p>Децентрализованная P2P-архитектура. Никакие блокировки не помешают общению — сообщения идут в обход любых ограничений.</p>
+      </div>
+      <div class="reason-card">
+        <h3>⚡ Мгновенно</h3>
+        <p>Умная маршрутизация доставляет сообщения за миллисекунды. Даже при слабом соединении TOK найдёт оптимальный путь.</p>
+      </div>
+      <div class="reason-card">
+        <h3>🎁 Бесплатно навсегда</h3>
+        <p>Тысячи стикеров, 50+ тем, видеозвонки высокого качества — без подписок и скрытых платежей. TOK остаётся бесплатным.</p>
+      </div>
+      <div class="reason-card">
+        <h3>🔐 Приватность</h3>
+        <p>Сквозное шифрование по умолчанию, открытый код клиентов, отсутствие логов. Только вы и ваши собеседники имеете доступ к переписке.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- Creators -->
-  <section class="section container creators">
+  <!-- Шкала прогресса (28%) -->
+  <section class="section container progress-section">
+    <div class="gradient-text progress-label">готовность к релизу</div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill">28%</div>
+    </div>
+    <div class="progress-note">приложение готово на 28% — осталось совсем немного, и оно выйдет в релиз!</div>
+  </section>
+
+  <!-- Блок создателей -->
+  <section class="section container creators-section">
     <div class="creators-card">
       <p>над этим проектом стараются</p>
-      <div class="creator-names">
-        <div class="creator"><div class="creator-avatar">K</div><span>K1lame</span></div>
-        <div class="creator"><div class="creator-avatar">M</div><span>Martin_Mefik</span></div>
+      <div class="creators-names">
+        <div class="creator">
+          <div class="creator-avatar">K</div>
+          <span>K1lame</span>
+        </div>
+        <div class="creator">
+          <div class="creator-avatar">M</div>
+          <span>Martin_Mefik</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Release date 2026 -->
-  <section class="section container release-block">
-    <span class="release-text">релиз состоится в</span>
-    <span class="release-date">2026</span>
+  <!-- Дата релиза (2026) -->
+  <section class="section container release-section">
+    <div class="release-card">
+      <span class="release-text">релиз состоится в</span>
+      <span class="release-date">2026</span>
+    </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">© 2026 TOK Messenger — связь без границ</footer>
+  <!-- Футер -->
+  <footer class="footer">
+    <p>© 2026 TOK Messenger — связь без границ</p>
+  </footer>
 
   <script>
-    // Intersection Observer для плавного появления
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('revealed');
+    (function() {
+      // Плавное появление секций
+      const sections = document.querySelectorAll('.section');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -30px 0px'
       });
-    }, { threshold: 0.2 });
-    sections.forEach(s => observer.observe(s));
-    // Плавный скролл по кнопке
-    document.querySelector('.btn')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.querySelector('#reasons').scrollIntoView({ behavior: 'smooth' });
-    });
+
+      sections.forEach(section => observer.observe(section));
+
+      // Принудительно показываем hero, если он видим при загрузке
+      setTimeout(() => {
+        document.querySelector('.hero-section').classList.add('revealed');
+      }, 100);
+
+      // Плавный скролл при клике на кнопку
+      const btn = document.querySelector('.btn-primary');
+      if (btn) {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector('#reasons');
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+    })();
   </script>
 </body>
 </html>
