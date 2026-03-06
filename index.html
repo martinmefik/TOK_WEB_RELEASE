@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TOK — не просто мессенджер</title>
+  <title>TOK — неоновый чёрный мессенджер</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <style>
     * {
       margin: 0;
@@ -156,7 +159,7 @@
       line-height: 1.8;
     }
 
-    /* Галерея (центрированная, фото крупнее) */
+    /* ГАЛЕРЕЯ (центрированная) */
     .gallery-section {
       margin: 140px 0;
       display: flex;
@@ -180,6 +183,7 @@
       max-width: 1300px;
       width: 100%;
       margin: 0 auto;
+      justify-content: center;
     }
 
     .gallery-item {
@@ -628,23 +632,23 @@
     </div>
   </section>
 
-  <!-- ГАЛЕРЕЯ (центрированная, фото крупнее, порядок исправлен) -->
+  <!-- ГАЛЕРЕЯ (центрированная) -->
   <section class="section container gallery-section">
     <h2 class="gallery-title neon-text">⚡ Интерфейс TOK</h2>
     <div class="gallery-grid">
-      <!-- Левое фото (image.jpg) - Главный экран -->
+      <!-- Левое фото - Главный экран -->
       <div class="gallery-item">
         <img src="image.jpg" alt="TOK главный экран" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/00f0ff?text=TOK+Main'">
         <div class="gallery-caption">🚀 Главный экран</div>
         <div class="gallery-description">Минималистичный дизайн с неоновыми акцентами. Всё важное — на виду, ничего лишнего.</div>
       </div>
-      <!-- Центральное фото (1image.jpg) - Кастомизация -->
+      <!-- Центральное фото - Кастомизация -->
       <div class="gallery-item">
         <img src="1image.jpg" alt="TOK кастомизация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/b84dff?text=TOK+Custom'">
         <div class="gallery-caption">🎨 Кастомизация</div>
         <div class="gallery-description">Возможность настроить интерфейс под себя — темы, цвета, расположение элементов. Сделайте TOK по-настоящему своим.</div>
       </div>
-      <!-- Правое фото (2image.jpg) - Быстрая регистрация -->
+      <!-- Правое фото - Быстрая регистрация -->
       <div class="gallery-item">
         <img src="2image.jpg" alt="TOK регистрация" onerror="this.src='https://via.placeholder.com/800x500/0b0f1a/ff4d9a?text=TOK+Register'">
         <div class="gallery-caption">🔐 Быстрая регистрация</div>
@@ -775,8 +779,8 @@
       // Обновляем при загрузке
       updateProgress();
       
-      // Обновляем каждые 10 секунд (для демонстрации, можно поставить реже)
-      setInterval(updateProgress, 10000);
+      // Обновляем каждую секунду для плавности (единицы)
+      setInterval(updateProgress, 1000);
     })();
   </script>
 </body>
