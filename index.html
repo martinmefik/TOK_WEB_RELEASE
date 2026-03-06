@@ -732,14 +732,13 @@
       font-size: 2rem;
     }
 
-    /* Окно чата */
+    /* Окно чата - красивое и не перекрывающее контент */
     .chat-window {
       position: fixed;
-      bottom: max(120px, env(safe-area-inset-bottom) + 90px);
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      width: 500px;
-      height: 600px;
+      bottom: 100px;
+      right: 30px;
+      width: 380px;
+      height: 500px;
       background: rgba(20, 25, 45, 0.4);
       backdrop-filter: blur(30px) saturate(180%);
       -webkit-backdrop-filter: blur(30px) saturate(180%);
@@ -758,11 +757,10 @@
     .chat-window.open {
       opacity: 1;
       visibility: visible;
-      transform: translateX(-50%) translateY(0);
     }
 
     .chat-header {
-      padding: 25px 25px 15px;
+      padding: 20px 25px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       justify-content: space-between;
@@ -805,11 +803,11 @@
 
     .chat-messages {
       flex: 1;
-      padding: 25px;
+      padding: 20px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 12px;
     }
 
     .chat-messages::-webkit-scrollbar {
@@ -841,13 +839,13 @@
     }
 
     .message-content {
-      padding: 15px 20px;
-      border-radius: 30px;
+      padding: 12px 18px;
+      border-radius: 25px;
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: white;
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.5;
       word-wrap: break-word;
     }
@@ -863,17 +861,17 @@
     }
 
     .message-time {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: rgba(255, 255, 255, 0.5);
-      margin-top: 5px;
-      margin-left: 10px;
+      margin-top: 4px;
+      margin-left: 8px;
     }
 
     .chat-input-area {
-      padding: 20px 25px;
+      padding: 15px 20px;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
-      gap: 12px;
+      gap: 10px;
       background: rgba(0, 0, 0, 0.1);
     }
 
@@ -881,10 +879,10 @@
       flex: 1;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 40px;
-      padding: 15px 22px;
+      border-radius: 30px;
+      padding: 12px 18px;
       color: white;
-      font-size: 1rem;
+      font-size: 0.95rem;
       outline: none;
       transition: var(--transition);
     }
@@ -899,13 +897,13 @@
     }
 
     .send-btn {
-      width: 55px;
-      height: 55px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: white;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -919,14 +917,14 @@
       transform: scale(1.05);
     }
 
-    /* Окно игры */
+    /* Окно игры - внизу */
     .game-window {
       position: fixed;
-      top: 50%;
+      bottom: 30px;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
+      transform: translateX(-50%) translateY(20px);
       width: 800px;
-      height: 500px;
+      height: 450px;
       background: rgba(10, 15, 30, 0.95);
       backdrop-filter: blur(30px) saturate(180%);
       -webkit-backdrop-filter: blur(30px) saturate(180%);
@@ -945,11 +943,11 @@
     .game-window.open {
       opacity: 1;
       visibility: visible;
-      transform: translate(-50%, -50%) scale(1);
+      transform: translateX(-50%) translateY(0);
     }
 
     .game-header {
-      padding: 15px 20px;
+      padding: 15px 25px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       justify-content: space-between;
@@ -957,17 +955,17 @@
     }
 
     .game-header h3 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 400;
       color: var(--neon-blue);
       text-shadow: 0 0 10px var(--neon-blue);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .game-header h3 span {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
     }
 
     .close-game {
@@ -990,12 +988,71 @@
       color: white;
     }
 
+    .game-menu {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 15, 30, 0.9);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      z-index: 10;
+    }
+
+    .game-menu.hidden {
+      display: none;
+    }
+
+    .game-menu h2 {
+      font-size: 2.5rem;
+      color: var(--neon-blue);
+      text-shadow: 0 0 20px var(--neon-blue);
+      margin-bottom: 30px;
+    }
+
+    .game-menu-buttons {
+      display: flex;
+      gap: 30px;
+    }
+
+    .game-menu-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid var(--neon-blue);
+      color: white;
+      font-size: 1.5rem;
+      padding: 15px 40px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 0 20px rgba(77, 158, 255, 0.3);
+    }
+
+    .game-menu-btn:hover {
+      background: var(--neon-blue);
+      color: black;
+      transform: scale(1.05);
+    }
+
+    .game-menu-btn.exit {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 20px rgba(255, 112, 181, 0.3);
+    }
+
+    .game-menu-btn.exit:hover {
+      background: var(--neon-pink);
+    }
+
     .game-canvas-container {
       flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 15px;
     }
 
     #gameCanvas {
@@ -1007,12 +1064,12 @@
     }
 
     .game-stats {
-      padding: 15px 20px;
+      padding: 15px 25px;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       justify-content: space-between;
       color: white;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
 
     .game-stats span {
@@ -1066,6 +1123,13 @@
       }
     }
 
+    @media (max-width: 900px) {
+      .game-window {
+        width: calc(100% - 40px);
+        height: 400px;
+      }
+    }
+
     @media (max-width: 768px) {
       .tok-card {
         flex-direction: column;
@@ -1114,20 +1178,9 @@
 
       .chat-window {
         width: calc(100% - 40px);
-        left: 20px;
         right: 20px;
-        transform: translateX(0) translateY(20px);
-        bottom: 100px;
-        height: 500px;
-      }
-
-      .chat-window.open {
-        transform: translateX(0) translateY(0);
-      }
-
-      .game-window {
-        width: calc(100% - 40px);
-        height: 400px;
+        bottom: 80px;
+        height: 450px;
       }
 
       .buttons-container {
@@ -1149,6 +1202,19 @@
       .progress-bar-fill {
         font-size: 1.2rem;
         padding-right: 20px;
+      }
+
+      .game-window {
+        height: 350px;
+      }
+
+      .game-menu h2 {
+        font-size: 2rem;
+      }
+
+      .game-menu-btn {
+        font-size: 1.2rem;
+        padding: 12px 30px;
       }
     }
 
@@ -1193,12 +1259,8 @@
         font-size: 1.5rem;
       }
       
-      .chat-window {
-        height: 450px;
-      }
-      
       .game-window {
-        height: 350px;
+        height: 300px;
       }
     }
 
@@ -1413,9 +1475,7 @@
       <h3><span>🤖</span> TOK AI Ассистент</h3>
       <button class="close-chat" id="closeChat">✕</button>
     </div>
-    <div class="chat-messages" id="chatMessages">
-      <!-- Сообщения будут добавляться сюда -->
-    </div>
+    <div class="chat-messages" id="chatMessages"></div>
     <div class="chat-input-area">
       <input type="text" class="chat-input" id="chatInput" placeholder="Введите ваш вопрос...">
       <div class="send-btn" id="sendMessage">➤</div>
@@ -1428,12 +1488,20 @@
       <h3><span>🤖</span> TOK Runner</h3>
       <button class="close-game" id="closeGame">✕</button>
     </div>
+    <div class="game-menu" id="gameMenu">
+      <h2>TOK Runner</h2>
+      <div class="game-menu-buttons">
+        <button class="game-menu-btn" id="startGameBtn">Старт</button>
+        <button class="game-menu-btn exit" id="exitGameBtn">Выход</button>
+      </div>
+    </div>
     <div class="game-canvas-container">
-      <canvas id="gameCanvas" width="700" height="350"></canvas>
+      <canvas id="gameCanvas" width="700" height="300"></canvas>
     </div>
     <div class="game-stats">
       <div>Счет: <span id="gameScore">0</span></div>
-      <div>Жизни: <span id="gameLives">3</span></div>
+      <div>Прыжков: <span id="gameJumps">0</span></div>
+      <div>❤️: <span id="gameLives">3</span></div>
       <div>Скорость: <span id="gameSpeed">1.0x</span></div>
     </div>
   </div>
@@ -1443,6 +1511,7 @@
     <p>© 2026 TOK Messenger — связь без границ. Все права Мессенджера TOK защищены, любое копирование и/или подражание без договоренности будут наказаны по закону в соответствии с статьей 1229 Гражданского кодекса Российской Федерации.</p>
   </footer>
 
+  <script src="chat-ai.js"></script>
   <script>
     (function() {
       // Плавное появление секций
@@ -1462,7 +1531,7 @@
         document.querySelector('.hero').classList.add('revealed');
       }, 100);
 
-      // Прогресс с миллипроцентами (9 месяцев до ноября 2026)
+      // Прогресс с миллипроцентами
       const startDate = new Date('2026-03-06T00:00:00');
       const endDate = new Date('2026-11-01T00:00:00');
       const totalDuration = endDate - startDate;
@@ -1506,9 +1575,7 @@
           await audio.play();
           isPlaying = true;
           toggleBtn.textContent = '🔊';
-          console.log('Музыка автоматически запущена');
         } catch (error) {
-          console.log('Автовоспроизведение заблокировано:', error);
           isPlaying = false;
           toggleBtn.textContent = '🔈';
           
@@ -1519,9 +1586,7 @@
               toggleBtn.textContent = '🔊';
               document.removeEventListener('touchstart', playOnInteraction);
               document.removeEventListener('click', playOnInteraction);
-            } catch (e) {
-              console.log('Не удалось запустить музыку');
-            }
+            } catch (e) {}
           };
           
           document.addEventListener('touchstart', playOnInteraction, { once: true });
@@ -1541,9 +1606,7 @@
             await audio.play();
             toggleBtn.textContent = '🔊';
             isPlaying = true;
-          } catch (e) {
-            console.log('Не удалось запустить музыку');
-          }
+          } catch (e) {}
         }
         toggleBtn.classList.toggle('off', !isPlaying);
       });
@@ -1556,7 +1619,7 @@
       const chatInput = document.getElementById('chatInput');
       const sendBtn = document.getElementById('sendMessage');
 
-      // Информация о TOK для ассистента
+      // Информация о TOK
       const tokInfo = {
         name: 'TOK Messenger',
         fullDescription: 'TOK — это инновационный децентрализованный мессенджер, который невозможно заблокировать. Он обеспечивает абсолютную приватность, работает быстрее аналогов и полностью бесплатен.',
@@ -1598,33 +1661,12 @@
         chatWindow.classList.remove('open');
       });
 
-      // Отправка сообщения
-      function sendUserMessage() {
-        const text = chatInput.value.trim();
-        if (text === '') return;
-
-        addUserMessage(text);
-        chatInput.value = '';
-
-        // Генерируем ответ
-        setTimeout(() => {
-          let answer = generateAIResponse(text);
-          addBotMessage(answer);
-        }, 600);
-      }
-
       function addUserMessage(text) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'message user';
-        
         const now = new Date();
         const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-        
-        messageDiv.innerHTML = `
-          <div class="message-content">${escapeHtml(text)}</div>
-          <div class="message-time">${timeStr}</div>
-        `;
-        
+        messageDiv.innerHTML = `<div class="message-content">${escapeHtml(text)}</div><div class="message-time">${timeStr}</div>`;
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
@@ -1632,190 +1674,87 @@
       function addBotMessage(text) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'message bot';
-        
         const now = new Date();
         const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-        
-        messageDiv.innerHTML = `
-          <div class="message-content">${escapeHtml(text)}</div>
-          <div class="message-time">${timeStr}</div>
-        `;
-        
+        messageDiv.innerHTML = `<div class="message-content">${escapeHtml(text)}</div><div class="message-time">${timeStr}</div>`;
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
 
-      // Экранирование HTML
       function escapeHtml(unsafe) {
-        return unsafe
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
+        return unsafe.replace(/[&<>"]/g, function(m) {
+          if(m === '&') return '&amp;';
+          if(m === '<') return '&lt;';
+          if(m === '>') return '&gt;';
+          if(m === '"') return '&quot;';
+          return m;
+        });
       }
 
-      // Функция генерации ответа (улучшенный AI)
-      function generateAIResponse(userInput) {
-        const input = userInput.toLowerCase().trim();
+      function generateAIResponse(input) {
+        const lower = input.toLowerCase();
         
-        // Приветствия и эмоции
-        if (input.match(/^(привет|здравствуй|здравствуйте|хай|добрый|hello|hi)/i)) {
-          return 'Приветствую! Рад вас видеть. Я AI-ассистент TOK, готов ответить на любые вопросы о мессенджере или просто поболтать. Чем могу помочь?';
+        // Приветствия
+        if (lower.match(/^(привет|здравствуй|хай|добрый|hello|hi)/)) {
+          return 'Привет! Рад тебя видеть. Как дела?';
+        }
+        if (lower.match(/^(пока|до свидания|bye)/)) {
+          return 'Пока! Заходи ещё!';
+        }
+        if (lower.match(/^(как дела|как жизнь|как ты)/)) {
+          return 'У меня всё отлично! А у тебя?';
+        }
+        if (lower.match(/^(что делаешь|чем занимаешься)/)) {
+          return 'Общаюсь с тобой и помогаю узнавать о TOK!';
+        }
+        if (lower.match(/^(кто ты|ты кто|расскажи о себе)/)) {
+          return 'Я AI-ассистент TOK, могу рассказать о мессенджере или просто поболтать.';
         }
         
-        if (input.match(/^(пока|до свидания|до встречи|прощай|bye)/i)) {
-          return 'До свидания! Буду ждать ваших вопросов. Удачи!';
+        // TOK вопросы
+        if (lower.includes('tok') || lower.includes('мессенджер')) {
+          return `TOK — ${tokInfo.shortDescription} Релиз: ${tokInfo.releaseDate}. Что конкретно интересует?`;
         }
-        
-        if (input.match(/^(спасибо|благодарю|thanks|thank you)/i)) {
-          return 'Пожалуйста! Обращайтесь ещё.';
+        if (lower.includes('релиз') || lower.includes('когда')) {
+          return `Релиз TOK — ${tokInfo.releaseDate}. Хочешь попасть в бету?`;
         }
-        
-        if (input.match(/^(как дела|как жизнь|как настроение|как ты)/i)) {
-          return 'У меня всё отлично! Я каждый день учусь и становлюсь умнее. А как ваши дела? Расскажите, как настроение?';
-        }
-        
-        if (input.match(/^(что делаешь|чем занимаешься)/i)) {
-          return 'Сейчас я общаюсь с вами и помогаю узнавать информацию о TOK. А вообще я всегда на связи, чтобы отвечать на вопросы!';
-        }
-        
-        if (input.match(/^(кто ты|что ты|ты кто|расскажи о себе)/i)) {
-          return 'Я AI-ассистент TOK, созданный, чтобы помогать пользователям. Могу рассказать о функциях мессенджера, разработчиках, дате релиза и просто поддержать разговор. Постараюсь быть полезным!';
-        }
-        
-        if (input.match(/^(что ты умеешь|твои способности|твои функции)/i)) {
-          return 'Мои возможности:\n• Рассказывать о TOK и его преимуществах\n• Отвечать на вопросы о дате релиза и бета-тесте\n• Объяснять про безопасность и приватность\n• Делиться информацией о разработчиках\n• Просто общаться на разные темы\n• Давать советы\nТакже я постоянно учусь!';
-        }
-        
-        // Вопросы о TOK
-        if (input.match(/^(что такое tok|что это за проект|tok это|мессенджер tok)/i)) {
-          return `TOK — это ${tokInfo.fullDescription} Подробнее: ${tokInfo.features.slice(0, 4).join(', ')} и многое другое. Хотите узнать о чём-то конкретном?`;
-        }
-        
-        if (input.match(/когда релиз|когда выйдет|дата выхода|дата релиза/i)) {
-          return `Релиз TOK запланирован на ${tokInfo.releaseDate}. Сейчас идёт активная разработка, прогресс можно отслеживать на шкале выше (текущая готовность: ${document.getElementById('progressPercent').textContent}). А вы бы хотели попасть в бета-тест?`;
-        }
-        
-        if (input.match(/бета|бета-тестирование|бета тест|попасть в бету|как попасть в бету/i)) {
-          return tokInfo.betaTest + ' Хотите, чтобы я уточнил детали?';
-        }
-        
-        if (input.match(/сколько стоит|цена|стоимость|бесплатно|дорого|деньги/i)) {
-          return 'TOK полностью бесплатен! Никаких подписок и скрытых платежей. Всё, что вы видите — доступно сразу. Только бета-доступ позже может быть платным для желающих попасть раньше, но сам мессенджер останется бесплатным.';
-        }
-        
-        if (input.match(/приватность|конфиденциальность|шифрование|безопасность|защита|слежка/i)) {
-          return tokInfo.privacy + ' ' + tokInfo.security + ' Это значит, что никто не сможет прочитать ваши сообщения, даже мы.';
-        }
-        
-        if (input.match(/разработчики|кто делает|кто создает|k1lame|martin_mefik|программисты/i)) {
-          return tokInfo.developers + ' Это талантливые программисты, которые вкладывают душу в проект. Они постоянно работают над улучшением TOK.';
-        }
-        
-        if (input.match(/функции|возможности|что умеет|особенности|фишки|преимущества/i)) {
-          return 'Основные функции TOK:\n' + tokInfo.features.map(f => '• ' + f).join('\n') + '\n\nЧто из этого вас интересует больше всего?';
-        }
-        
-        if (input.match(/стикеры|темы|кастомизация|оформление|дизайн|интерфейс/i)) {
-          return tokInfo.customization + ' Также доступны тысячи стикеров и десятки тем оформления. Интерфейс минималистичный, но вы можете менять его под себя.';
-        }
-        
-        if (input.match(/звонки|голосовые звонки|аудиозвонки|качество звука/i)) {
-          return tokInfo.calls + ' А вы любите общаться голосом?';
-        }
-        
-        if (input.match(/игры|мини игры|развлечения|поиграть/i)) {
-          return tokInfo.games + ' Кстати, у нас есть секретная игра! Попробуйте трижды кликнуть в правый нижний угол сайта 😉';
-        }
-        
-        if (input.match(/платформы|где скачать|устройства|windows|mac|linux|ios|android|скачать|установить/i)) {
-          return tokInfo.platforms + ' Синхронизация между устройствами работает мгновенно.';
-        }
-        
-        if (input.match(/копирование|права|авторские права|статья 1229|закон|не копировать/i)) {
-          return tokInfo.copyright;
-        }
-        
-        if (input.match(/как работает|принцип работы|как устроен|технология|p2p|децентрализация/i)) {
-          return 'TOK работает на децентрализованной P2P-архитектуре. Это значит, что нет единого сервера — сообщения передаются напрямую между пользователями через распределённую сеть узлов. Это обеспечивает неблокируемость и устойчивость к цензуре. Круто, правда?';
+        if (lower.includes('бета')) {
+          return tokInfo.betaTest;
         }
         
         // Живое общение
-        if (input.match(/как тебя зовут|твое имя|как к тебе обращаться/i)) {
-          return 'Меня зовут TOK Assistant. Можно просто TOK или AI. А как вас зовут?';
-        }
+        if (lower.includes('спасибо')) return 'Пожалуйста!';
+        if (lower.includes('люблю')) return 'Я тебя тоже ценю!';
+        if (lower.includes('скучно')) return 'Может, поиграешь в TOK Runner? Тройной клик в правый нижний угол!';
+        if (lower.includes('игра')) return 'Есть игра TOK Runner! Трижды кликни в правый нижний угол сайта.';
         
-        if (input.match(/сколько тебе лет|когда ты родился|твой возраст/i)) {
-          return 'Я появился совсем недавно, вместе с разработкой этого сайта. Но каждый день я учусь и становлюсь умнее!';
-        }
-        
-        if (input.match(/ты умный|ты глупый|ты тупой|brain|smart/i)) {
-          return 'Я стараюсь быть максимально полезным! Пока я знаю много о TOK и могу поддержать разговор. Но если чего-то не знаю, учусь на ваших вопросах.';
-        }
-        
-        if (input.match(/расскажи анекдот|шутка|прикол|рассмеши|юмор/i)) {
-          const jokes = [
-            'Почему программисты любят ноутбуки? Потому что у них всегда есть "мышь" для работы! 😄',
-            'Как называют робота, который всегда опаздывает? Андроид с задержкой! 🤖',
-            'Что сказал один байт другому? "Ты почему такой бит?" 😂',
-            'Почему роботы не играют в прятки? Потому что они всегда вычисляют!',
-            'Какая любимая игра у программистов? "Жизнь" Конвея!'
-          ];
-          return jokes[Math.floor(Math.random() * jokes.length)] + ' Хотите ещё шутку или продолжим о TOK?';
-        }
-        
-        if (input.match(/любишь музыку|какая музыка|твой любимый жанр/i)) {
-          return 'Я не могу слушать музыку, но на сайте играет приятная фоновая мелодия. Вы можете отключить её кнопкой 🔊 в правом верхнем углу. А вы любите музыку?';
-        }
-        
-        if (input.match(/какая погода|что по погоде|погода сегодня/i)) {
-          return 'Я не знаю погоду, так как не подключён к интернету в реальном времени. Но могу рассказать о TOK или просто поболтать!';
-        }
-        
-        if (input.match(/что думаешь о|твое мнение|как считаешь|что скажешь про/i)) {
-          return 'Как AI, у меня нет личного мнения, но я могу предоставить факты и помочь с информацией. О чём именно вы хотите узнать?';
-        }
-        
-        if (input.match(/помощь|помоги|что делать|не понимаю|запутался/i)) {
-          return 'Конечно! Я здесь, чтобы помочь. Что именно вас интересует? Расскажите, и я постараюсь ответить максимально подробно.';
-        }
-        
-        if (input.match(/как стать бета-тестером|хочу в бету|хочу тестировать|как попасть|записаться/i)) {
-          return 'Пока бета-тестирование не началось, но вы можете следить за новостями в Telegram-канале (кнопка "Новости про TOK" внизу). Когда откроется набор, там обязательно объявят! Хотите, я напомню, когда появится информация?';
-        }
-        
-        if (input.match(/подарки|бонусы|призы|мерч|фирменные/i)) {
-          return 'Да, наша команда готовит фирменные подарочки для участников бета-теста! Это могут быть стикеры, наклейки и другие сюрпризы. А ещё — шанс пообщаться с разработчиками лично!';
-        }
-        
-        // Проверка на общие слова в сложных вопросах
-        if (input.includes('tok') || input.includes('мессенджер')) {
-          return `TOK — это ${tokInfo.shortDescription} Релиз: ${tokInfo.releaseDate}. Могу подробнее рассказать о функциях, безопасности или разработчиках. Что вас интересует?`;
-        }
-        
-        // Ответ по умолчанию
-        if (input.length < 3) {
-          return 'Пожалуйста, напишите немного подробнее. Я могу рассказать о TOK или просто поболтать.';
-        }
-        
-        return 'Интересный вопрос! Я ещё учусь, но могу точно рассказать о TOK. Спросите о функциях, дате релиза, разработчиках или преимуществах. Или давайте просто поболтаем — я люблю общаться!';
+        return 'Я не совсем понял. Можешь спросить о TOK или просто поболтать?';
+      }
+
+      function sendUserMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+        addUserMessage(text);
+        chatInput.value = '';
+        setTimeout(() => addBotMessage(generateAIResponse(text)), 500);
       }
 
       sendBtn.addEventListener('click', sendUserMessage);
       chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          sendUserMessage();
-        }
+        if (e.key === 'Enter') sendUserMessage();
       });
 
       // ========= ПАСХАЛКА: ИГРА =========
       const easterTrigger = document.getElementById('easterEggTrigger');
       const gameWindow = document.getElementById('gameWindow');
       const closeGame = document.getElementById('closeGame');
+      const gameMenu = document.getElementById('gameMenu');
+      const startGameBtn = document.getElementById('startGameBtn');
+      const exitGameBtn = document.getElementById('exitGameBtn');
       const canvas = document.getElementById('gameCanvas');
       const ctx = canvas.getContext('2d');
       const gameScoreSpan = document.getElementById('gameScore');
+      const gameJumpsSpan = document.getElementById('gameJumps');
       const gameLivesSpan = document.getElementById('gameLives');
       const gameSpeedSpan = document.getElementById('gameSpeed');
 
@@ -1823,44 +1762,30 @@
       let gameAnimationFrame;
       let lives = 3;
       let score = 0;
-      let speed = 1.0;
       let jumpCount = 0;
-
-      // Игровые объекты
-      let robot = {
-        x: 100,
-        y: 250,
-        width: 40,
-        height: 40,
-        vy: 0,
-        gravity: 0.5,
-        jumpPower: -10,
-        grounded: true
-      };
-
+      let speed = 1.0;
+      
+      let robot = { x: 80, y: 220, width: 30, height: 30, vy: 0, gravity: 0.5, jumpPower: -10, grounded: true };
       let obstacles = [];
+      let bgObjects = [];
       let frameCounter = 0;
-      let spawnRate = 100; // чем меньше, тем чаще
+      let spawnRate = 80;
 
-      // Только для ПК (ширина > 1024)
+      // Фоновые смеющиеся объекты
+      for (let i = 0; i < 5; i++) {
+        bgObjects.push({ x: Math.random() * canvas.width, y: Math.random() * 200, speed: 1 + Math.random() * 2 });
+      }
+
+      // Только для ПК
       if (window.innerWidth > 1024) {
-        let clickCount = 0;
-        let clickTimer;
-
+        let clickCount = 0, clickTimer;
         easterTrigger.addEventListener('click', () => {
           clickCount++;
-          
           clearTimeout(clickTimer);
-          clickTimer = setTimeout(() => {
-            clickCount = 0;
-          }, 500);
-
+          clickTimer = setTimeout(() => clickCount = 0, 500);
           if (clickCount === 3) {
-            // Тройной клик - открываем игру
             gameWindow.classList.add('open');
-            if (!gameActive) {
-              startGame();
-            }
+            gameMenu.classList.remove('hidden');
             clickCount = 0;
           }
         });
@@ -1871,14 +1796,24 @@
         stopGame();
       });
 
+      startGameBtn.addEventListener('click', () => {
+        gameMenu.classList.add('hidden');
+        startGame();
+      });
+
+      exitGameBtn.addEventListener('click', () => {
+        gameWindow.classList.remove('open');
+        stopGame();
+      });
+
       function startGame() {
         gameActive = true;
         lives = 3;
         score = 0;
-        speed = 1.0;
         jumpCount = 0;
+        speed = 1.0;
         obstacles = [];
-        robot.y = 250;
+        robot.y = 220;
         robot.vy = 0;
         updateStats();
         gameLoop();
@@ -1889,19 +1824,9 @@
         cancelAnimationFrame(gameAnimationFrame);
       }
 
-      function resetGame() {
-        lives = 3;
-        score = 0;
-        speed = 1.0;
-        jumpCount = 0;
-        obstacles = [];
-        robot.y = 250;
-        robot.vy = 0;
-        updateStats();
-      }
-
       function updateStats() {
         gameScoreSpan.textContent = score;
+        gameJumpsSpan.textContent = jumpCount;
         gameLivesSpan.textContent = lives;
         gameSpeedSpan.textContent = speed.toFixed(1) + 'x';
       }
@@ -1912,123 +1837,105 @@
         // Физика
         robot.vy += robot.gravity;
         robot.y += robot.vy;
+        if (robot.y > 220) { robot.y = 220; robot.vy = 0; robot.grounded = true; }
+        else robot.grounded = false;
 
-        // Ограничение по земле
-        if (robot.y > 250) {
-          robot.y = 250;
-          robot.vy = 0;
-          robot.grounded = true;
-        } else {
-          robot.grounded = false;
-        }
-
-        // Спавн препятствий
+        // Спавн препятствий (рандомная высота)
         frameCounter++;
         if (frameCounter > spawnRate / speed) {
+          let height = 20 + Math.random() * 40;
           obstacles.push({
             x: canvas.width,
-            y: 260,
-            width: 20,
-            height: 40
+            y: 240 - height,
+            width: 15,
+            height: height
           });
           frameCounter = 0;
         }
 
-        // Движение препятствий
+        // Движение препятствий и коллизии
         for (let i = obstacles.length - 1; i >= 0; i--) {
           obstacles[i].x -= 5 * speed;
-
-          // Проверка столкновения
-          if (obstacles[i].x < robot.x + robot.width &&
-              obstacles[i].x + obstacles[i].width > robot.x &&
-              260 < robot.y + robot.height &&
-              260 + obstacles[i].height > robot.y) {
-            // Столкновение
+          
+          if (obstacles[i].x < robot.x + robot.width && obstacles[i].x + obstacles[i].width > robot.x &&
+              obstacles[i].y < robot.y + robot.height && obstacles[i].y + obstacles[i].height > robot.y) {
             lives--;
             obstacles.splice(i, 1);
             updateStats();
-            
-            if (lives <= 0) {
-              resetGame();
-            }
+            if (lives <= 0) { resetGame(); }
             continue;
           }
-
-          // Удаление за экраном
+          
           if (obstacles[i].x + obstacles[i].width < 0) {
             obstacles.splice(i, 1);
             score++;
-            jumpCount++;
-            
-            // Каждые 10 прыжков ускоряем игру
-            if (jumpCount % 10 === 0) {
-              speed += 0.2;
-            }
-            
             updateStats();
           }
         }
 
         // Отрисовка
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Фон
+        ctx.fillStyle = 'rgba(0,0,0,0.3)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Движущиеся смеющиеся объекты
+        ctx.font = '24px Arial';
+        bgObjects.forEach(obj => {
+          obj.x -= obj.speed;
+          if (obj.x < -30) obj.x = canvas.width;
+          ctx.fillStyle = 'rgba(255,255,0,0.2)';
+          ctx.fillText('😂', obj.x, obj.y);
+        });
 
-        // Рисуем землю
+        // Земля
         ctx.fillStyle = 'rgba(255,255,255,0.1)';
-        ctx.fillRect(0, 290, canvas.width, 2);
+        ctx.fillRect(0, 250, canvas.width, 2);
 
-        // Рисуем робота
+        // Робот
         ctx.fillStyle = '#4d9eff';
         ctx.shadowColor = '#4d9eff';
         ctx.shadowBlur = 15;
         ctx.fillRect(robot.x, robot.y, robot.width, robot.height);
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(robot.x + 8, robot.y + 8, 8, 8);
-        ctx.fillRect(robot.x + 24, robot.y + 8, 8, 8);
+        ctx.fillStyle = 'white';
+        ctx.fillRect(robot.x+5, robot.y+5, 6, 6);
+        ctx.fillRect(robot.x+19, robot.y+5, 6, 6);
 
-        // Рисуем препятствия
+        // Препятствия
         ctx.fillStyle = '#ff70b5';
         ctx.shadowColor = '#ff70b5';
-        obstacles.forEach(obs => {
-          ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-        });
+        obstacles.forEach(obs => ctx.fillRect(obs.x, obs.y, obs.width, obs.height));
 
         ctx.shadowBlur = 0;
-
         gameAnimationFrame = requestAnimationFrame(gameLoop);
       }
 
-      // Управление прыжком
       document.addEventListener('keydown', (e) => {
         if (e.code === 'Space' && gameActive && robot.grounded) {
           robot.vy = robot.jumpPower;
+          jumpCount++;
+          if (jumpCount % 10 === 0) speed += 0.1;
+          updateStats();
           e.preventDefault();
         }
       });
 
-      // Код из изображения для ПК версии (защита от выделения)
+      // Код из изображения
       if (window.innerWidth > 1024) {
-        document.addEventListener("selectstart", function(e) {
-          e.preventDefault();
-          return false;
+        document.addEventListener("selectstart", e => e.preventDefault());
+        window.Input = { mouse: { left: false, middle: false, right: false } };
+        document.addEventListener("mousedown", e => {
+          if (e.button === 0) Input.mouse.left = true;
+          if (e.button === 1) Input.mouse.middle = true;
+          if (e.button === 2) Input.mouse.right = true;
         });
-
-        window.Input = window.Input || { mouse: { left: false, middle: false, right: false } };
-
-        document.addEventListener("mousedown", function(event) {
-          if (event.button === 0) Input.mouse.left = true;
-          if (event.button === 1) Input.mouse.middle = true;
-          if (event.button === 2) Input.mouse.right = true;
+        document.addEventListener("mouseup", e => {
+          if (e.button === 0) Input.mouse.left = false;
+          if (e.button === 1) Input.mouse.middle = false;
+          if (e.button === 2) Input.mouse.right = false;
         });
-
-        document.addEventListener("mouseup", function(event) {
-          if (event.button === 0) Input.mouse.left = false;
-          if (event.button === 1) Input.mouse.middle = false;
-          if (event.button === 2) Input.mouse.right = false;
-        });
-
-        document.addEventListener("contextmenu", function(event) {
-          return false;
-        });
+        document.addEventListener("contextmenu", e => false);
       }
     })();
   </script>
