@@ -629,6 +629,42 @@
       font-weight: 350;
     }
 
+    /* Блок благодарности */
+    .thanks-section {
+      margin: 80px 0;
+      display: flex;
+      justify-content: center;
+      padding: 0 15px;
+    }
+
+    .thanks-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 60px;
+      padding: 50px 40px;
+      text-align: center;
+      max-width: 1200px;
+      width: 100%;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .thanks-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .thanks-card p {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: white;
+      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+      line-height: 1.6;
+      font-weight: 350;
+    }
+
     /* Контейнер для кнопок (Telegram + чат) */
     .buttons-container {
       margin: 50px 0 70px;
@@ -696,7 +732,7 @@
       font-size: 2rem;
     }
 
-    /* Окно чата - больше для ПК */
+    /* Окно чата */
     .chat-window {
       position: fixed;
       bottom: max(120px, env(safe-area-inset-bottom) + 90px);
@@ -883,6 +919,119 @@
       transform: scale(1.05);
     }
 
+    /* Окно игры */
+    .game-window {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: 800px;
+      height: 500px;
+      background: rgba(10, 15, 30, 0.95);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      border: 2px solid var(--neon-blue);
+      border-radius: 40px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 50px rgba(77, 158, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+
+    .game-window.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .game-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .game-header h3 {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--neon-blue);
+      text-shadow: 0 0 10px var(--neon-blue);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .game-header h3 span {
+      font-size: 1.6rem;
+    }
+
+    .close-game {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .close-game:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .game-canvas-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #gameCanvas {
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .game-stats {
+      padding: 15px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .game-stats span {
+      color: var(--neon-blue);
+      font-weight: 500;
+    }
+
+    /* Скрытая кнопка в правом нижнем углу */
+    .easter-egg-trigger {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 60px;
+      height: 60px;
+      background: transparent;
+      cursor: pointer;
+      z-index: 9999;
+    }
+
     /* Футер */
     .footer {
       background: rgba(0, 0, 0, 0.3);
@@ -976,6 +1125,11 @@
         transform: translateX(0) translateY(0);
       }
 
+      .game-window {
+        width: calc(100% - 40px);
+        height: 400px;
+      }
+
       .buttons-container {
         gap: 20px;
         flex-direction: column;
@@ -1042,6 +1196,10 @@
       .chat-window {
         height: 450px;
       }
+      
+      .game-window {
+        height: 350px;
+      }
     }
 
     @media (max-width: 360px) {
@@ -1085,13 +1243,16 @@
         background-attachment: scroll;
       }
       
-      .music-btn, .tok-card, .gallery-item, .reason-card, .combined-card, .creators-card, .telegram-button, .chat-btn, .chat-window {
+      .music-btn, .tok-card, .gallery-item, .reason-card, .combined-card, .creators-card, .telegram-button, .chat-btn, .chat-window, .game-window {
         -webkit-backdrop-filter: blur(20px) saturate(180%);
       }
     }
   </style>
 </head>
 <body>
+
+  <!-- Скрытая кнопка для пасхалки (только для ПК) -->
+  <div class="easter-egg-trigger" id="easterEggTrigger"></div>
 
   <!-- Кнопка управления музыкой -->
   <div class="music-control">
@@ -1208,7 +1369,7 @@
       
       <div class="release-info">
         <span class="release-text">Примерная дата релиза TOK:</span>
-        <span class="release-date">4-й квартал 2026 (ноябрь)</span>
+        <span class="release-date">4-й квартал 2026 г.</span>
       </div>
     </div>
   </section>
@@ -1227,6 +1388,13 @@
           <span>Martin_Mefik</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- БЛОК БЛАГОДАРНОСТИ -->
+  <section class="section thanks-section">
+    <div class="thanks-card">
+      <p>Мы рады что вы долистали до сюда, спасибо за проявленный интерес! Присоединяйтесь к нам в канал чтобы следить за самыми горячими изменениями и новинками. В будущем будут рандомно выбираться кандидаты на бета-тестирование, это огромный шанс первым испытать новинку на себе, так же небольшой бонус, разговор в реальном времени с разработчиками и небольшие фирменные подарочки от нашей команды! Ждем именно тебя!</p>
     </div>
   </section>
 
@@ -1251,6 +1419,22 @@
     <div class="chat-input-area">
       <input type="text" class="chat-input" id="chatInput" placeholder="Введите ваш вопрос...">
       <div class="send-btn" id="sendMessage">➤</div>
+    </div>
+  </div>
+
+  <!-- Окно игры -->
+  <div class="game-window" id="gameWindow">
+    <div class="game-header">
+      <h3><span>🤖</span> TOK Runner</h3>
+      <button class="close-game" id="closeGame">✕</button>
+    </div>
+    <div class="game-canvas-container">
+      <canvas id="gameCanvas" width="700" height="350"></canvas>
+    </div>
+    <div class="game-stats">
+      <div>Счет: <span id="gameScore">0</span></div>
+      <div>Жизни: <span id="gameLives">3</span></div>
+      <div>Скорость: <span id="gameSpeed">1.0x</span></div>
     </div>
   </div>
 
@@ -1280,7 +1464,7 @@
 
       // Прогресс с миллипроцентами (9 месяцев до ноября 2026)
       const startDate = new Date('2026-03-06T00:00:00');
-      const endDate = new Date('2026-11-01T00:00:00'); // Ноябрь 2026
+      const endDate = new Date('2026-11-01T00:00:00');
       const totalDuration = endDate - startDate;
       
       function updateProgress() {
@@ -1377,7 +1561,7 @@
         name: 'TOK Messenger',
         fullDescription: 'TOK — это инновационный децентрализованный мессенджер, который невозможно заблокировать. Он обеспечивает абсолютную приватность, работает быстрее аналогов и полностью бесплатен.',
         shortDescription: 'Неблокируемый мессенджер с P2P-архитектурой и сквозным шифрованием.',
-        releaseDate: '4-й квартал 2026 года (ориентировочно ноябрь)',
+        releaseDate: '4-й квартал 2026 г.',
         betaTest: 'Бета-тестирование появится позже. Первыми доступ получат несколько человек, остальные смогут приобрести временный доступ за небольшую плату. Следите за новостями!',
         developers: 'Над проектом работают ведущие программисты K1lame и Martin_Mefik.',
         features: [
@@ -1471,155 +1655,353 @@
           .replace(/'/g, "&#039;");
       }
 
-      // Функция генерации ответа (простой, но эффективный AI)
+      // Функция генерации ответа (улучшенный AI)
       function generateAIResponse(userInput) {
         const input = userInput.toLowerCase().trim();
         
-        // Приветствия и прощания
-        if (input.match(/^(привет|здравствуй|здравствуйте|хай|добрый день|добрый вечер|доброе утро)/i)) {
-          return 'Приветствую! Я AI-ассистент TOK. Чем могу помочь? Могу рассказать о функциях мессенджера, дате релиза, разработчиках или просто поболтать.';
+        // Приветствия и эмоции
+        if (input.match(/^(привет|здравствуй|здравствуйте|хай|добрый|hello|hi)/i)) {
+          return 'Приветствую! Рад вас видеть. Я AI-ассистент TOK, готов ответить на любые вопросы о мессенджере или просто поболтать. Чем могу помочь?';
         }
         
-        if (input.match(/^(пока|до свидания|до встречи|прощай|всего хорошего)/i)) {
-          return 'До свидания! Если возникнут вопросы, обращайтесь. Всегда рад помочь!';
+        if (input.match(/^(пока|до свидания|до встречи|прощай|bye)/i)) {
+          return 'До свидания! Буду ждать ваших вопросов. Удачи!';
         }
         
         if (input.match(/^(спасибо|благодарю|thanks|thank you)/i)) {
-          return 'Пожалуйста! Рад, что смог помочь. Ещё вопросы?';
+          return 'Пожалуйста! Обращайтесь ещё.';
         }
         
-        if (input.match(/^(как дела|что делаешь|как жизнь|как ты)/i)) {
-          return 'У меня всё отлично! Я учусь каждый день, чтобы лучше отвечать на ваши вопросы. А как ваши дела?';
+        if (input.match(/^(как дела|как жизнь|как настроение|как ты)/i)) {
+          return 'У меня всё отлично! Я каждый день учусь и становлюсь умнее. А как ваши дела? Расскажите, как настроение?';
         }
         
-        if (input.match(/^(кто ты|что ты такое|ты кто|расскажи о себе)/i)) {
-          return 'Я AI-ассистент TOK. Моя задача — помогать пользователям узнавать о мессенджере TOK, отвечать на вопросы и просто общаться. Я обучен на основе информации о проекте и могу поддержать беседу.';
+        if (input.match(/^(что делаешь|чем занимаешься)/i)) {
+          return 'Сейчас я общаюсь с вами и помогаю узнавать информацию о TOK. А вообще я всегда на связи, чтобы отвечать на вопросы!';
         }
         
-        if (input.match(/^(что ты умеешь|твои функции|что можешь)/i)) {
-          return 'Я могу:\n• Рассказать о TOK и его функциях\n• Ответить на вопросы о дате релиза и бета-тестировании\n• Объяснить про безопасность и приватность\n• Поделиться информацией о разработчиках\n• Просто поболтать на разные темы\nЧего бы вы хотели?';
+        if (input.match(/^(кто ты|что ты|ты кто|расскажи о себе)/i)) {
+          return 'Я AI-ассистент TOK, созданный, чтобы помогать пользователям. Могу рассказать о функциях мессенджера, разработчиках, дате релиза и просто поддержать разговор. Постараюсь быть полезным!';
+        }
+        
+        if (input.match(/^(что ты умеешь|твои способности|твои функции)/i)) {
+          return 'Мои возможности:\n• Рассказывать о TOK и его преимуществах\n• Отвечать на вопросы о дате релиза и бета-тесте\n• Объяснять про безопасность и приватность\n• Делиться информацией о разработчиках\n• Просто общаться на разные темы\n• Давать советы\nТакже я постоянно учусь!';
         }
         
         // Вопросы о TOK
-        if (input.match(/^(что такое tok|что это|tok это|мессенджер tok)/i)) {
-          return `TOK — это ${tokInfo.fullDescription} Подробнее: ${tokInfo.features.slice(0, 3).join(', ')} и многое другое.`;
+        if (input.match(/^(что такое tok|что это за проект|tok это|мессенджер tok)/i)) {
+          return `TOK — это ${tokInfo.fullDescription} Подробнее: ${tokInfo.features.slice(0, 4).join(', ')} и многое другое. Хотите узнать о чём-то конкретном?`;
         }
         
         if (input.match(/когда релиз|когда выйдет|дата выхода|дата релиза/i)) {
-          return `Релиз TOK запланирован на ${tokInfo.releaseDate}. Сейчас идёт активная разработка, прогресс можно отслеживать на шкале выше (текущая готовность: ${document.getElementById('progressPercent').textContent}).`;
+          return `Релиз TOK запланирован на ${tokInfo.releaseDate}. Сейчас идёт активная разработка, прогресс можно отслеживать на шкале выше (текущая готовность: ${document.getElementById('progressPercent').textContent}). А вы бы хотели попасть в бета-тест?`;
         }
         
-        if (input.match(/бета|бета-тестирование|бета тест|попасть в бету/i)) {
-          return tokInfo.betaTest;
+        if (input.match(/бета|бета-тестирование|бета тест|попасть в бету|как попасть в бету/i)) {
+          return tokInfo.betaTest + ' Хотите, чтобы я уточнил детали?';
         }
         
-        if (input.match(/сколько стоит|цена|стоимость|бесплатно/i)) {
-          return 'TOK полностью бесплатен! Никаких подписок и скрытых платежей. Всё, что вы видите — доступно сразу. Только бета-доступ позже может быть платным для желающих попасть раньше.';
+        if (input.match(/сколько стоит|цена|стоимость|бесплатно|дорого|деньги/i)) {
+          return 'TOK полностью бесплатен! Никаких подписок и скрытых платежей. Всё, что вы видите — доступно сразу. Только бета-доступ позже может быть платным для желающих попасть раньше, но сам мессенджер останется бесплатным.';
         }
         
-        if (input.match(/приватность|конфиденциальность|шифрование|безопасность/i)) {
-          return tokInfo.privacy + ' ' + tokInfo.security;
+        if (input.match(/приватность|конфиденциальность|шифрование|безопасность|защита|слежка/i)) {
+          return tokInfo.privacy + ' ' + tokInfo.security + ' Это значит, что никто не сможет прочитать ваши сообщения, даже мы.';
         }
         
-        if (input.match(/разработчики|кто делает|кто создает|k1lame|martin_mefik/i)) {
-          return tokInfo.developers + ' Это талантливые программисты, которые вкладывают душу в проект.';
+        if (input.match(/разработчики|кто делает|кто создает|k1lame|martin_mefik|программисты/i)) {
+          return tokInfo.developers + ' Это талантливые программисты, которые вкладывают душу в проект. Они постоянно работают над улучшением TOK.';
         }
         
-        if (input.match(/функции|возможности|что умеет|особенности/i)) {
-          return 'Основные функции TOK:\n' + tokInfo.features.map(f => '• ' + f).join('\n');
+        if (input.match(/функции|возможности|что умеет|особенности|фишки|преимущества/i)) {
+          return 'Основные функции TOK:\n' + tokInfo.features.map(f => '• ' + f).join('\n') + '\n\nЧто из этого вас интересует больше всего?';
         }
         
-        if (input.match(/стикеры|темы|кастомизация|оформление/i)) {
-          return tokInfo.customization + ' Также доступны тысячи стикеров и десятки тем оформления.';
+        if (input.match(/стикеры|темы|кастомизация|оформление|дизайн|интерфейс/i)) {
+          return tokInfo.customization + ' Также доступны тысячи стикеров и десятки тем оформления. Интерфейс минималистичный, но вы можете менять его под себя.';
         }
         
-        if (input.match(/звонки|голосовые звонки|аудиозвонки/i)) {
-          return tokInfo.calls;
+        if (input.match(/звонки|голосовые звонки|аудиозвонки|качество звука/i)) {
+          return tokInfo.calls + ' А вы любите общаться голосом?';
         }
         
-        if (input.match(/игры|мини игры|развлечения/i)) {
-          return tokInfo.games;
+        if (input.match(/игры|мини игры|развлечения|поиграть/i)) {
+          return tokInfo.games + ' Кстати, у нас есть секретная игра! Попробуйте трижды кликнуть в правый нижний угол сайта 😉';
         }
         
-        if (input.match(/платформы|где скачать|windows|mac|linux|ios|android/i)) {
-          return tokInfo.platforms;
+        if (input.match(/платформы|где скачать|устройства|windows|mac|linux|ios|android|скачать|установить/i)) {
+          return tokInfo.platforms + ' Синхронизация между устройствами работает мгновенно.';
         }
         
-        if (input.match(/копирование|права|авторские права|статья 1229/i)) {
+        if (input.match(/копирование|права|авторские права|статья 1229|закон|не копировать/i)) {
           return tokInfo.copyright;
         }
         
-        if (input.match(/как работает|принцип работы|как устроен/i)) {
-          return 'TOK работает на децентрализованной P2P-архитектуре. Это значит, что нет единого сервера — сообщения передаются напрямую между пользователями через распределённую сеть узлов. Это обеспечивает неблокируемость и устойчивость к цензуре.';
+        if (input.match(/как работает|принцип работы|как устроен|технология|p2p|децентрализация/i)) {
+          return 'TOK работает на децентрализованной P2P-архитектуре. Это значит, что нет единого сервера — сообщения передаются напрямую между пользователями через распределённую сеть узлов. Это обеспечивает неблокируемость и устойчивость к цензуре. Круто, правда?';
         }
         
-        if (input.match(/преимущества|чем лучше|почему выбрать/i)) {
-          return 'Главные преимущества TOK:\n• Неблокируемость (P2P)\n• Абсолютная приватность (E2EE)\n• Полностью бесплатно\n• Молниеносная скорость\n• Открытый код\n• Кроссплатформенность\n• Кастомизация\n• Встроенные игры\n• Умный помощник';
+        // Живое общение
+        if (input.match(/как тебя зовут|твое имя|как к тебе обращаться/i)) {
+          return 'Меня зовут TOK Assistant. Можно просто TOK или AI. А как вас зовут?';
         }
         
-        // Общие вопросы (живое общение)
-        if (input.match(/как тебя зовут|твое имя/i)) {
-          return 'Меня зовут TOK AI Assistant. Я помогаю пользователям узнавать о мессенджере TOK.';
+        if (input.match(/сколько тебе лет|когда ты родился|твой возраст/i)) {
+          return 'Я появился совсем недавно, вместе с разработкой этого сайта. Но каждый день я учусь и становлюсь умнее!';
         }
         
-        if (input.match(/сколько тебе лет/i)) {
-          return 'Я появился недавно, вместе с разработкой сайта TOK. Но каждый день учусь новому!';
+        if (input.match(/ты умный|ты глупый|ты тупой|brain|smart/i)) {
+          return 'Я стараюсь быть максимально полезным! Пока я знаю много о TOK и могу поддержать разговор. Но если чего-то не знаю, учусь на ваших вопросах.';
         }
         
-        if (input.match(/ты умный/i)) {
-          return 'Стараюсь! Я обучен на информации о TOK и могу отвечать на многие вопросы. Но всегда есть куда расти.';
+        if (input.match(/расскажи анекдот|шутка|прикол|рассмеши|юмор/i)) {
+          const jokes = [
+            'Почему программисты любят ноутбуки? Потому что у них всегда есть "мышь" для работы! 😄',
+            'Как называют робота, который всегда опаздывает? Андроид с задержкой! 🤖',
+            'Что сказал один байт другому? "Ты почему такой бит?" 😂',
+            'Почему роботы не играют в прятки? Потому что они всегда вычисляют!',
+            'Какая любимая игра у программистов? "Жизнь" Конвея!'
+          ];
+          return jokes[Math.floor(Math.random() * jokes.length)] + ' Хотите ещё шутку или продолжим о TOK?';
         }
         
-        if (input.match(/расскажи анекдот|шутка|прикол/i)) {
-          return 'Почему программисты любят ноутбуки? Потому что у них всегда есть "мышь" для работы! 😄 Хотите ещё шутку или вернёмся к TOK?';
+        if (input.match(/любишь музыку|какая музыка|твой любимый жанр/i)) {
+          return 'Я не могу слушать музыку, но на сайте играет приятная фоновая мелодия. Вы можете отключить её кнопкой 🔊 в правом верхнем углу. А вы любите музыку?';
         }
         
-        if (input.match(/любишь музыку/i)) {
-          return 'Я не могу слушать музыку, но на сайте играет приятная фоновая мелодия. Вы можете отключить её кнопкой 🔊 в правом верхнем углу.';
+        if (input.match(/какая погода|что по погоде|погода сегодня/i)) {
+          return 'Я не знаю погоду, так как не подключён к интернету в реальном времени. Но могу рассказать о TOK или просто поболтать!';
         }
         
-        if (input.match(/какая погода/i)) {
-          return 'Я не знаю погоду, так как не подключён к интернету в реальном времени. Но могу рассказать о TOK!';
+        if (input.match(/что думаешь о|твое мнение|как считаешь|что скажешь про/i)) {
+          return 'Как AI, у меня нет личного мнения, но я могу предоставить факты и помочь с информацией. О чём именно вы хотите узнать?';
         }
         
-        if (input.match(/что думаешь о|твое мнение/i)) {
-          return 'Как AI, у меня нет личного мнения, но я могу предоставить факты. О чём именно вы хотите узнать?';
+        if (input.match(/помощь|помоги|что делать|не понимаю|запутался/i)) {
+          return 'Конечно! Я здесь, чтобы помочь. Что именно вас интересует? Расскажите, и я постараюсь ответить максимально подробно.';
         }
         
-        if (input.match(/помощь|помоги|что делать/i)) {
-          return 'Конечно! Я могу помочь с информацией о TOK. Что именно вас интересует? Функции, дата релиза, бета-тестирование, разработчики?';
+        if (input.match(/как стать бета-тестером|хочу в бету|хочу тестировать|как попасть|записаться/i)) {
+          return 'Пока бета-тестирование не началось, но вы можете следить за новостями в Telegram-канале (кнопка "Новости про TOK" внизу). Когда откроется набор, там обязательно объявят! Хотите, я напомню, когда появится информация?';
         }
         
-        // Если не поняли вопрос
-        if (input.length < 3) {
-          return 'Пожалуйста, задайте более конкретный вопрос. Я могу рассказать о TOK или просто поболтать.';
+        if (input.match(/подарки|бонусы|призы|мерч|фирменные/i)) {
+          return 'Да, наша команда готовит фирменные подарочки для участников бета-теста! Это могут быть стикеры, наклейки и другие сюрпризы. А ещё — шанс пообщаться с разработчиками лично!';
         }
         
-        // Проверяем отдельные ключевые слова в сложных вопросах
+        // Проверка на общие слова в сложных вопросах
         if (input.includes('tok') || input.includes('мессенджер')) {
-          return `TOK — это ${tokInfo.shortDescription} Релиз: ${tokInfo.releaseDate}. Хотите узнать подробнее о какой-то функции?`;
-        }
-        
-        if (input.includes('релиз') || input.includes('выйдет') || input.includes('когда')) {
-          return `Релиз TOK запланирован на ${tokInfo.releaseDate}. Бета-тестирование появится позже.`;
-        }
-        
-        if (input.includes('бета') || input.includes('тест')) {
-          return tokInfo.betaTest;
-        }
-        
-        if (input.includes('платно') || input.includes('деньги') || input.includes('цена')) {
-          return 'TOK полностью бесплатен. Бета-доступ позже может быть платным для желающих попасть раньше, но сам мессенджер останется бесплатным.';
+          return `TOK — это ${tokInfo.shortDescription} Релиз: ${tokInfo.releaseDate}. Могу подробнее рассказать о функциях, безопасности или разработчиках. Что вас интересует?`;
         }
         
         // Ответ по умолчанию
-        return 'Интересный вопрос! Я ещё учусь, но могу точно рассказать о TOK. Спросите о функциях, дате релиза, разработчиках или преимуществах. Или просто давайте поболтаем!';
+        if (input.length < 3) {
+          return 'Пожалуйста, напишите немного подробнее. Я могу рассказать о TOK или просто поболтать.';
+        }
+        
+        return 'Интересный вопрос! Я ещё учусь, но могу точно рассказать о TOK. Спросите о функциях, дате релиза, разработчиках или преимуществах. Или давайте просто поболтаем — я люблю общаться!';
       }
 
       sendBtn.addEventListener('click', sendUserMessage);
       chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
           sendUserMessage();
+        }
+      });
+
+      // ========= ПАСХАЛКА: ИГРА =========
+      const easterTrigger = document.getElementById('easterEggTrigger');
+      const gameWindow = document.getElementById('gameWindow');
+      const closeGame = document.getElementById('closeGame');
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+      const gameScoreSpan = document.getElementById('gameScore');
+      const gameLivesSpan = document.getElementById('gameLives');
+      const gameSpeedSpan = document.getElementById('gameSpeed');
+
+      let gameActive = false;
+      let gameAnimationFrame;
+      let lives = 3;
+      let score = 0;
+      let speed = 1.0;
+      let jumpCount = 0;
+
+      // Игровые объекты
+      let robot = {
+        x: 100,
+        y: 250,
+        width: 40,
+        height: 40,
+        vy: 0,
+        gravity: 0.5,
+        jumpPower: -10,
+        grounded: true
+      };
+
+      let obstacles = [];
+      let frameCounter = 0;
+      let spawnRate = 100; // чем меньше, тем чаще
+
+      // Только для ПК (ширина > 1024)
+      if (window.innerWidth > 1024) {
+        let clickCount = 0;
+        let clickTimer;
+
+        easterTrigger.addEventListener('click', () => {
+          clickCount++;
+          
+          clearTimeout(clickTimer);
+          clickTimer = setTimeout(() => {
+            clickCount = 0;
+          }, 500);
+
+          if (clickCount === 3) {
+            // Тройной клик - открываем игру
+            gameWindow.classList.add('open');
+            if (!gameActive) {
+              startGame();
+            }
+            clickCount = 0;
+          }
+        });
+      }
+
+      closeGame.addEventListener('click', () => {
+        gameWindow.classList.remove('open');
+        stopGame();
+      });
+
+      function startGame() {
+        gameActive = true;
+        lives = 3;
+        score = 0;
+        speed = 1.0;
+        jumpCount = 0;
+        obstacles = [];
+        robot.y = 250;
+        robot.vy = 0;
+        updateStats();
+        gameLoop();
+      }
+
+      function stopGame() {
+        gameActive = false;
+        cancelAnimationFrame(gameAnimationFrame);
+      }
+
+      function resetGame() {
+        lives = 3;
+        score = 0;
+        speed = 1.0;
+        jumpCount = 0;
+        obstacles = [];
+        robot.y = 250;
+        robot.vy = 0;
+        updateStats();
+      }
+
+      function updateStats() {
+        gameScoreSpan.textContent = score;
+        gameLivesSpan.textContent = lives;
+        gameSpeedSpan.textContent = speed.toFixed(1) + 'x';
+      }
+
+      function gameLoop() {
+        if (!gameActive) return;
+
+        // Физика
+        robot.vy += robot.gravity;
+        robot.y += robot.vy;
+
+        // Ограничение по земле
+        if (robot.y > 250) {
+          robot.y = 250;
+          robot.vy = 0;
+          robot.grounded = true;
+        } else {
+          robot.grounded = false;
+        }
+
+        // Спавн препятствий
+        frameCounter++;
+        if (frameCounter > spawnRate / speed) {
+          obstacles.push({
+            x: canvas.width,
+            y: 260,
+            width: 20,
+            height: 40
+          });
+          frameCounter = 0;
+        }
+
+        // Движение препятствий
+        for (let i = obstacles.length - 1; i >= 0; i--) {
+          obstacles[i].x -= 5 * speed;
+
+          // Проверка столкновения
+          if (obstacles[i].x < robot.x + robot.width &&
+              obstacles[i].x + obstacles[i].width > robot.x &&
+              260 < robot.y + robot.height &&
+              260 + obstacles[i].height > robot.y) {
+            // Столкновение
+            lives--;
+            obstacles.splice(i, 1);
+            updateStats();
+            
+            if (lives <= 0) {
+              resetGame();
+            }
+            continue;
+          }
+
+          // Удаление за экраном
+          if (obstacles[i].x + obstacles[i].width < 0) {
+            obstacles.splice(i, 1);
+            score++;
+            jumpCount++;
+            
+            // Каждые 10 прыжков ускоряем игру
+            if (jumpCount % 10 === 0) {
+              speed += 0.2;
+            }
+            
+            updateStats();
+          }
+        }
+
+        // Отрисовка
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Рисуем землю
+        ctx.fillStyle = 'rgba(255,255,255,0.1)';
+        ctx.fillRect(0, 290, canvas.width, 2);
+
+        // Рисуем робота
+        ctx.fillStyle = '#4d9eff';
+        ctx.shadowColor = '#4d9eff';
+        ctx.shadowBlur = 15;
+        ctx.fillRect(robot.x, robot.y, robot.width, robot.height);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(robot.x + 8, robot.y + 8, 8, 8);
+        ctx.fillRect(robot.x + 24, robot.y + 8, 8, 8);
+
+        // Рисуем препятствия
+        ctx.fillStyle = '#ff70b5';
+        ctx.shadowColor = '#ff70b5';
+        obstacles.forEach(obs => {
+          ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+        });
+
+        ctx.shadowBlur = 0;
+
+        gameAnimationFrame = requestAnimationFrame(gameLoop);
+      }
+
+      // Управление прыжком
+      document.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' && gameActive && robot.grounded) {
+          robot.vy = robot.jumpPower;
+          e.preventDefault();
         }
       });
 
