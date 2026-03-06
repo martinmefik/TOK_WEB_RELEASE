@@ -33,6 +33,38 @@
       --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
+    /* Красивый скроллбар */
+    ::-webkit-scrollbar {
+      width: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      margin: 5px 0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3));
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.4));
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Для Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.2);
+    }
+
     body {
       background: var(--bg-deep);
       background-image: url('space.jpg');
@@ -84,7 +116,7 @@
       transform: translateY(0);
     }
 
-    /* Кнопка управления музыкой - перемещена наверх */
+    /* Кнопка управления музыкой */
     .music-control {
       position: fixed;
       top: max(20px, env(safe-area-inset-top));
@@ -118,6 +150,227 @@
 
     .music-btn.off {
       opacity: 0.7;
+    }
+
+    /* Кнопка чата */
+    .chat-toggle {
+      position: fixed;
+      bottom: max(30px, env(safe-area-inset-bottom));
+      left: max(30px, env(safe-area-inset-left));
+      z-index: 1000;
+    }
+
+    .chat-btn {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      padding: 18px 35px;
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 400;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .chat-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .chat-btn span {
+      font-size: 1.8rem;
+    }
+
+    /* Окно чата */
+    .chat-window {
+      position: fixed;
+      bottom: max(120px, env(safe-area-inset-bottom) + 90px);
+      left: max(30px, env(safe-area-inset-left));
+      width: 380px;
+      height: 550px;
+      background: rgba(20, 25, 45, 0.35);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 40px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 999;
+      transform: translateX(-120%);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .chat-window.open {
+      transform: translateX(0);
+    }
+
+    .chat-header {
+      padding: 25px 25px 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-header h3 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-header h3 span {
+      font-size: 1.8rem;
+    }
+
+    .close-chat {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .close-chat:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 25px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    /* Стили для скролла в чате */
+    .chat-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-messages::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      max-width: 85%;
+    }
+
+    .message.bot {
+      align-self: flex-start;
+    }
+
+    .message.user {
+      align-self: flex-end;
+    }
+
+    .message-content {
+      padding: 15px 20px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .message.bot .message-content {
+      background: rgba(77, 158, 255, 0.15);
+      border-color: rgba(77, 158, 255, 0.3);
+    }
+
+    .message.user .message-content {
+      background: rgba(255, 112, 181, 0.15);
+      border-color: rgba(255, 112, 181, 0.3);
+    }
+
+    .message-time {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 5px;
+      margin-left: 10px;
+    }
+
+    .chat-input-area {
+      padding: 20px 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 40px;
+      padding: 15px 22px;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .chat-input:focus {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .chat-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .send-btn {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .send-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
     }
 
     /* Типографика */
@@ -655,7 +908,7 @@
       font-weight: 320;
     }
 
-    /* Улучшенная адаптация для мобильных */
+    /* Адаптация */
     @media (max-width: 1100px) {
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -713,6 +966,24 @@
         right: 15px;
       }
 
+      .chat-window {
+        width: calc(100% - 40px);
+        left: 20px;
+        right: 20px;
+        bottom: 100px;
+        height: 500px;
+      }
+
+      .chat-toggle {
+        left: 20px;
+        bottom: 20px;
+      }
+
+      .chat-btn {
+        padding: 15px 25px;
+        font-size: 1.1rem;
+      }
+
       .progress-bar-bg {
         height: 45px;
       }
@@ -764,6 +1035,14 @@
       .footer {
         padding: 30px 15px;
       }
+      
+      .chat-btn span {
+        font-size: 1.5rem;
+      }
+      
+      .chat-window {
+        height: 450px;
+      }
     }
 
     @media (max-width: 360px) {
@@ -781,9 +1060,13 @@
         font-size: 1.8rem;
         padding: 10px 20px;
       }
+      
+      .chat-btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+      }
     }
 
-    /* Поддержка больших экранов */
     @media (min-width: 2000px) {
       .container {
         max-width: 1800px;
@@ -803,13 +1086,12 @@
       }
     }
 
-    /* iOS specific improvements */
     @supports (-webkit-touch-callout: none) {
       body {
         background-attachment: scroll;
       }
       
-      .music-btn, .tok-card, .gallery-item, .reason-card, .combined-card, .creators-card, .telegram-button {
+      .music-btn, .tok-card, .gallery-item, .reason-card, .combined-card, .creators-card, .telegram-button, .chat-btn, .chat-window {
         -webkit-backdrop-filter: blur(20px) saturate(180%);
       }
     }
@@ -820,6 +1102,29 @@
   <!-- Кнопка управления музыкой -->
   <div class="music-control">
     <div class="music-btn" id="musicToggle">🔊</div>
+  </div>
+
+  <!-- Кнопка чата -->
+  <div class="chat-toggle">
+    <div class="chat-btn" id="chatToggle">
+      <span>💬</span>
+      Остались вопросы? Жми
+    </div>
+  </div>
+
+  <!-- Окно чата -->
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <h3><span>🤖</span> TOK Нейросеть</h3>
+      <button class="close-chat" id="closeChat">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <!-- Сообщения будут добавляться сюда -->
+    </div>
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Введите ваш вопрос...">
+      <div class="send-btn" id="sendMessage">➤</div>
+    </div>
   </div>
 
   <!-- Аудио элемент -->
@@ -940,7 +1245,7 @@
   <!-- БЛОК СОЗДАТЕЛЕЙ С ФОТОГРАФИЯМИ -->
   <section class="section creators-section">
     <div class="creators-card">
-      <p>Над этим проектом работают программисты:</p>
+      <p>Над проектом работают ведущие программисты:</p>
       <div class="creators-names">
         <div class="creator">
           <img src="4image.jpg" alt="K1lame" class="creator-avatar" onerror="this.src='https://via.placeholder.com/130x130/0b0f1a/b84dff?text=K1lame'">
@@ -985,7 +1290,7 @@
 
       // Прогресс с миллипроцентами (9 месяцев)
       const startDate = new Date('2026-03-06T00:00:00');
-      const endDate = new Date('2026-12-06T00:00:00'); // +9 месяцев
+      const endDate = new Date('2026-12-06T00:00:00');
       const totalDuration = endDate - startDate;
       
       function updateProgress() {
@@ -1014,19 +1319,16 @@
       updateProgress();
       setInterval(updateProgress, 1000);
 
-      // Управление музыкой - автоматическое воспроизведение
+      // Управление музыкой
       const audio = document.getElementById('bgMusic');
       const toggleBtn = document.getElementById('musicToggle');
       
-      // Устанавливаем громкость 1% (0.01)
       audio.volume = 0.01;
       
       let isPlaying = false;
       
-      // Функция для попытки автовоспроизведения
       async function attemptAutoPlay() {
         try {
-          // Пробуем воспроизвести сразу
           await audio.play();
           isPlaying = true;
           toggleBtn.textContent = '🔊';
@@ -1036,7 +1338,6 @@
           isPlaying = false;
           toggleBtn.textContent = '🔈';
           
-          // Пробуем снова при любом взаимодействии пользователя
           const playOnInteraction = async () => {
             try {
               await audio.play();
@@ -1054,7 +1355,6 @@
         }
       }
       
-      // Запускаем автовоспроизведение
       attemptAutoPlay();
       
       toggleBtn.addEventListener('click', async () => {
@@ -1074,23 +1374,128 @@
         toggleBtn.classList.toggle('off', !isPlaying);
       });
 
-      // Проверка загрузки favicon
-      const favicon = document.querySelector('link[rel="icon"]');
-      if (favicon) {
-        favicon.onerror = function() {
-          console.log('Favicon не загрузился, используем стандартный');
-        };
+      // Чат нейросети
+      const chatToggle = document.getElementById('chatToggle');
+      const chatWindow = document.getElementById('chatWindow');
+      const closeChat = document.getElementById('closeChat');
+      const chatMessages = document.getElementById('chatMessages');
+      const chatInput = document.getElementById('chatInput');
+      const sendBtn = document.getElementById('sendMessage');
+
+      // База знаний на основе текста сайта
+      const knowledgeBase = {
+        'привет': 'Здравствуйте! Чем я могу вам помочь?',
+        'ток': 'TOK — это инновационный децентрализованный мессенджер, который невозможно заблокировать. Он обеспечивает абсолютную приватность и работает быстрее аналогов.',
+        'мессенджер': 'TOK — это не просто мессенджер, а целая экосистема безопасного общения с P2P-архитектурой, сквозным шифрованием и бесплатным функционалом.',
+        'бесплатно': 'Да, TOK полностью бесплатный! Тысячи стикеров, десятки тем, неограниченное количество сообщений — всё это доступно каждому пользователю без подписок.',
+        'приватность': 'TOK гарантирует абсолютную приватность: сквозное шифрование включено по умолчанию, открытый исходный код, отсутствие логов и сбора метаданных.',
+        'безопасность': 'Безопасность — наш приоритет. Сквозное шифрование, децентрализация и открытый код обеспечивают защиту ваших данных.',
+        'когда релиз': 'Релиз TOK запланирован на 4-й квартал 2026 года. Сейчас идёт активная разработка, готовность составляет примерно 28%',
+        'дата релиза': 'Релиз TOK запланирован на 4-й квартал 2026 года.',
+        'готовность': 'Готовность TOK постоянно растёт. Сейчас она составляет примерно 28%. Вы можете следить за прогрессом на нашем сайте.',
+        'функции': 'TOK предлагает: неблокируемую архитектуру, молниеносную скорость, полную бесплатность, приватность, глобальную сеть, кастомизацию, умного помощника, кроссплатформенность и встроенные игры.',
+        'разработчики': 'Над проектом работают ведущие программисты K1lame и Martin_Mefik.',
+        'K1lame': 'K1lame — один из ведущих программистов проекта TOK.',
+        'Martin_Mefik': 'Martin_Mefik — ведущий программист и архитектор TOK.',
+        'дизайн': 'Интерфейс TOK выполнен в минималистичном стиле с неоновыми акцентами. Главный экран, кастомизация, быстрая регистрация и удобные звонки — всё продумано для вас.',
+        'интерфейс': 'Интерфейс TOK включает главный экран с неоновыми акцентами, гибкую кастомизацию, быструю регистрацию и удобные звонки.',
+        'регистрация': 'Регистрация в TOK быстрая, удобная и безопасная. Ваши данные под защитой с первого мгновения.',
+        'звонки': 'В TOK доступны удобные звонки с кристально чистым качеством звука и шумоподавлением.',
+        'кастомизация': 'TOK позволяет настроить интерфейс под себя: темы, цвета, расположение элементов. Сделайте TOK по-настоящему своим.',
+        'игры': 'В TOK есть встроенные мини-игры для общения с друзьями. Это весело!',
+        'по умолчанию': 'По умолчанию',
+        'кроссплатформенность': 'TOK доступен на всех устройствах: iOS, Android, Windows, Mac, Linux.',
+        'помощник': 'Умный помощник на базе AI помогает с переводами, суммаризацией сообщений и быстрыми ответами.',
+      };
+
+      // Открытие/закрытие чата
+      chatToggle.addEventListener('click', () => {
+        chatWindow.classList.toggle('open');
+        if (chatWindow.classList.contains('open') && chatMessages.children.length === 0) {
+          // Добавляем приветственное сообщение от бота при первом открытии
+          addBotMessage('Здравствуйте, на связи нейросеть мессенджера TOK, какой у вас вопрос?');
+        }
+      });
+
+      closeChat.addEventListener('click', () => {
+        chatWindow.classList.remove('open');
+      });
+
+      // Отправка сообщения
+      function sendUserMessage() {
+        const text = chatInput.value.trim();
+        if (text === '') return;
+
+        addUserMessage(text);
+        chatInput.value = '';
+
+        // Ищем ответ в базе знаний
+        setTimeout(() => {
+          let answer = findAnswer(text);
+          addBotMessage(answer);
+        }, 600);
       }
+
+      function addUserMessage(text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message user';
+        
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+        
+        messageDiv.innerHTML = `
+          <div class="message-content">${text}</div>
+          <div class="message-time">${timeStr}</div>
+        `;
+        
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function addBotMessage(text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message bot';
+        
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+        
+        messageDiv.innerHTML = `
+          <div class="message-content">${text}</div>
+          <div class="message-time">${timeStr}</div>
+        `;
+        
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function findAnswer(question) {
+        question = question.toLowerCase();
+        
+        // Проверяем все ключи в базе знаний
+        for (let key in knowledgeBase) {
+          if (question.includes(key)) {
+            return knowledgeBase[key];
+          }
+        }
+        
+        // Если не нашли, возвращаем общий ответ
+        return 'Спасибо за ваш вопрос! Я нейросеть TOK и могу рассказать о нашем мессенджере: о его функциях, безопасности, дате релиза, разработчиках и многом другом. Пожалуйста, задайте вопрос более конкретно.';
+      }
+
+      sendBtn.addEventListener('click', sendUserMessage);
+      chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          sendUserMessage();
+        }
+      });
 
       // Код из изображения для ПК версии
       if (window.innerWidth > 1024) {
-        // Для предотвращения выделения текста при кликах
         document.addEventListener("selectstart", function(e) {
           e.preventDefault();
           return false;
         });
 
-        // Обработка нажатий мыши для Input.mouse (эмуляция)
         window.Input = window.Input || { mouse: { left: false, middle: false, right: false } };
 
         document.addEventListener("mousedown", function(event) {
@@ -1117,10 +1522,7 @@
           }
         });
 
-        // Защита от контекстного меню на правый клик (опционально)
         document.addEventListener("contextmenu", function(event) {
-          // Можно раскомментировать если нужно полностью отключить контекстное меню
-          // event.preventDefault();
           return false;
         });
       }
