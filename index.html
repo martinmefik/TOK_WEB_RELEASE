@@ -66,11 +66,6 @@
 
     body {
       background: var(--bg-deep);
-      background-image: url('space.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
       color: var(--text-primary);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.5;
@@ -79,19 +74,48 @@
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      backdrop-filter: brightness(0.8);
     }
 
-    body::before {
-      content: '';
+    /* Параллакс фон */
+    .parallax-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120%;
+      background-image: url('space.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: translateY(0);
+      will-change: transform;
+      z-index: -2;
+      opacity: 0.8;
+    }
+
+    .parallax-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px) brightness(0.9);
-      z-index: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px) brightness(0.8);
+      z-index: -1;
+    }
+
+    /* Индикатор прогресса чтения */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink), var(--neon-purple));
+      box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-pink);
+      z-index: 10001;
+      transition: width 0.1s ease;
+      border-radius: 0 2px 2px 0;
     }
 
     .container {
@@ -390,7 +414,7 @@
       font-weight: 320;
     }
 
-    /* Причины (обновленные) */
+    /* Причины */
     .reasons-section {
       margin: 80px 0;
       display: flex;
@@ -449,6 +473,138 @@
       color: rgba(255, 255, 255, 0.8);
       line-height: 1.6;
       font-weight: 320;
+    }
+
+    /* НОВЫЙ БЛОК: Ключевые особенности */
+    .features-section {
+      margin: 80px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .features-title {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+      padding: 0 20px;
+      font-weight: 350;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1400px;
+      width: 100%;
+      padding: 0 15px;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 40px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .feature-item:hover {
+      border-color: var(--neon-blue);
+      transform: translateY(-8px);
+      box-shadow: 0 0 30px var(--neon-blue);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .feature-item h3 {
+      font-size: 1.6rem;
+      color: white;
+      text-shadow: 0 2px 10px var(--neon-blue);
+      margin-bottom: 15px;
+    }
+
+    .feature-item p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* НОВЫЙ БЛОК: Дорожная карта */
+    .roadmap-section {
+      margin: 80px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .roadmap-title {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+      padding: 0 20px;
+      font-weight: 350;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      width: 100%;
+      padding: 0 15px;
+    }
+
+    .roadmap-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 40px 30px;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .roadmap-card:hover {
+      border-color: var(--neon-pink);
+      transform: translateY(-8px);
+      box-shadow: 0 0 30px var(--neon-pink);
+    }
+
+    .roadmap-date {
+      position: absolute;
+      top: -15px;
+      left: 30px;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+      color: white;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: 0 0 20px var(--neon-blue);
+    }
+
+    .roadmap-card h3 {
+      font-size: 1.8rem;
+      color: white;
+      text-shadow: 0 2px 10px var(--neon-pink);
+      margin: 20px 0 15px;
+    }
+
+    .roadmap-card p {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
     }
 
     /* Объединенный блок прогресса и даты */
@@ -961,7 +1117,7 @@
       font-weight: 320;
     }
 
-    /* Адаптация для мобильных */
+    /* Адаптация */
     @media (max-width: 1100px) {
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -970,6 +1126,14 @@
       .reasons-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 18px;
+      }
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+      .roadmap-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
       }
     }
 
@@ -996,6 +1160,18 @@
         grid-template-columns: 1fr;
         max-width: 450px;
         gap: 18px;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+        gap: 18px;
+      }
+      
+      .roadmap-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+        gap: 30px;
       }
       
       .creators-names {
@@ -1089,25 +1265,6 @@
       }
     }
 
-    @media (min-width: 2000px) {
-      .container {
-        max-width: 1800px;
-      }
-      
-      .gallery-grid {
-        max-width: 1800px;
-      }
-      
-      .reasons-grid {
-        max-width: 1800px;
-      }
-      
-      .tok-content p {
-        max-width: 900px;
-        font-size: 1.5rem;
-      }
-    }
-
     @supports (-webkit-touch-callout: none) {
       body {
         background-attachment: scroll;
@@ -1120,6 +1277,12 @@
   </style>
 </head>
 <body>
+  <!-- Индикатор прогресса чтения -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Параллакс фон -->
+  <div class="parallax-bg" id="parallaxBg"></div>
+  <div class="parallax-overlay"></div>
 
   <!-- Кнопка управления музыкой -->
   <div class="music-control">
@@ -1182,6 +1345,98 @@
           <div class="gallery-caption">📞 Удобные звонки</div>
           <div class="gallery-description">Кристально чистое качество звука, шумоподавление. Будьте на связи всегда.</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- НОВЫЙ БЛОК: Ключевые особенности -->
+  <section class="section features-section">
+    <h2 class="features-title">✨ Ключевые особенности TOK</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <span class="feature-icon">🔮</span>
+        <h3>P2P Архитектура</h3>
+        <p>Прямое соединение между пользователями без центральных серверов. Максимальная скорость и неуязвимость.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🛡️</span>
+        <h3>Военное шифрование</h3>
+        <p>Сквозное AES-256 шифрование. Только отправитель и получатель имеют доступ к сообщениям.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">⚡</span>
+        <h3>Мгновенная доставка</h3>
+        <p>Умная маршрутизация сообщений через несколько каналов одновременно. Нулевая задержка.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🎨</span>
+        <h3>Умная кастомизация</h3>
+        <p>Нейросеть подбирает темы под ваш стиль общения. Более 1000 уникальных комбинаций.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Причины (оставляем) -->
+  <section class="section reasons-section" id="reasons">
+    <h2 class="reasons-title">Почему стоит выбрать TOK?</h2>
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <h3>🛡️ Неблокируемый</h3>
+        <p>Децентрализованная P2P-архитектура обеспечивает работу в обход любых блокировок. Даже при проблемах с доступом к сети TOK найдёт путь для вашего сообщения.</p>
+      </div>
+      <div class="reason-card">
+        <h3>⚡ Молниеносный</h3>
+        <p>Умная маршрутизация и оптимизация протоколов позволяют доставлять сообщения за миллисекунды. TOK работает быстро даже при нестабильном соединении.</p>
+      </div>
+      <div class="reason-card">
+        <h3>🎁 Полностью бесплатный</h3>
+        <p>Никаких подписок и скрытых платежей. Тысячи стикеров, десятки тем, неограниченное количество сообщений — всё это доступно каждому.</p>
+      </div>
+      <div class="reason-card">
+        <h3>🔐 Абсолютная приватность</h3>
+        <p>Сквозное шифрование включено по умолчанию. Открытый исходный код гарантирует отсутствие «закладок». Мы не храним логи и не следим за вами.</p>
+      </div>
+      <div class="reason-card">
+        <h3>🌍 Глобальная сеть</h3>
+        <p>Серверы распределены по всему миру. Вы всегда на связи, где бы ни находились. География не имеет значения.</p>
+      </div>
+      <div class="reason-card">
+        <h3>🎨 Кастомизация</h3>
+        <p>Тысячи тем, анимаций и стикеров. Сделайте свой TOK уникальным и неповторимым. Выражайте себя!</p>
+      </div>
+      <div class="reason-card">
+        <h3>🤖 Умный помощник</h3>
+        <p>Встроенный AI помогает с переводами, суммаризацией сообщений и быстрыми ответами. Технологии будущего уже сегодня.</p>
+      </div>
+      <div class="reason-card">
+        <h3>📱 Кроссплатформенность</h3>
+        <p>TOK доступен на всех устройствах: iOS, Android, Windows, Mac, Linux. Синхронизация в реальном времени.</p>
+      </div>
+      <div class="reason-card">
+        <h3>🎮 Игровая платформа</h3>
+        <p>Встроенные мини-игры и развлечения для общения с друзьями. TOK — это ещё и весело!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- НОВЫЙ БЛОК: Дорожная карта -->
+  <section class="section roadmap-section">
+    <h2 class="roadmap-title">🗺️ Дорожная карта TOK</h2>
+    <div class="roadmap-grid">
+      <div class="roadmap-card">
+        <div class="roadmap-date">Q2 2026</div>
+        <h3>Закрытая альфа</h3>
+        <p>Первое тестирование среди ограниченного круга разработчиков. Отладка базового функционала и P2P-соединений.</p>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-date">Q3 2026</div>
+        <h3>Открытая бета</h3>
+        <p>Приглашаем первых тестировщиков. Можно будет купить ранний доступ и пообщаться с командой разработчиков.</p>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-date">Q4 2026</div>
+        <h3>Официальный релиз</h3>
+        <p>Запуск для всех пользователей. Полный набор функций, стабильная работа и поддержка всех платформ.</p>
       </div>
     </div>
   </section>
@@ -1296,14 +1551,12 @@
       audio.volume = 0.01;
       audio.load();
       
-      // Пытаемся воспроизвести сразу
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
           toggleBtn.textContent = '🔊';
         }).catch(() => {
           toggleBtn.textContent = '🔈';
-          // Если не получилось, ждем взаимодействия
           document.addEventListener('click', function playOnClick() {
             audio.play().catch(e => {});
             toggleBtn.textContent = '🔊';
@@ -1326,6 +1579,22 @@
       document.getElementById('programmersLink').addEventListener('click', (e) => {
         e.preventDefault();
         document.getElementById('creators').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Индикатор прогресса чтения
+      const progressBar = document.getElementById('progressBar');
+      window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + '%';
+      });
+
+      // Параллакс эффект для фона
+      const parallaxBg = document.getElementById('parallaxBg');
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        parallaxBg.style.transform = `translateY(${scrolled * 0.3}px)`;
       });
 
       // ========= УМНЫЙ ЧАТ =========
